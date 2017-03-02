@@ -1,3 +1,4 @@
+require "vindicia/version"
 require 'httparty'
 require 'hashie'
 
