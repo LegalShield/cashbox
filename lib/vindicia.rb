@@ -1,9 +1,10 @@
 require 'httparty'
 
-require 'vindicia/repository'
-require 'vindicia/request_mapper'
-require 'vindicia/response_mapper'
-#require 'vindicia/model'
+require 'vindicia/repository/base'
+require 'vindicia/request_mapper/base'
+require 'vindicia/response_mapper/base'
+require 'vindicia/model/base'
+#require 'vindicia/exception'
 
 module Vindicia
   class << self
@@ -11,7 +12,13 @@ module Vindicia
   end
 
   def self.sandbox!
-    Vindicia::Repository.base_uri('https://api.prodtest.vindicia.com')
+    Vindicia::Repository::Base.base_uri('https://api.prodtest.vindicia.com')
+  end
+
+  def self.test!
+    Vindicia::Repository::Base.base_uri('http://example.com')
+    Vindicia.username = 'username'
+    Vindicia.password = 'password'
   end
 end
 

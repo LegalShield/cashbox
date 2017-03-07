@@ -1,0 +1,30 @@
+{
+  "object": "Account",
+  "id": "105-1486763198",
+  "vid": "570c2f4053ba985a5cbe19abb6fa7835906f9ce6",
+  "created": "2017-02-10T13:46:39-08:00",
+  "default_currency": "USD",
+  "email_type": "html",
+  "notify_before_billing": false,
+  "payment_methods": {
+    "object": "List",
+    "data": [
+      {
+        "object": "PaymentMethod",
+        "vid": "e7a75dcfa3df7f255a80089d535eff857ba070a7",
+        "created": "2017-02-10T13:46:50-08:00",
+        "type": "PayPal",
+        "paypal": {
+          "object": "PayPal",
+          "return_url": "http://localhost:3000/success?test=1",
+          "cancel_url": "http://localhost:3000/cancel",
+          "request_reference_id": true,
+          "reference_id": null
+        },
+        "primary": true,
+        "active": true
+      }
+    ],
+    "total_count": 1
+  }
+}
