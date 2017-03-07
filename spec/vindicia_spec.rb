@@ -1,11 +1,15 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe Vindicia do
-  it "has a version number" do
+  it 'has a version number' do
     expect(Vindicia::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it { should have_attr_accessor(:username) }
+  it { should have_attr_accessor(:password) }
+
+  it 'sets sandbox values' do
+    Vindicia.sandbox!
+    expect(Vindicia::Repository.base_uri).to eql('https://api.prodtest.vindicia.com')
   end
 end
