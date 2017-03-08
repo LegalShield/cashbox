@@ -1,4 +1,4 @@
-[{
+{
   "object": "List",
   "data": [
     {
@@ -72,4 +72,4 @@
   "url": "/products?limit=1",
   "next": "/products?limit=1&starting_after=1",
   "previous": "/products?limit=1&ending_before=1"
-}]
+}

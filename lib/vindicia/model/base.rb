@@ -1,5 +1,5 @@
 module Vindicia::Model
-  class Base
+  class Base < Hash
     def initialize(attributes = {})
       super()
       self.update_attributes(attributes)
@@ -19,3 +19,8 @@ module Vindicia::Model
 end
 
 require 'vindicia/model/product'
+require 'vindicia/model/billing_plan'
+require 'vindicia/model/product_description'
+require 'vindicia/model/entitlement'
+require 'vindicia/model/product_price'
+require 'vindicia/model/billing_plan_period'

@@ -9,16 +9,15 @@ describe 'Product' do
     subject do
       Vindicia::Repository::Product.new.first
     end
-    #binding.pry
 
     before do
       stub_get('/products')
         .with({ query: { limit: 1 } })
-        .to_return(:status => 200, :body => fixture('products'), :headers => { 'Content-Type': 'application/json' })
+        .to_return(:status => 200, :body => fixture('product'), :headers => { 'Content-Type': 'application/json' })
     end
 
     it 'returns a product model' do
-      expect(subject).to be_a(Vindicia::Model::Product)
+      expect(subject).to be_an_instance_of(Vindicia::Model::Product)
     end
   end
 end

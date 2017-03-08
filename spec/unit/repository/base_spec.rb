@@ -1,59 +1,58 @@
 require 'spec_helper'
 
 describe Vindicia::Repository::Base do
-  before do
-    Vindicia.username = 'u'
-    Vindicia.password = 'p'
+  subject { Vindicia::Repository::Base }
+
+  it 'parties with HTTParty' do
+    expect(subject.ancestors).to include(HTTParty)
   end
 
-  context 'config' do
-    subject { Vindicia::Repository::Base }
-
-    it 'parties with HTTParty' do
-      expect(subject.new).to be_a(HTTParty)
-    end
-
-    it 'is formated as json' do
-      expect(subject.format).to eq :json
-    end
+  it 'is formated as json' do
+    expect(subject.format).to eq :json
   end
 
   context 'making calls' do
-    subject        { Vindicia::Repository::Base.new }
-    let(:record)   { double('record') }
-    let(:data)     { double('data', first: record, to_h: record) }
-    let(:response) { double('response', to_h: data, first: data) }
-    let(:model)    { double('model') }
+    let(:repository)      { Vindicia::Repository::Base.new }
+    let(:model)           { double('model') }
+    let(:record)          { double('record') }
+    let(:mapped_response) { double('mapped response', first: record) }
+    let(:data)            { double('data') }
+    let(:response)        { double('response', to_h: data) }
 
     before do
-      allow(Vindicia::ResponseMapper::Base).to receive(:map).with(data) { [] }
+      allow(Vindicia::ResponseMapper::Base).to receive(:map).with(data).and_return(mapped_response)
     end
 
     describe 'shared' do
       before do
+        Vindicia.username = 'u'
+        Vindicia.password = 'p'
+
         allow(Vindicia::Repository::Base).to receive(:get).with(kind_of(String), hash_including({ basic_auth: { username: 'u', password: 'p' } })).and_return(response)
       end
 
       it 'adds the correct authentication' do
-        subject.all
+        repository.all
         expect(Vindicia::Repository::Base).to have_received(:get).with(kind_of(String), hash_including({ basic_auth: { username: 'u', password: 'p' } }))
       end
 
       it 'calls the correct list route' do
-        subject.all
+        repository.all
         expect(Vindicia::Repository::Base).to have_received(:get).with('/bases', kind_of(Hash))
       end
 
       it 'calls the correct show route' do
-        subject.find(1)
+        repository.find(1)
         expect(Vindicia::Repository::Base).to have_received(:get).with('/bases/1', kind_of(Hash))
       end
     end
 
     describe '#where' do
+      let(:call_response) { repository.where({ name: 'Jon' }) }
+
       before do
         allow(Vindicia::Repository::Base).to receive(:get).with(kind_of(String), hash_including({ query: { limit: 500, name: 'Jon' } })).and_return(response)
-        subject.where({ name: 'Jon' })
+        call_response
       end
 
       it 'calls the correct list route' do
@@ -67,11 +66,18 @@ describe Vindicia::Repository::Base do
       it 'maps the response correctly' do
         expect(Vindicia::ResponseMapper::Base).to have_received(:map).with(data)
       end
+
+      it 'returns the mapped response' do
+        expect(call_response).to eql(mapped_response)
+      end
     end
 
     describe '#all' do
-      before do allow(Vindicia::Repository::Base).to receive(:get).with(kind_of(String), hash_including({ query: { } })).and_return(response)
-        subject.all
+      let(:call_response) { repository.all }
+
+      before do
+        allow(Vindicia::Repository::Base).to receive(:get).with(kind_of(String), hash_including({ query: { } })).and_return(response)
+        call_response
       end
 
       it 'calls the correct list route' do
@@ -85,13 +91,19 @@ describe Vindicia::Repository::Base do
       it 'maps the response correctly' do
         expect(Vindicia::ResponseMapper::Base).to have_received(:map).with(data)
       end
+
+      it 'returns the mapped response' do
+        expect(call_response).to eql(mapped_response)
+      end
     end
 
     describe '#first' do
+      let(:call_response) { repository.first }
+
       before do
-        allow(Vindicia::ResponseMapper::Base).to receive(:map).with(record)
+        allow(Vindicia::ResponseMapper::Base).to receive(:map).with(data).and_return(mapped_response)
         allow(Vindicia::Repository::Base).to receive(:get).with(kind_of(String), hash_including({ query: { limit: 1 } })).and_return(response)
-        subject.first
+        call_response
       end
 
       it 'calls the correct list route' do
@@ -103,15 +115,21 @@ describe Vindicia::Repository::Base do
       end
 
       it 'parses the response correctly' do
-        expect(Vindicia::ResponseMapper::Base).to have_received(:map).with(record)
+        expect(Vindicia::ResponseMapper::Base).to have_received(:map).with(data)
+      end
+
+      it 'returns the correct response' do
+        expect(call_response).to eql(record)
       end
     end
 
     describe '#find' do
       context 'success' do
+        let(:call_response) { repository.find(1) }
+
         before do
           allow(Vindicia::Repository::Base).to receive(:get).with(kind_of(String), hash_including({ query: { } })).and_return(response)
-          subject.find(1)
+          call_response
         end
 
         it 'calls the correct show route' do
@@ -121,18 +139,23 @@ describe Vindicia::Repository::Base do
         it 'parses the response correctly' do
           expect(Vindicia::ResponseMapper::Base).to have_received(:map).with(data)
         end
+
+        it 'returns the correct response' do
+          expect(call_response).to eql(mapped_response)
+        end
       end
 
       context 'failure' do
         it 'throws an error if an id is not supplied' do
-          expect( -> { subject.find(nil) }).to raise_exception(ArgumentError)
+          expect( -> { repository.find(nil) }).to raise_exception(ArgumentError)
         end
       end
     end
 
     describe '#save' do
       let(:mapped_request_to_json) { double('mapped request to json') }
-      let(:mapped_request) { double('mapped request', to_json: mapped_request_to_json ) }
+      let(:mapped_request)         { double('mapped request', to_json: mapped_request_to_json ) }
+      let(:call_response)          { repository.save(model) }
 
       before do
         allow(Vindicia::RequestMapper::Base).to receive(:map).with(model).and_return(mapped_request)
@@ -142,7 +165,7 @@ describe Vindicia::Repository::Base do
         before do
           allow(model).to receive(:id) { 123 }
           allow(Vindicia::Repository::Base).to receive(:post).with('/bases/123', hash_including({ body: mapped_request_to_json })).and_return(response)
-          subject.save(model)
+          call_response
         end
 
         it 'checks the id of the model' do
@@ -160,13 +183,17 @@ describe Vindicia::Repository::Base do
         it 'delegates response mapping correctly' do
           expect(Vindicia::ResponseMapper::Base).to have_received(:map).with(data)
         end
+
+        it 'returns the mapped response' do
+          expect(call_response).to eql(mapped_response)
+        end
       end
 
       context 'unpersisted record' do
         before do
           allow(model).to receive(:id) { nil }
           allow(Vindicia::Repository::Base).to receive(:post).with('/bases', hash_including({ body: mapped_request_to_json })).and_return(response)
-          subject.save(model)
+          call_response
         end
 
         it 'checks the id of the model' do
@@ -183,6 +210,10 @@ describe Vindicia::Repository::Base do
 
         it 'delegates response mapping correctly' do
           expect(Vindicia::ResponseMapper::Base).to have_received(:map).with(data)
+        end
+
+        it 'returns the mapped response' do
+          expect(call_response).to eql(mapped_response)
         end
       end
     end

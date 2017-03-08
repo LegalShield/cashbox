@@ -13,5 +13,4 @@ describe Vindicia::Model::Product do
   it { should have_attr_accessor(:billing_descriptor) }
   it { should have_attr_accessor(:credit_granted) }
   it { should have_attr_accessor(:prices) }
-
 end

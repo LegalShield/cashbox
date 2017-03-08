@@ -1,4 +1,5 @@
 require 'httparty'
+require 'hashie'
 
 require 'vindicia/repository/base'
 require 'vindicia/request_mapper/base'

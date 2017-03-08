@@ -4,7 +4,6 @@ WebMock.disable_net_connect!
 
 FIXTURE_PATH = File.expand_path('../../fixtures', __FILE__)
 
-puts 'here'
 def stub_get(path)
   stub_request(:get, Vindicia::Repository::Base.base_uri + path)
 end

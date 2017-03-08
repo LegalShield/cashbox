@@ -15,7 +15,7 @@ module Vindicia::Repository
     end
 
     def first
-      map_response(get(route, { limit: 1 }).first)
+      map_response(get(route, { limit: 1 })).first
     end
 
     def find(id)
