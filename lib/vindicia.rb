@@ -1,13 +1,14 @@
 require 'httparty'
 require 'hashie'
 
-require 'vindicia/type/list'
-require 'vindicia/type/date_time'
-require 'vindicia/repository/base'
-require 'vindicia/request_mapper/base'
+require 'vindicia/type'
+#require 'vindicia/concern'
+require 'vindicia/model'
+require 'vindicia/repository'
+require 'vindicia/request_mapper'
 require 'vindicia/response_mapper'
-require 'vindicia/model/base'
-#require 'vindicia/exception'
+require 'vindicia/request'
+require 'vindicia/response'
 
 module Vindicia
   class << self
