@@ -32,7 +32,7 @@ module Vindicia::Repository
     def map_response(response)
       puts JSON.pretty_generate(response.to_h)
       puts ''
-      Vindicia::ResponseMapper::Base.map(response.to_h)
+      Vindicia::ResponseMapper.map(response.to_h)
     end
 
     def get(path, query = {})

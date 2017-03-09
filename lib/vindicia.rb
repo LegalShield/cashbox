@@ -3,7 +3,7 @@ require 'hashie'
 
 require 'vindicia/repository/base'
 require 'vindicia/request_mapper/base'
-require 'vindicia/response_mapper/base'
+require 'vindicia/response_mapper'
 require 'vindicia/model/base'
 #require 'vindicia/exception'
 
