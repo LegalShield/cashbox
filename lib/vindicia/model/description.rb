@@ -1,6 +1,6 @@
 module Vindicia::Model
   class Description < Base
-    attr_accessor :language,
-                  :description
+    property :language
+    property :description
   end
 end

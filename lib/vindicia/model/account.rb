@@ -1,21 +1,18 @@
 module Vindicia::Model
   class Account < Base
-    include Vindicia::Concern::Persistable
+    #include Vindicia::Concern::Persistable
 
-    attr_accessor :id,
-                  :vid,
-                  :created,
-                  :default_currency,
-                  :email,
-                  :email_type,
-                  :name,
-                  :notify_before_billing
+    property :id
+    property :vid
+    property :created, transform_with: lambda { |v| DateTime.parse(v) }
 
-    def initialize(attributes = {})
-      super
-      self.default_currency = 'USD'
-      self.notify_before_billing = false
-      self.created = TimeDate.parse(self.created) if self.created
-    end
+    property :default_currency
+    property :email
+    property :email_type
+    property :name
+    property :notify_before_billing
+
+    property :payment_methods, transform_with: lambda { |d| d['data'].map { |v| Vindicia::Model::PaymentMethod.new(v) } }
+
   end
 end

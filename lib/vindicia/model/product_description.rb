@@ -1,5 +1,6 @@
 module Vindicia::Model
   class ProductDescription < Base
-    attr_accessor :language, :description
+    property :language
+    property :description
   end
 end

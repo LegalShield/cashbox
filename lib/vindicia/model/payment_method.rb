@@ -1,16 +1,17 @@
 module Vindicia::Model
   class PaymentMethod < Base
-    include Vindicia::Concern::Persistable
+    #include Vindicia::Concern::Persistable
 
-    attr_accessor :id,
-                  :vid,
-                  :created,
-                  :credit_card,
-                  :primary,
-                  :type
+    property :id
+    property :vid
+    property :credit_card
+    property :primary
+    property :type
+
+    property :created, transform_with: lambda { |v| DateTime.parse(v) }
+    property :paypal, transform_with: lambda { |v| Vindicia::Model::PayPal.new(v) }
   end
 end
-
 
 #{
   #"object": "PaymentMethod",

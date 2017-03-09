@@ -1,16 +1,11 @@
 module Vindicia::Model
-  class Base < Hash
-    def initialize(attributes = {})
-      super()
-      self.update_attributes(attributes)
-    end
-
-    def update_attributes(attributes = {})
-      attributes.each do |name, value|
-        self.instance_variable_set("@#{name}", value)
-      end
-      self
-    end
+  #class Base
+  class Base < Hashie::Trash
+    include Hashie::Extensions::MergeInitializer
+    include Hashie::Extensions::IgnoreUndeclared
+    include Hashie::Extensions::IndifferentAccess
+    include Hashie::Extensions::Dash::Coercion
+    #include Hashie::Extensions::MethodAccess
 
     def object
       self.class.name.split('::').last
@@ -18,9 +13,7 @@ module Vindicia::Model
   end
 end
 
-require 'vindicia/model/product'
-require 'vindicia/model/billing_plan'
-require 'vindicia/model/product_description'
-require 'vindicia/model/entitlement'
-require 'vindicia/model/product_price'
-require 'vindicia/model/billing_plan_period'
+Dir[File.dirname(__FILE__) + '/*.rb'].each do |file|
+  next if file =~ /base/
+  require(file)
+end

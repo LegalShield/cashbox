@@ -19,5 +19,9 @@ describe 'Product' do
     it 'returns a product model' do
       expect(subject).to be_an_instance_of(Vindicia::Model::Product)
     end
+
+    it 'has the right id' do
+      expect(subject.vid).to eql('7118699d6406494d7672503761fa21809fefaf25')
+    end
   end
 end

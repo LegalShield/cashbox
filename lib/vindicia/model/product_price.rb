@@ -1,5 +1,6 @@
 module Vindicia::Model
   class ProductPrice < Base
-    attr_accessor :amount, :currency
+    property :amount, coerce: Float
+    property :currency
   end
 end

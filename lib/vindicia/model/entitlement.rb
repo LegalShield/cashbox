@@ -1,7 +1,7 @@
 module Vindicia::Model
   class Entitlement < Base
-    attr_accessor :id,
-                  :description
+    property :id
+    property :description
 
   end
 end

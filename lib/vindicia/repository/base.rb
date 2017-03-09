@@ -7,7 +7,7 @@ module Vindicia::Repository
     format :json
 
     def where(query = {})
-      map_response(get(route, { limit: 500 }.merge(query)))
+      map_response(get(route, { limit: 100 }.merge(query)))
     end
 
     def all
@@ -30,6 +30,8 @@ module Vindicia::Repository
     private
 
     def map_response(response)
+      puts JSON.pretty_generate(response.to_h)
+      puts ''
       Vindicia::ResponseMapper::Base.map(response.to_h)
     end
 
@@ -52,4 +54,7 @@ module Vindicia::Repository
   end
 end
 
-require 'vindicia/repository/product'
+Dir[File.dirname(__FILE__) + '/*.rb'].each do |file|
+  next if file =~ /base/
+  require(file)
+end

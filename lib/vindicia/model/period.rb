@@ -1,7 +1,7 @@
 module Vindicia::Model
   class Period < Base
-    attr_accessor :type,
-                  :quantity,
-                  :cycles
+    property :type
+    property :quantity
+    property :cycles
   end
 end

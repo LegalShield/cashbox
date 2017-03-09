@@ -18,8 +18,19 @@ module Vindicia::ResponseMapper
       ##end
     #end
 
+    #def self.map(response)
+      #"Vindicia::ResponseMapper::#{response['object']}".constantize.new(response).map
+    #end
+
     def self.map(response)
-      "Vindicia::ResponseMapper::#{response['object']}".constantize.new(response).map
+      case response['object']
+      when 'List'
+        response['data'].map {|d| map(d) }
+      when 'Error'
+        puts response
+      else
+        "Vindicia::Model::#{response['object']}".constantize.new(response)
+      end
     end
 
     private
