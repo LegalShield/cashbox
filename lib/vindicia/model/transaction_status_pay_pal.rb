@@ -1,9 +1,8 @@
 module Vindicia::Model
   class TransactionStatusPayPal < Base
-    attr_accessor :object,
-                  :token,
-                  :auth_code,
-                  :redirect_url
+    property :token
+    property :auth_code
+    property :redirect_url
   end
 end
 #{

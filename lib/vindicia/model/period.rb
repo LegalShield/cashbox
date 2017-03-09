@@ -1,7 +1,7 @@
 module Vindicia::Model
   class Period < Base
-    property :type
-    property :quantity
     property :cycles
+    property :quantity
+    property :type
   end
 end

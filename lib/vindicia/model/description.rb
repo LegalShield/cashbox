@@ -1,6 +1,6 @@
 module Vindicia::Model
   class Description < Base
-    property :language
     property :description
+    property :language
   end
 end
