@@ -5,19 +5,19 @@ module Vindicia
     format :json
 
     def initialize(method, path, options = {})
-      @method = method
-      @path = path
+      @method  = method
+      @path    = path
       @options = options
     end
 
     def perform
-      self.class.send(@method, @path, @options.merge(basic_auth: basic_auth))
+      self.class.send(@method, @path, @options.merge(default_options))
     end
 
     private
 
-    def basic_auth
-      { username: Vindicia.username, password: Vindicia.password }
+    def default_options
+      { basic_auth: { username: Vindicia.username, password: Vindicia.password }}
     end
   end
 end
