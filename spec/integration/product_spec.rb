@@ -10,6 +10,22 @@ describe 'Product' do
       Vindicia::Repository::Product.new.first
     end
 
+    let(:response) do
+      Vindicia::Repository::Product.new.first
+    end
+
+    response = Vindicia::Repository::Product.new.all
+
+    response = response.next
+
+    response = response.next
+    response.body.each do |product|
+
+    end
+
+    response.has_next?
+
+
     before do
       stub_get('/products')
         .with({ query: { limit: 1 } })

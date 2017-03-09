@@ -1,6 +1,8 @@
 require 'httparty'
 require 'hashie'
 
+require 'vindicia/type/list'
+require 'vindicia/type/date_time'
 require 'vindicia/repository/base'
 require 'vindicia/request_mapper/base'
 require 'vindicia/response_mapper'

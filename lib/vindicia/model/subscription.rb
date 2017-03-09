@@ -6,7 +6,8 @@ module Vindicia::Model
 
     property :account, transform_with: lambda { |v| Vindicia::Model::Account.new(v) }
     property :billing_day
-    property :billing_plan, transform_with: lambda { |v| Vindicia::Model::BillingPlan.new(v) }
+    #property :billing_plan, transform_with: lambda { |v| Vindicia::Model::BillingPlan.new(v) }
+    property :billing_plan, coerce: Vindicia::Model::BillingPlan
     property :billing_state
     property :currency
     property :default_billing_plan, transform_with: lambda { |v| Vindicia::Model::BillingPlan.new(v) }
