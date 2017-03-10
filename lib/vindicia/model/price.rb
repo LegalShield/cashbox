@@ -1,6 +1,6 @@
 module Vindicia::Model
   class Price < Base
-    property :amount
+    property :amount, coerce: Float
     property :currency
   end
 end

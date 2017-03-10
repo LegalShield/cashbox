@@ -1,5 +1,5 @@
 module Vindicia::Model
-  class ProductDescription < Base
+  class ProductDescription < Vindicia::Model::Description
     property :description
     property :language
   end
