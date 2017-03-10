@@ -18,8 +18,8 @@ describe 'Product' do
 
     it { is_expected.to be_a(Vindicia::Model::Transaction) }
 
-    its(:vid)          { is_expected.to eql('00df553ba17a0cde2275e278628fd6b7f2d8b067') }
-    its(:id)           { is_expected.to eql('LEGALSHI00000684') }
+    its(:vid)          { is_expected.to eql('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa') }
+    its(:id)           { is_expected.to eql('bbbbbbbbbbbbbbbb') }
     its(:created)      { is_expected.to eql(DateTime.parse('2017-02-11T00:01:35-08:00')) }
     its(:amount)       { is_expected.to eql(10.71) }
     its(:currency)     { is_expected.to eql('USD') }

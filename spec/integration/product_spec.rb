@@ -18,7 +18,7 @@ describe 'Product' do
 
     it { is_expected.to be_a(Vindicia::Model::Product) }
 
-    its(:vid)                  { is_expected.to eql('7118699d6406494d7672503761fa21809fefaf25') }
+    its(:vid)                  { is_expected.to eql('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa') }
     its(:id)                   { is_expected.to eql('1') }
     its(:created)              { is_expected.to eql(DateTime.parse('2017-02-03T13:46:27-08:00')) }
     its(:default_billing_plan) { is_expected.to be_a(Vindicia::Model::BillingPlan)  }
