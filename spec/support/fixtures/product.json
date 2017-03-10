@@ -4,7 +4,7 @@
     {
       "object": "Product",
       "id": "1",
-      "vid": "7118699d6406494d7672503761fa21809fefaf25",
+      "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "created": "2017-02-03T13:46:27-08:00",
       "descriptions": {
         "object": "List",
@@ -21,7 +21,7 @@
       "default_billing_plan": {
         "object": "BillingPlan",
         "id": "1",
-        "vid": "4d9cee99a1301a0cd91e4921b228bfedf329257a",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "created": "2017-02-03T13:44:10-08:00",
         "description": "daily",
         "status": "Active",

@@ -1,14 +1,14 @@
 {
   "object": "Transaction",
-  "id": "LEGALSHI00000597",
-  "vid": "bc943d5f5458b8c13d3435dc52c7c23425bea41d",
+  "id": "bbbbbbbbbbbbbbbb",
+  "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "created": "2017-02-10T13:46:50-08:00",
   "amount": 0,
   "currency": "USD",
   "account": {
     "object": "Account",
     "id": "105-1486763198",
-    "vid": "570c2f4053ba985a5cbe19abb6fa7835906f9ce6",
+    "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "created": "2017-02-10T13:46:39-08:00",
     "default_currency": "USD",
     "email_type": "html",
@@ -18,7 +18,7 @@
       "data": [
         {
           "object": "PaymentMethod",
-          "vid": "e7a75dcfa3df7f255a80089d535eff857ba070a7",
+          "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "created": "2017-02-10T13:46:50-08:00",
           "type": "PayPal",
           "paypal": {
@@ -37,7 +37,7 @@
   },
   "source_payment_method": {
     "object": "PaymentMethod",
-    "vid": "e7a75dcfa3df7f255a80089d535eff857ba070a7",
+    "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "created": "2017-02-10T13:46:50-08:00",
     "type": "PayPal",
     "paypal": {
@@ -62,7 +62,7 @@
           "object": "TransactionStatusPayPal",
           "token": "EC-0PY59464AS577883J",
           "auth_code": "000",
-          "redirect_url": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=EC-0PY59464AS577883J"
+          "redirect_url": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=EC-0PY59483AS577900J"
         }
       },
       {
@@ -74,14 +74,14 @@
           "object": "TransactionStatusPayPal",
           "token": "EC-0PY59464AS577883J",
           "auth_code": "000",
-          "redirect_url": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=EC-0PY59464AS577883J"
+          "redirect_url": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=EC-0PY59498AS577898J"
         }
       }
     ],
     "total_count": 2
   },
   "payment_processor": "PayPal",
-  "payment_processor_transaction_id": "LEGALSHI00000597",
+  "payment_processor_transaction_id": "bbbbbbbbbbbbbbbb",
   "metadata": {
     "vin:RetryNumber": "0",
     "vin:BillingCycle": "0"
@@ -142,7 +142,7 @@
   "subscription": {
     "object": "Subscription",
     "id": "16-1486763201",
-    "vid": "d8d7d43466be74b3c09d05dfd3f1ff5c9ab73e23"
+    "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
   },
   "to_be_captured": true
 }

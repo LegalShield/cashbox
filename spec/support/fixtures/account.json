@@ -1,7 +1,7 @@
 {
   "object": "Account",
   "id": "105-1486763198",
-  "vid": "570c2f4053ba985a5cbe19abb6fa7835906f9ce6",
+  "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
   "created": "2017-02-10T13:46:39-08:00",
   "default_currency": "USD",
   "email_type": "html",
@@ -11,7 +11,7 @@
     "data": [
       {
         "object": "PaymentMethod",
-        "vid": "e7a75dcfa3df7f255a80089d535eff857ba070a7",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "created": "2017-02-10T13:46:50-08:00",
         "type": "PayPal",
         "paypal": {
