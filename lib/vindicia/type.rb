@@ -6,9 +6,7 @@ module Vindicia::Type
   end
 
   def self.DateTime
-    @date_time ||= -> (value) {
-      DateTime.parse(value)
-    }
+    @date_time ||= -> (value) { DateTime.parse(value) }
   end
 
   def self.Boolean
