@@ -1,6 +1,7 @@
 module Vindicia::Model
   autoload :Base,                    'vindicia/model/base'
   autoload :Account,                 'vindicia/model/account'
+  autoload :Address,                 'vindicia/model/address'
   autoload :BillingPlan,             'vindicia/model/billing_plan'
   autoload :BillingPlanPeriod,       'vindicia/model/billing_plan_period'
   autoload :Description,             'vindicia/model/description'

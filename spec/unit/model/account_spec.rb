@@ -9,9 +9,11 @@ describe Vindicia::Model::Account do
   it { should have_property(:default_currency) }
   it { should have_property(:email) }
   it { should have_property(:email_type) }
-  it { should have_property(:name) }
+  it { should have_property(:language) }
   it { should have_property(:notify_before_billing) }
+  it { should have_property(:name) }
   it { should have_property(:payment_methods) }
+  it { should have_property(:shipping_address) }
 
   its(:object) { is_expected.to eql('Account') }
 end
