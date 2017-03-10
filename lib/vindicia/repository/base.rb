@@ -19,10 +19,6 @@ module Vindicia::Repository
       Vindicia::Response.new(Vindicia::Request.new(:get, route(id)))
     end
 
-    #def save(model)
-      #Vindicia::Response.new(Vindicia::Request.new(:post, route(id), Vindicia::RequestMapper::Base.map(model)))
-    #end
-
     private
 
     def self.route(id=nil)
