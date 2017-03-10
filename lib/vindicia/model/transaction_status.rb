@@ -1,8 +1,8 @@
 module Vindicia::Model
   class TransactionStatus < Base
-    property :created, transform_with: lambda { |v| DateTime.parse(v) }
+    property :created, coerce: Vindicia::Type::DateTime
     property :payment_method_type
-    property :paypal_status, transform_with: lambda { |v| Vindicia::Model::TransactionStatusPayPal.new(v) }
+    property :paypal_status, coerce: Vindicia::Model::TransactionStatusPayPal
     property :status
   end
 end

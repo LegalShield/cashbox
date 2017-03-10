@@ -8,7 +8,7 @@ describe Vindicia::Model::Product do
   it { should have_property(:created).coercing_with(Vindicia::Type::DateTime) }
   it { should have_property(:descriptions) }
   it { should have_property(:status) }
-  it { should have_property(:default_billing_plan) }
+  it { should have_property(:default_billing_plan).coercing_with(Vindicia::Model::BillingPlan) }
   it { should have_property(:entitlements) }
   it { should have_property(:billing_descriptor) }
   it { should have_property(:credit_granted) }

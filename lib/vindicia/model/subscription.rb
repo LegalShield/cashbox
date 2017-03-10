@@ -7,7 +7,7 @@ module Vindicia::Model
     property :billing_day
     property :billing_plan, coerce: Vindicia::Model::BillingPlan
     property :billing_state
-    property :currenc
+    property :currency
     property :default_billing_plan, coerce: Vindicia::Model::BillingPlan
     property :description
     property :ends, coerce: Vindicia::Type::DateTime

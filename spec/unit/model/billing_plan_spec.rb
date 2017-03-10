@@ -3,12 +3,12 @@ require 'spec_helper'
 describe Vindicia::Model::BillingPlan do
   it { should be_a(Vindicia::Model::Base) }
 
-  it { should have_attr_accessor(:id) }
-  it { should have_attr_accessor(:vid) }
-  it { should have_attr_accessor(:created) }
-  it { should have_attr_accessor(:billing_descriptor) }
-  it { should have_attr_accessor(:billing_notification_days) }
-  it { should have_attr_accessor(:description) }
-  it { should have_attr_accessor(:periods) }
-  it { should have_attr_accessor(:status) }
+  it { should have_property(:id) }
+  it { should have_property(:vid) }
+  it { should have_property(:created).coercing_with(Vindicia::Type::DateTime) }
+  it { should have_property(:billing_descriptor) }
+  it { should have_property(:billing_notification_days) }
+  it { should have_property(:description) }
+  it { should have_property(:periods) }
+  it { should have_property(:status) }
 end
