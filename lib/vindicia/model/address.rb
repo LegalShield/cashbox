@@ -1,13 +1,13 @@
 module Vindicia::Model
   class Address < Base
     property :vid
-    property :name
-    property :line1
     property :city
-    property :district
-    property :postal_code
     property :country
-    property :phone
+    property :district
     property :fax
+    property :line1
+    property :name
+    property :phone
+    property :postal_code
   end
 end
