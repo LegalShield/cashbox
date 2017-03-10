@@ -4,6 +4,7 @@ module Vindicia::Model
   autoload :Address,                 'vindicia/model/address'
   autoload :BillingPlan,             'vindicia/model/billing_plan'
   autoload :BillingPlanPeriod,       'vindicia/model/billing_plan_period'
+  autoload :CreditCard,              'vindicia/model/credit_card'
   autoload :Description,             'vindicia/model/description'
   autoload :Entitlement,             'vindicia/model/entitlement'
   autoload :PayPal,                  'vindicia/model/pay_pal'
