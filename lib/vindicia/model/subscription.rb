@@ -2,24 +2,22 @@ module Vindicia::Model
   class Subscription < Base
     property :id
     property :vid
-    property :created, transform_with: lambda { |v| DateTime.parse(v) }
-
-    property :account, transform_with: lambda { |v| Vindicia::Model::Account.new(v) }
+    property :created, coerce: Vindicia::Type::DateTime
+    property :account, coerce: Vindicia::Model::Account
     property :billing_day
-    #property :billing_plan, transform_with: lambda { |v| Vindicia::Model::BillingPlan.new(v) }
     property :billing_plan, coerce: Vindicia::Model::BillingPlan
     property :billing_state
-    property :currency
-    property :default_billing_plan, transform_with: lambda { |v| Vindicia::Model::BillingPlan.new(v) }
+    property :currenc
+    property :default_billing_plan, coerce: Vindicia::Model::BillingPlan
     property :description
-    property :ends, transform_with: lambda { |v| DateTime.parse(v) }
-    property :entitled_through, transform_with: lambda { |v| DateTime.parse(v) }
-    property :items, transform_with: lambda { |d| d['data'].map { |v| Vindicia::Model::SubscriptionItem.new(v) } }
-    property :most_recent_billing
-    property :next_billing
-    property :notify_on_transition
-    property :payment_method, transform_with: lambda { |v| Vindicia::Model::PaymentMethod.new(v) }
+    property :ends, coerce: Vindicia::Type::DateTime
+    property :entitled_through, coerce: Vindicia::Type::DateTime
+    property :items, coerce: Vindicia::Type::List.proc_for(Vindicia::Model::SubscriptionItem)
+    property :most_recent_billing, coerce: Vindicia::Type::DateTime
+    property :next_billing, coerce: Vindicia::Type::DateTime
+    property :notify_on_transition, coerce: Vindicia::Type::Boolean
+    property :payment_method, coerce: Vindicia::Model::PaymentMethod
     property :policy
-    property :starts, transform_with: lambda { |v| DateTime.parse(v) }
+    property :starts, coerce: Vindicia::Type::DateTime
   end
 end

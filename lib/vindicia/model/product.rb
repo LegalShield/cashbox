@@ -2,13 +2,13 @@ module Vindicia::Model
   class Product < Base
     property :id
     property :vid
-    property :created, transform_with: lambda { |v| DateTime.parse(v) }
+    property :created, coerce: Vindicia::Type::DateTime
     property :billing_descriptor
     property :credit_granted
-    property :default_billing_plan, transform_with: lambda { |v| Vindicia::Model::BillingPlan.new(v) }
-    property :descriptions, transform_with: lambda { |d| d['data'].map { |v| Vindicia::Model::ProductDescription.new(v) } }
-    property :entitlements, transform_with: lambda { |d| d['data'].map { |v| Vindicia::Model::Entitlement.new(v) } }
-    property :prices, transform_with: lambda { |d| d['data'].map { |v| Vindicia::Model::ProductPrice.new(v) } }
+    property :default_billing_plan, coerce: Vindicia::Model::BillingPlan
+    property :descriptions, coerce: Vindicia::Type::List.proc_for(Vindicia::Model::ProductDescription)
+    property :entitlements, coerce: Vindicia::Type::List.proc_for(Vindicia::Model::Entitlement)
+    property :prices, coerce: Vindicia::Type::List.proc_for(Vindicia::Model::ProductPrice)
     property :status
   end
 end
