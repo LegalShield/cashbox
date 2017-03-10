@@ -5,7 +5,7 @@ describe Vindicia::Model::Product do
 
   it { should have_property(:id) }
   it { should have_property(:vid) }
-  it { should have_property(:created).coercing_with(Vindicia::Type::DateTime) }
+  it { should have_property(:created).coercing_with(Vindicia::Type.DateTime) }
   it { should have_property(:descriptions) }
   it { should have_property(:status) }
   it { should have_property(:default_billing_plan).coercing_with(Vindicia::Model::BillingPlan) }

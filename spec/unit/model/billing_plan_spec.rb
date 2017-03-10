@@ -5,7 +5,7 @@ describe Vindicia::Model::BillingPlan do
 
   it { should have_property(:id) }
   it { should have_property(:vid) }
-  it { should have_property(:created).coercing_with(Vindicia::Type::DateTime) }
+  it { should have_property(:created).coercing_with(Vindicia::Type.DateTime) }
   it { should have_property(:billing_descriptor) }
   it { should have_property(:billing_notification_days) }
   it { should have_property(:description) }
