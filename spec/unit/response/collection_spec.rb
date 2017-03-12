@@ -28,4 +28,8 @@ describe 'instance methods' do
 
   it { is_expected.to delegate_method(:each).to(:body) }
   it { is_expected.to be_an(Enumerable) }
+
+  it { is_expected.not_to respond_to(:min) }
+  it { is_expected.not_to respond_to(:max) }
+  it { is_expected.not_to respond_to(:sort) }
 end
