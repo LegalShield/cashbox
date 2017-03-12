@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe Vindicia::Model::ProductDescription do
-  it { should be_a(Vindicia::Model::Description) }
+  it { is_expected.to be_a(Vindicia::Model::Description) }
 end

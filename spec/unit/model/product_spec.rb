@@ -1,16 +1,16 @@
 require 'spec_helper'
 
 describe Vindicia::Model::Product do
-  it { should be_a(Vindicia::Model::Base) }
+  it { is_expected.to be_a(Vindicia::Model::Base) }
 
-  it { should have_property(:id) }
-  it { should have_property(:vid) }
-  it { should have_property(:created).coercing_with(Vindicia::Type.DateTime) }
-  it { should have_property(:descriptions) }
-  it { should have_property(:status) }
-  it { should have_property(:default_billing_plan).coercing_with(Vindicia::Model::BillingPlan) }
-  it { should have_property(:entitlements) }
-  it { should have_property(:billing_descriptor) }
-  it { should have_property(:credit_granted) }
-  it { should have_property(:prices) }
+  it { is_expected.to have_property(:id) }
+  it { is_expected.to have_property(:vid) }
+  it { is_expected.to have_property(:created).coercing_with(Vindicia::Type.DateTime) }
+  it { is_expected.to have_property(:descriptions) }
+  it { is_expected.to have_property(:status) }
+  it { is_expected.to have_property(:default_billing_plan).coercing_with(Vindicia::Model::BillingPlan) }
+  it { is_expected.to have_property(:entitlements) }
+  it { is_expected.to have_property(:billing_descriptor) }
+  it { is_expected.to have_property(:credit_granted) }
+  it { is_expected.to have_property(:prices) }
 end

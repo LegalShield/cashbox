@@ -5,8 +5,8 @@ describe Vindicia do
     expect(Vindicia::VERSION).not_to be nil
   end
 
-  it { should have_attr_accessor(:username) }
-  it { should have_attr_accessor(:password) }
+  it { is_expected.to have_attr_accessor(:username) }
+  it { is_expected.to have_attr_accessor(:password) }
 
   it 'sets sandbox values' do
     Vindicia.sandbox!

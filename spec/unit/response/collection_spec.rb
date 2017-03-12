@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Vindicia::Response::Collection do
   subject { Vindicia::Response::Collection.new(nil) }
 
-  it { should be_a(Vindicia::Response::Base) }
+  it { is_expected.to be_a(Vindicia::Response::Base) }
 end
 
 describe 'instance methods' do
