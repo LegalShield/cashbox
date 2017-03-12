@@ -7,7 +7,7 @@ module Vindicia::Response
     end
 
     def body
-      @body ||= map(raw_body)
+      @body ||= cast(raw_body)
     end
 
     def raw_body
@@ -16,14 +16,14 @@ module Vindicia::Response
 
     private
 
-    def map(hash)
+    def cast(hash)
       case hash['object']
       when 'List'
-        hash['data'].map {|d| map(d) }
+        hash['data'].map {|d| cast(d) }
       when 'Error'
-        throw Vindicia::Exception.new(response.to_h)
+        Vindicia::Exception.new(response.to_h)
       else
-        "Vindicia::Model::#{hash['object']}".constantize.new(hash)
+        Vindicia::Model.const_get(hash['object']).new(hash)
       end
     end
 
