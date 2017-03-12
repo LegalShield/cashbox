@@ -1,7 +1,6 @@
 module Vindicia
   class Request
     include HTTParty
-    #debug_output $stderr
     format :json
 
     def initialize(method, path, options = {})

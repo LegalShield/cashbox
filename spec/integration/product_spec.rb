@@ -13,7 +13,11 @@ describe 'Product' do
     before do
       stub_get('/products')
         .with({ query: { limit: 1 } })
-        .to_return(:status => 200, :body => fixture('product'), :headers => { 'Content-Type': 'application/json' })
+        .to_return({
+          :status => 200,
+          :body => fixture('product'),
+          :headers => { 'Content-Type': 'application/json' }
+        })
     end
 
     it { is_expected.to be_a(Vindicia::Model::Product) }
