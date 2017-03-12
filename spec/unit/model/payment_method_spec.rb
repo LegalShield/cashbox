@@ -10,4 +10,6 @@ describe Vindicia::Model::PaymentMethod do
   it { is_expected.to have_property(:paypal).coercing_with(Vindicia::Model::PayPal) }
   it { is_expected.to have_property(:primary) }
   it { is_expected.to have_property(:type) }
+
+  its(:object) { is_expected.to eql('PaymentMethod') }
 end

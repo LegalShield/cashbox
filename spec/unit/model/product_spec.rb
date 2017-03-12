@@ -13,4 +13,6 @@ describe Vindicia::Model::Product do
   it { is_expected.to have_property(:billing_descriptor) }
   it { is_expected.to have_property(:credit_granted) }
   it { is_expected.to have_property(:prices) }
+
+  its(:object) { is_expected.to eql('Product') }
 end

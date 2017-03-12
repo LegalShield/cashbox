@@ -22,4 +22,6 @@ describe Vindicia::Model::Subscription do
   it { is_expected.to have_property(:payment_method).coercing_with(Vindicia::Model::PaymentMethod) }
   it { is_expected.to have_property(:policy) }
   it { is_expected.to have_property(:starts).coercing_with(Vindicia::Type.DateTime) }
+
+  its(:object) { is_expected.to eql('Subscription') }
 end

@@ -8,4 +8,5 @@ describe Vindicia::Model::TransactionStatus do
   it { is_expected.to have_property(:paypal_status).coercing_with(Vindicia::Model::TransactionStatusPayPal) }
   it { is_expected.to have_property(:status) }
 
+  its(:object) { is_expected.to eql('TransactionStatus') }
 end

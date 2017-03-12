@@ -13,4 +13,6 @@ describe Vindicia::Model::TransactionItem do
   it { is_expected.to have_property(:tax_classification) }
   it { is_expected.to have_property(:tax_type) }
   it { is_expected.to have_property(:total) }
+
+  its(:object) { is_expected.to eql('TransactionItem') }
 end

@@ -11,4 +11,6 @@ describe Vindicia::Model::BillingPlan do
   it { is_expected.to have_property(:description) }
   it { is_expected.to have_property(:periods) }
   it { is_expected.to have_property(:status) }
+
+  its(:object) { is_expected.to eql('BillingPlan') }
 end

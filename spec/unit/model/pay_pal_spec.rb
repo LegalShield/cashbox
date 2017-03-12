@@ -7,4 +7,6 @@ describe Vindicia::Model::PayPal do
   it { is_expected.to have_property(:reference_id) }
   it { is_expected.to have_property(:request_reference_id) }
   it { is_expected.to have_property(:return_url) }
+
+  its(:object) { is_expected.to eql('PayPal') }
 end
