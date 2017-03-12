@@ -9,6 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Jonathon Storer']
   spec.email         = ['jonathon.scott.storer@gmail.com']
 
+  spec.required_ruby_version = '~> 2.0'
+
   spec.summary       = %q{Vindicia Rest Client}
   spec.description   = %q{Vindicia Rest Client}
   spec.homepage      = 'https://github.com/legalshield/vindicia'

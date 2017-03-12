@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Vindicia::Repository::Product do
+describe Vindicia::Repository::Transaction do
   it { is_expected.to be_a(Vindicia::Repository::Base) }
 end

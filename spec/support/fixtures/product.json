@@ -12,7 +12,7 @@
           {
             "object": "ProductDescription",
             "language": "EN",
-            "description": "Oklahoma Limited Personal Plan"
+            "description": "so descriptive"
           }
         ],
         "total_count": 1
@@ -45,8 +45,8 @@
         "data": [
           {
             "object": "Entitlement",
-            "id": "consultation",
-            "description": "Consultations"
+            "id": "my-entitlement",
+            "description": "Entitled"
           }
         ],
         "total_count": 1
@@ -71,5 +71,5 @@
   "total_count": 131,
   "url": "/products?limit=1",
   "next": "/products?limit=1&starting_after=1",
-  "previous": "/products?limit=1&ending_before=1"
+  "previous": "/products?limit=1&ending_before=2"
 }

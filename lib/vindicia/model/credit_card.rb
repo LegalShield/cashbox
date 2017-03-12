@@ -2,9 +2,9 @@ module Vindicia::Model
   class CreditCard < Base
     property :vid
     property :account
-    property :bin
-    property :last_digits
     property :account_length
+    property :bin
     property :expiration_date
+    property :last_digits
   end
 end

@@ -1,6 +1,6 @@
 module Vindicia::Model
   class Entitlement < Base
-    property :description
     property :id
+    property :description
   end
 end

@@ -7,8 +7,8 @@ module Vindicia::Model
     property :email
     property :email_type
     property :language
-    property :notify_before_billing
     property :name
+    property :notify_before_billing
     property :payment_methods, coerce: Vindicia::Type.List(Vindicia::Model::PaymentMethod)
     property :shipping_address, coerce: Vindicia::Model::Address
   end

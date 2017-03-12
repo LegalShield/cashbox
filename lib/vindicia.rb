@@ -8,6 +8,9 @@ require 'vindicia/request'
 require 'vindicia/response'
 
 module Vindicia
+  autoload :VERSION, 'vindicia/version'
+  autoload :Exception, 'vindicia/exception'
+
   class << self
     attr_accessor :username, :password
   end
@@ -22,5 +25,3 @@ module Vindicia
     Vindicia.password = 'password'
   end
 end
-
-autoload :VERSION, 'vindicia/version'
