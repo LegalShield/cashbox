@@ -6,12 +6,12 @@ module Vindicia::Repository
       Vindicia::Response::Collection.new(Vindicia::Request.new(:get, route, { query: { limit: 100 }.merge(query)}))
     end
 
-    def self.all
-      self.where
-    end
-
     def self.first
       self.where({ limit: 1 }).first
+    end
+
+    def self.all
+      self.where
     end
 
     def self.find(id)
