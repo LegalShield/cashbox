@@ -3,20 +3,20 @@ require 'active_support/inflector'
 module Vindicia::Repository
   class Base
     def self.where(query = {})
-      Vindicia::Response.new(Vindicia::Request.new(:get, route, { query: { limit: 100 }.merge(query) }))
-    end
-
-    def self.all
-      Vindicia::Response.new(Vindicia::Request.new(:get, route, { query: { limit: 100 } }))
+      Vindicia::Response::Collection.new(Vindicia::Request.new(:get, route, { query: { limit: 100 }.merge(query) }))
     end
 
     def self.first
-      Vindicia::Response.new(Vindicia::Request.new(:get, route, { query: { limit: 1 } })).body.first
+      self.where({ limit: 1 }).first
+    end
+
+    def self.all
+      self.where
     end
 
     def self.find(id)
       raise ArgumentError.new("Cannot find Resource with id 'nil'") unless id
-      Vindicia::Response.new(Vindicia::Request.new(:get, route(id)))
+      Vindicia::Response::Object.new(Vindicia::Request.new(:get, route(id)))
     end
 
     private

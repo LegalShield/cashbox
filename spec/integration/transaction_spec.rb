@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Product' do
+describe 'Transaction' do
   before do
     Vindicia.test!
   end
