@@ -3,7 +3,7 @@ require 'active_support/inflector'
 module Vindicia::Repository
   class Base
     def self.where(query = {})
-      Vindicia::Response::Collection.new(Vindicia::Request.new(:get, route, { query: { limit: 100 }.merge(query) }))
+      Vindicia::Response::Collection.new(Vindicia::Request.new(:get, route, { query: { limit: 100 }.merge(query)}))
     end
 
     def self.first
