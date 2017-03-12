@@ -1,0 +1,828 @@
+{
+  "object": "List",
+  "data": [
+    {
+      "object": "Transaction",
+      "id": "bbbbbbbbbbbbbbbb",
+      "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "created": "2017-02-11T00:01:35-08:00",
+      "amount": 10.71,
+      "currency": "USD",
+      "account": {
+        "object": "Account",
+        "id": "PPlotter",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "created": "2017-01-22T11:06:00-08:00",
+        "default_currency": "USD",
+        "email": "paula.0@example.org",
+        "email_type": "html",
+        "language": "EN",
+        "notify_before_billing": false,
+        "name": "Paula Plotter",
+        "shipping_address": {
+          "object": "Address",
+          "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "name": "Paula Plotter",
+          "line1": "4635 Ingram Road",
+          "city": "Liberty",
+          "district": "NC",
+          "postal_code": "27298",
+          "country": "US",
+          "phone": "336-622-3355",
+          "fax": "752-331-6484"
+        },
+        "payment_methods": {
+          "object": "List",
+          "data": [
+            {
+              "object": "PaymentMethod",
+              "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "created": "2017-02-10T13:19:04-08:00",
+              "type": "PayPal",
+              "paypal": {
+                "object": "PayPal",
+                "return_url": "https://example.com/success?test=1",
+                "cancel_url": "https://example.com/cancel?test=2",
+                "request_reference_id": true,
+                "reference_id": null
+              },
+              "primary": true,
+              "active": true
+            },
+            {
+              "object": "PaymentMethod",
+              "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "created": "2017-01-22T11:06:00-08:00",
+              "type": "CreditCard",
+              "credit_card": {
+                "object": "CreditCard",
+                "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "account": "474169XXXXXX4447",
+                "bin": "474169",
+                "last_digits": "4447",
+                "account_length": 16,
+                "expiration_date": "201804"
+              },
+              "account_holder": "Paula Plotter",
+              "billing_address": {
+                "object": "Address",
+                "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "name": "Paula Plotter",
+                "line1": "4635 Ingram Road",
+                "city": "Liberty",
+                "district": "NC",
+                "postal_code": "27298",
+                "country": "US",
+                "phone": "336-622-3355",
+                "fax": "752-331-6484"
+              },
+              "customer_specified_type": "Visa",
+              "customer_description": "My wifes Visa credit card",
+              "primary": false,
+              "active": true
+            }
+          ],
+          "total_count": 2
+        },
+        "metadata": {
+          "Created By": "Vindicia sandbox software"
+        }
+      },
+      "source_payment_method": {
+        "object": "PaymentMethod",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "created": "2017-02-10T13:19:04-08:00",
+        "type": "PayPal",
+        "paypal": {
+          "object": "PayPal",
+          "return_url": "http://localhost:3000/success",
+          "cancel_url": "http://localhost:3000/cancel",
+          "request_reference_id": true,
+          "reference_id": null
+        },
+        "primary": true,
+        "active": true
+      },
+      "status_log": {
+        "object": "List",
+        "data": [
+          {
+            "object": "TransactionStatus",
+            "status": "Cancelled",
+            "created": "2017-02-11T00:10:55-08:00",
+            "payment_method_type": "PayPal",
+            "paypal_status": {
+              "object": "TransactionStatusPayPal",
+              "token": "EC-64F78649YT8003602",
+              "auth_code": "11451",
+              "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
+            }
+          },
+          {
+            "object": "TransactionStatus",
+            "status": "New",
+            "created": "2017-02-11T00:01:35-08:00",
+            "payment_method_type": "PayPal",
+            "paypal_status": {
+              "object": "TransactionStatusPayPal",
+              "token": "EC-64F78649YT8003602",
+              "auth_code": "11451",
+              "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
+            }
+          }
+        ],
+        "total_count": 2
+      },
+      "payment_processor": "PayPal",
+      "payment_processor_transaction_id": "bbbbbbbbbbbbbbbb",
+      "shipping_address": {
+        "object": "Address",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "name": "Paula Plotter",
+        "line1": "4635 Ingram Road",
+        "city": "Liberty",
+        "district": "NC",
+        "postal_code": "27298",
+        "country": "US",
+        "phone": "336-622-3355",
+        "fax": "752-331-6484"
+      },
+      "metadata": {
+        "vin:RetryNumber": "0",
+        "vin:BillingCycle": "1"
+      },
+      "items": {
+        "object": "List",
+        "data": [
+          {
+            "object": "TransactionItem",
+            "sku": "1",
+            "index_number": 1,
+            "item_type": "Purchase",
+            "name": "daily",
+            "quantity": 1,
+            "tax_classification": null,
+            "service_period_starts": "2017-02-11T00:00:00-08:00",
+            "service_period_ends": "2017-02-11T00:00:00-08:00",
+            "tax_type": "Exclusive Sales",
+            "total": 0
+          },
+          {
+            "object": "TransactionItem",
+            "sku": "1",
+            "index_number": 2,
+            "item_type": "Purchase",
+            "name": "Widgets",
+            "subscription_item": {
+              "object": "SubscriptionItem",
+              "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "price": 10,
+            "quantity": 1,
+            "tax_classification": null,
+            "service_period_starts": "2017-02-11T00:00:00-08:00",
+            "service_period_ends": "2017-02-11T00:00:00-08:00",
+            "tax_type": "Exclusive Sales",
+            "tax": {
+              "object": "List",
+              "data": [
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "COUNTY_151",
+                  "name": "RANDOLPH COUNTY SALES TAX",
+                  "amount": 0.23
+                },
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "STATE_37",
+                  "name": "NORTH CAROLINA STATE SALES TAX",
+                  "amount": 0.48
+                }
+              ],
+              "total_count": 2
+            },
+            "subtotal": 10,
+            "total": 10.71
+          },
+          {
+            "object": "TransactionItem",
+            "sku": "Total Tax",
+            "index_number": 3,
+            "item_type": "Purchase",
+            "name": "Total Tax",
+            "price": 0,
+            "quantity": 1,
+            "tax_classification": "TaxExempt",
+            "service_period_starts": "2017-02-11T00:00:00-08:00",
+            "service_period_ends": "2017-02-11T00:00:00-08:00",
+            "tax_type": "Exclusive Sales",
+            "tax": {
+              "object": "List",
+              "data": [
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "COUNTY_151",
+                  "name": "RANDOLPH COUNTY SALES TAX",
+                  "amount": 0.23
+                },
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "STATE_37",
+                  "name": "NORTH CAROLINA STATE SALES TAX",
+                  "amount": 0.48
+                }
+              ],
+              "total_count": 2
+            },
+            "discount": 0,
+            "subtotal": 0,
+            "total": 0.71
+          }
+        ],
+        "total_count": 3
+      },
+      "billing_descriptor": "1",
+      "sales_tax_address": {
+        "object": "Address",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "name": "Paula Plotter",
+        "line1": "4635 Ingram Road",
+        "city": "LIBERTY",
+        "district": "NC",
+        "postal_code": "27298",
+        "country": "US"
+      },
+      "subscription_sequence": 2,
+      "billing_plan_sequence": 2,
+      "original_billing_date": "2017-02-11T00:00:00-08:00",
+      "billing_attempt": 0,
+      "subscription": {
+        "object": "Subscription",
+        "id": "8-1486761541",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "object": "Transaction",
+      "id": "bbbbbbbbbbbbbbbb",
+      "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "created": "2017-02-10T13:19:03-08:00",
+      "amount": 10.71,
+      "currency": "USD",
+      "account": {
+        "object": "Account",
+        "id": "PPlotter",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "created": "2017-01-22T11:06:00-08:00",
+        "default_currency": "USD",
+        "email": "paula.0@example.org",
+        "email_type": "html",
+        "language": "EN",
+        "notify_before_billing": false,
+        "name": "Paula Plotter",
+        "shipping_address": {
+          "object": "Address",
+          "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "name": "Paula Plotter",
+          "line1": "4635 Ingram Road",
+          "city": "Liberty",
+          "district": "NC",
+          "postal_code": "27298",
+          "country": "US",
+          "phone": "336-622-3355",
+          "fax": "752-331-6484"
+        },
+        "payment_methods": {
+          "object": "List",
+          "data": [
+            {
+              "object": "PaymentMethod",
+              "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "created": "2017-02-10T13:19:04-08:00",
+              "type": "PayPal",
+              "paypal": {
+                "object": "PayPal",
+                "return_url": "https://example.com/success?test=1",
+                "cancel_url": "https://example.com/cancel?test=2",
+                "request_reference_id": true,
+                "reference_id": null
+              },
+              "primary": true,
+              "active": true
+            },
+            {
+              "object": "PaymentMethod",
+              "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "created": "2017-01-22T11:06:00-08:00",
+              "type": "CreditCard",
+              "credit_card": {
+                "object": "CreditCard",
+                "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "account": "474169XXXXXX4447",
+                "bin": "474169",
+                "last_digits": "4447",
+                "account_length": 16,
+                "expiration_date": "201804"
+              },
+              "account_holder": "Paula Plotter",
+              "billing_address": {
+                "object": "Address",
+                "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "name": "Paula Plotter",
+                "line1": "4635 Ingram Road",
+                "city": "Liberty",
+                "district": "NC",
+                "postal_code": "27298",
+                "country": "US",
+                "phone": "336-622-3355",
+                "fax": "752-331-6484"
+              },
+              "customer_specified_type": "Visa",
+              "customer_description": "My wifes Visa credit card",
+              "primary": false,
+              "active": true
+            }
+          ],
+          "total_count": 2
+        },
+        "metadata": {
+          "Created By": "Vindicia sandbox software"
+        }
+      },
+      "source_payment_method": {
+        "object": "PaymentMethod",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "created": "2017-02-10T13:19:04-08:00",
+        "type": "PayPal",
+        "paypal": {
+          "object": "PayPal",
+          "return_url": "http://localhost:3000/success",
+          "cancel_url": "http://localhost:3000/cancel",
+          "request_reference_id": true,
+          "reference_id": null
+        },
+        "primary": true,
+        "active": true
+      },
+      "status_log": {
+        "object": "List",
+        "data": [
+          {
+            "object": "TransactionStatus",
+            "status": "AuthorizationPending",
+            "created": "2017-02-10T13:19:05-08:00",
+            "payment_method_type": "PayPal",
+            "paypal_status": {
+              "object": "TransactionStatusPayPal",
+              "token": "EC-64F78649YT8003602",
+              "auth_code": "000",
+              "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
+            }
+          },
+          {
+            "object": "TransactionStatus",
+            "status": "New",
+            "created": "2017-02-10T13:19:03-08:00",
+            "payment_method_type": "PayPal",
+            "paypal_status": {
+              "object": "TransactionStatusPayPal",
+              "token": "EC-64F78649YT8003602",
+              "auth_code": "000",
+              "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
+            }
+          }
+        ],
+        "total_count": 2
+      },
+      "payment_processor": "PayPal",
+      "payment_processor_transaction_id": "bbbbbbbbbbbbbbbb",
+      "shipping_address": {
+        "object": "Address",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "name": "Paula Plotter",
+        "line1": "4635 Ingram Road",
+        "city": "Liberty",
+        "district": "NC",
+        "postal_code": "27298",
+        "country": "US",
+        "phone": "336-622-3355",
+        "fax": "752-331-6484"
+      },
+      "metadata": {
+        "vin:RetryNumber": "0",
+        "vin:BillingCycle": "0"
+      },
+      "items": {
+        "object": "List",
+        "data": [
+          {
+            "object": "TransactionItem",
+            "sku": "1",
+            "index_number": 1,
+            "item_type": "Purchase",
+            "name": "daily",
+            "quantity": 1,
+            "tax_classification": null,
+            "service_period_starts": "2017-02-10T00:00:00-08:00",
+            "service_period_ends": "2017-02-10T00:00:00-08:00",
+            "tax_type": "Exclusive Sales",
+            "total": 0
+          },
+          {
+            "object": "TransactionItem",
+            "sku": "1",
+            "index_number": 2,
+            "item_type": "Purchase",
+            "name": "Widgets",
+            "price": 10,
+            "quantity": 1,
+            "tax_classification": null,
+            "service_period_starts": "2017-02-10T00:00:00-08:00",
+            "service_period_ends": "2017-02-10T00:00:00-08:00",
+            "tax_type": "Exclusive Sales",
+            "tax": {
+              "object": "List",
+              "data": [
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "COUNTY_151",
+                  "name": "RANDOLPH COUNTY SALES TAX",
+                  "amount": 0.23
+                },
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "STATE_37",
+                  "name": "NORTH CAROLINA STATE SALES TAX",
+                  "amount": 0.48
+                }
+              ],
+              "total_count": 2
+            },
+            "subtotal": 10,
+            "total": 10.71
+          },
+          {
+            "object": "TransactionItem",
+            "sku": "Total Tax",
+            "index_number": 3,
+            "item_type": "Purchase",
+            "name": "Total Tax",
+            "price": 0,
+            "quantity": 1,
+            "tax_classification": "TaxExempt",
+            "service_period_starts": "2017-02-10T00:00:00-08:00",
+            "service_period_ends": "2017-02-10T00:00:00-08:00",
+            "tax_type": "Exclusive Sales",
+            "tax": {
+              "object": "List",
+              "data": [
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "COUNTY_151",
+                  "name": "RANDOLPH COUNTY SALES TAX",
+                  "amount": 0.23
+                },
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "STATE_37",
+                  "name": "NORTH CAROLINA STATE SALES TAX",
+                  "amount": 0.48
+                }
+              ],
+              "total_count": 2
+            },
+            "discount": 0,
+            "subtotal": 0,
+            "total": 0.71
+          }
+        ],
+        "total_count": 3
+      },
+      "billing_descriptor": "1",
+      "sales_tax_address": {
+        "object": "Address",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "name": "Paula Plotter",
+        "line1": "4635 Ingram Road",
+        "city": "LIBERTY",
+        "district": "NC",
+        "postal_code": "27298",
+        "country": "US"
+      },
+      "subscription_sequence": 1,
+      "billing_plan_sequence": 1,
+      "original_billing_date": "2017-02-10T00:00:00-08:00",
+      "billing_attempt": 0,
+      "subscription": {
+        "object": "Subscription",
+        "id": "8-1486761541",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "to_be_captured": true
+    },
+    {
+      "object": "Transaction",
+      "id": "bbbbbbbbbbbbbbbb",
+      "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "created": "2017-01-22T11:06:01-08:00",
+      "amount": 280.48,
+      "currency": "USD",
+      "account": {
+        "object": "Account",
+        "id": "PPlotter",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "created": "2017-01-22T11:06:00-08:00",
+        "default_currency": "USD",
+        "email": "paula.0@example.org",
+        "email_type": "html",
+        "language": "EN",
+        "notify_before_billing": false,
+        "name": "Paula Plotter",
+        "shipping_address": {
+          "object": "Address",
+          "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "name": "Paula Plotter",
+          "line1": "4635 Ingram Road",
+          "city": "Liberty",
+          "district": "NC",
+          "postal_code": "27298",
+          "country": "US",
+          "phone": "336-622-3355",
+          "fax": "752-331-6484"
+        },
+        "payment_methods": {
+          "object": "List",
+          "data": [
+            {
+              "object": "PaymentMethod",
+              "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "created": "2017-02-10T13:19:04-08:00",
+              "type": "PayPal",
+              "paypal": {
+                "object": "PayPal",
+                "return_url": "https://example.com/success?test=1",
+                "cancel_url": "https://example.com/cancel?test=2",
+                "request_reference_id": true,
+                "reference_id": null
+              },
+              "primary": true,
+              "active": true
+            },
+            {
+              "object": "PaymentMethod",
+              "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "created": "2017-01-22T11:06:00-08:00",
+              "type": "CreditCard",
+              "credit_card": {
+                "object": "CreditCard",
+                "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "account": "474169XXXXXX4447",
+                "bin": "474169",
+                "last_digits": "4447",
+                "account_length": 16,
+                "expiration_date": "201804"
+              },
+              "account_holder": "Paula Plotter",
+              "billing_address": {
+                "object": "Address",
+                "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "name": "Paula Plotter",
+                "line1": "4635 Ingram Road",
+                "city": "Liberty",
+                "district": "NC",
+                "postal_code": "27298",
+                "country": "US",
+                "phone": "336-622-3355",
+                "fax": "752-331-6484"
+              },
+              "customer_specified_type": "Visa",
+              "customer_description": "My wifes Visa credit card",
+              "primary": false,
+              "active": true
+            }
+          ],
+          "total_count": 2
+        },
+        "metadata": {
+          "Created By": "Vindicia sandbox software"
+        }
+      },
+      "source_payment_method": {
+        "object": "PaymentMethod",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "created": "2017-01-22T11:06:00-08:00",
+        "type": "CreditCard",
+        "credit_card": {
+          "object": "CreditCard",
+          "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "account": "474169XXXXXX4447",
+          "bin": "474169",
+          "last_digits": "4447",
+          "account_length": 16,
+          "expiration_date": "201804"
+        },
+        "account_holder": "Paula Plotter",
+        "billing_address": {
+          "object": "Address",
+          "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "name": "Paula Plotter",
+          "line1": "4635 Ingram Road",
+          "city": "Liberty",
+          "district": "NC",
+          "postal_code": "27298",
+          "country": "US",
+          "phone": "336-622-3355",
+          "fax": "752-331-6484"
+        },
+        "customer_specified_type": "Visa",
+        "customer_description": "My wifes Visa credit card",
+        "primary": false,
+        "active": true
+      },
+      "status_log": {
+        "object": "List",
+        "data": [
+          {
+            "object": "TransactionStatus",
+            "status": "Captured",
+            "created": "2017-01-22T11:06:30-08:00",
+            "payment_method_type": "CreditCard",
+            "credit_card_status": {
+              "object": "TransactionStatusCreditCard",
+              "auth_code": "T00"
+            }
+          },
+          {
+            "object": "TransactionStatus",
+            "status": "Authorized",
+            "created": "2017-01-22T11:06:03-08:00",
+            "payment_method_type": "CreditCard",
+            "credit_card_status": {
+              "object": "TransactionStatusCreditCard",
+              "auth_code": "T00"
+            }
+          },
+          {
+            "object": "TransactionStatus",
+            "status": "New",
+            "created": "2017-01-22T11:06:01-08:00",
+            "payment_method_type": "CreditCard",
+            "credit_card_status": {
+              "object": "TransactionStatusCreditCard",
+              "auth_code": "T00"
+            }
+          }
+        ],
+        "total_count": 3
+      },
+      "payment_processor": "Test",
+      "payment_processor_transaction_id": "bbbbbbbbbbbbbbbb",
+      "shipping_address": {
+        "object": "Address",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "name": "Paula Plotter",
+        "line1": "4635 Ingram Road",
+        "city": "Liberty",
+        "district": "NC",
+        "postal_code": "27298",
+        "country": "US",
+        "phone": "336-622-3355",
+        "fax": "752-331-6484"
+      },
+      "metadata": {
+        "Created By": "Vindicia sandbox software"
+      },
+      "items": {
+        "object": "List",
+        "data": [
+          {
+            "object": "TransactionItem",
+            "sku": "SKU-A123",
+            "index_number": 1,
+            "item_type": "Purchase",
+            "name": "Product_A",
+            "price": 11.99,
+            "quantity": 3,
+            "tax_classification": "DC020500",
+            "tax_type": "Exclusive Sales",
+            "tax": {
+              "object": "List",
+              "data": [
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "COUNTY_151",
+                  "name": "RANDOLPH COUNTY SALES TAX",
+                  "amount": 0.81
+                },
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "STATE_37",
+                  "name": "NORTH CAROLINA STATE SALES TAX",
+                  "amount": 1.71
+                }
+              ],
+              "total_count": 2
+            },
+            "subtotal": 35.97,
+            "total": 38.49
+          },
+          {
+            "object": "TransactionItem",
+            "sku": "SKU-B456",
+            "index_number": 2,
+            "item_type": "Purchase",
+            "name": "Product_B",
+            "price": 21.49,
+            "quantity": 2,
+            "tax_classification": "DC020500",
+            "tax_type": "Exclusive Sales",
+            "tax": {
+              "object": "List",
+              "data": [
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "COUNTY_151",
+                  "name": "RANDOLPH COUNTY SALES TAX",
+                  "amount": 0.97
+                },
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "STATE_37",
+                  "name": "NORTH CAROLINA STATE SALES TAX",
+                  "amount": 2.04
+                }
+              ],
+              "total_count": 2
+            },
+            "subtotal": 42.98,
+            "total": 45.99
+          },
+          {
+            "object": "TransactionItem",
+            "sku": "SKU-S321",
+            "index_number": 3,
+            "item_type": "Purchase",
+            "name": "Service_A",
+            "price": 196,
+            "quantity": 1,
+            "tax_classification": "S0000000",
+            "tax_type": "Exclusive Sales",
+            "subtotal": 196,
+            "total": 196
+          },
+          {
+            "object": "TransactionItem",
+            "sku": "Total Tax",
+            "index_number": 4,
+            "item_type": "Purchase",
+            "name": "Total Tax",
+            "price": 0,
+            "quantity": 1,
+            "tax_classification": "TaxExempt",
+            "tax_type": "Exclusive Sales",
+            "tax": {
+              "object": "List",
+              "data": [
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "COUNTY_151",
+                  "name": "RANDOLPH COUNTY SALES TAX",
+                  "amount": 1.78
+                },
+                {
+                  "object": "TaxItem",
+                  "jurisdiction": "STATE_37",
+                  "name": "NORTH CAROLINA STATE SALES TAX",
+                  "amount": 3.75
+                }
+              ],
+              "total_count": 2
+            },
+            "discount": 0,
+            "subtotal": 0,
+            "total": 5.53
+          }
+        ],
+        "total_count": 4
+      },
+      "affiliate": "Affiliate_D",
+      "sub_affiliate": "AffiliateSubId_B",
+      "source_ip": "242.181.126.85",
+      "sales_tax_address": {
+        "object": "Address",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "name": "Paula Plotter",
+        "line1": "4635 Ingram Road",
+        "city": "LIBERTY",
+        "district": "NC",
+        "postal_code": "27298",
+        "country": "US"
+      },
+      "to_be_captured": true
+    }
+  ],
+  "total_count": 3,
+  "url": "/transactions?limit=100&account=PPlotter",
+  "next": "/transactions?limit=100&account=PPlotter&starting_after=bbbbbbbbbbbbbbbb",
+  "previous": "/transactions?limit=100&account=PPlotter&ending_before=cccccccccccccccc"
+}

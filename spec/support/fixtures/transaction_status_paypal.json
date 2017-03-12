@@ -1,0 +1,6 @@
+{
+  "object": "TransactionStatusPayPal",
+  "token": "EC-0PY59477AS577883J",
+  "auth_code": "000",
+  "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
+}

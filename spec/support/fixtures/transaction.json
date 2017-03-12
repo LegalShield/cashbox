@@ -1,0 +1,148 @@
+{
+  "object": "Transaction",
+  "id": "bbbbbbbbbbbbbbbb",
+  "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "created": "2017-02-10T13:46:50-08:00",
+  "amount": 0,
+  "currency": "USD",
+  "account": {
+    "object": "Account",
+    "id": "105-1486763198",
+    "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "created": "2017-02-10T13:46:39-08:00",
+    "default_currency": "USD",
+    "email_type": "html",
+    "notify_before_billing": false,
+    "payment_methods": {
+      "object": "List",
+      "data": [
+        {
+          "object": "PaymentMethod",
+          "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "created": "2017-02-10T13:46:50-08:00",
+          "type": "PayPal",
+          "paypal": {
+            "object": "PayPal",
+            "return_url": "https://example.com/success?test=1",
+            "cancel_url": "https://example.com/cancel?test=2",
+            "request_reference_id": true,
+            "reference_id": null
+          },
+          "primary": true,
+          "active": true
+        }
+      ],
+      "total_count": 1
+    }
+  },
+  "source_payment_method": {
+    "object": "PaymentMethod",
+    "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "created": "2017-02-10T13:46:50-08:00",
+    "type": "PayPal",
+    "paypal": {
+      "object": "PayPal",
+      "return_url": "https://example.com/success?test=1",
+      "cancel_url": "https://example.com/cancel?test=2",
+      "request_reference_id": true,
+      "reference_id": null
+    },
+    "primary": true,
+    "active": true
+  },
+  "status_log": {
+    "object": "List",
+    "data": [
+      {
+        "object": "TransactionStatus",
+        "status": "AuthorizationPending",
+        "created": "2017-02-10T13:46:52-08:00",
+        "payment_method_type": "PayPal",
+        "paypal_status": {
+          "object": "TransactionStatusPayPal",
+          "token": "EC-0PY59464AS577883J",
+          "auth_code": "000",
+          "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
+        }
+      },
+      {
+        "object": "TransactionStatus",
+        "status": "New",
+        "created": "2017-02-10T13:46:50-08:00",
+        "payment_method_type": "PayPal",
+        "paypal_status": {
+          "object": "TransactionStatusPayPal",
+          "token": "EC-0PY59464AS577883J",
+          "auth_code": "000",
+          "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
+        }
+      }
+    ],
+    "total_count": 2
+  },
+  "payment_processor": "PayPal",
+  "payment_processor_transaction_id": "bbbbbbbbbbbbbbbb",
+  "metadata": {
+    "vin:RetryNumber": "0",
+    "vin:BillingCycle": "0"
+  },
+  "items": {
+    "object": "List",
+    "data": [
+      {
+        "object": "TransactionItem",
+        "sku": "1",
+        "index_number": 1,
+        "item_type": "Purchase",
+        "name": "daily",
+        "quantity": 1,
+        "tax_classification": null,
+        "service_period_starts": "2017-02-10T00:00:00-08:00",
+        "service_period_ends": "2017-02-10T00:00:00-08:00",
+        "tax_type": "Exclusive Sales",
+        "total": 0
+      },
+      {
+        "object": "TransactionItem",
+        "sku": "6-1486763199",
+        "index_number": 2,
+        "item_type": "Purchase",
+        "name": "Perseus Plan 1",
+        "quantity": 1,
+        "tax_classification": null,
+        "service_period_starts": "2017-02-10T00:00:00-08:00",
+        "service_period_ends": "2017-02-10T00:00:00-08:00",
+        "tax_type": "Exclusive Sales",
+        "total": 0
+      },
+      {
+        "object": "TransactionItem",
+        "sku": "Total Tax",
+        "index_number": 3,
+        "item_type": "Purchase",
+        "name": "Total Tax",
+        "price": 0,
+        "quantity": 1,
+        "tax_classification": "TaxExempt",
+        "service_period_starts": "2017-02-10T00:00:00-08:00",
+        "service_period_ends": "2017-02-10T00:00:00-08:00",
+        "tax_type": "Exclusive Sales",
+        "discount": 0,
+        "subtotal": 0,
+        "total": 0
+      }
+    ],
+    "total_count": 3
+  },
+  "billing_descriptor": "1",
+  "subscription_sequence": 1,
+  "billing_plan_sequence": 1,
+  "original_billing_date": "2017-02-10T00:00:00-08:00",
+  "billing_attempt": 0,
+  "subscription": {
+    "object": "Subscription",
+    "id": "16-1486763201",
+    "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "to_be_captured": true
+}

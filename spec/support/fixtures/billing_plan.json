@@ -1,0 +1,22 @@
+{
+  "object": "BillingPlan",
+  "id": "1",
+  "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "created": "2017-02-03T13:44:10-08:00",
+  "description": "daily",
+  "status": "Active",
+  "periods": {
+    "object": "List",
+    "data": [
+      {
+        "object": "BillingPlanPeriod",
+        "type": "Day",
+        "quantity": 1,
+        "cycles": 0
+      }
+    ],
+    "total_count": 1
+  },
+  "billing_notification_days": 1,
+  "billing_descriptor": "1"
+}
