@@ -41,8 +41,8 @@
               "type": "PayPal",
               "paypal": {
                 "object": "PayPal",
-                "return_url": "http://localhost:3000/success",
-                "cancel_url": "http://localhost:3000/cancel",
+                "return_url": "https://example.com/success?test=1",
+                "cancel_url": "https://example.com/cancel?test=2",
                 "request_reference_id": true,
                 "reference_id": null
               },
@@ -115,7 +115,7 @@
               "object": "TransactionStatusPayPal",
               "token": "EC-64F78649YT8003602",
               "auth_code": "11451",
-              "redirect_url": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=EC-64F78649YT8003602"
+              "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
             }
           },
           {
@@ -127,7 +127,7 @@
               "object": "TransactionStatusPayPal",
               "token": "EC-64F78649YT8003602",
               "auth_code": "11451",
-              "redirect_url": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=EC-64F78649YT8003602"
+              "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
             }
           }
         ],
@@ -302,8 +302,8 @@
               "type": "PayPal",
               "paypal": {
                 "object": "PayPal",
-                "return_url": "http://localhost:3000/success",
-                "cancel_url": "http://localhost:3000/cancel",
+                "return_url": "https://example.com/success?test=1",
+                "cancel_url": "https://example.com/cancel?test=2",
                 "request_reference_id": true,
                 "reference_id": null
               },
@@ -376,7 +376,7 @@
               "object": "TransactionStatusPayPal",
               "token": "EC-64F78649YT8003602",
               "auth_code": "000",
-              "redirect_url": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=EC-64F78649YT8003602"
+              "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
             }
           },
           {
@@ -388,7 +388,7 @@
               "object": "TransactionStatusPayPal",
               "token": "EC-64F78649YT8003602",
               "auth_code": "000",
-              "redirect_url": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=EC-64F78649YT8003602"
+              "redirect_url": "https://paypal.example.com.com/webscr?cmd=_express-checkout&useraction=commit&token=my_token"
             }
           }
         ],
@@ -560,8 +560,8 @@
               "type": "PayPal",
               "paypal": {
                 "object": "PayPal",
-                "return_url": "http://localhost:3000/success",
-                "cancel_url": "http://localhost:3000/cancel",
+                "return_url": "https://example.com/success?test=1",
+                "cancel_url": "https://example.com/cancel?test=2",
                 "request_reference_id": true,
                 "reference_id": null
               },
