@@ -25,4 +25,3 @@ module Vindicia
     Vindicia.password = 'password'
   end
 end
-
