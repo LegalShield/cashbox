@@ -172,7 +172,7 @@
             "sku": "1",
             "index_number": 2,
             "item_type": "Purchase",
-            "name": "Oklahoma Limited Personal Plan",
+            "name": "Widgets",
             "subscription_item": {
               "object": "SubscriptionItem",
               "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -433,7 +433,7 @@
             "sku": "1",
             "index_number": 2,
             "item_type": "Purchase",
-            "name": "Oklahoma Limited Personal Plan",
+            "name": "Widgets",
             "price": 10,
             "quantity": 1,
             "tax_classification": null,
