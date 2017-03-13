@@ -20,4 +20,8 @@ module Vindicia::Model
   autoload :TransactionItem,         'vindicia/model/transaction_item'
   autoload :TransactionStatus,       'vindicia/model/transaction_status'
   autoload :TransactionStatusPayPal, 'vindicia/model/transaction_status_pay_pal'
+
+  module Concern
+    autoload :Objectable, 'vindicia/model/concern/objectable'
+  end
 end

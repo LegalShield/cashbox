@@ -19,9 +19,9 @@ module Vindicia::Repository
       Vindicia::Response::Object.new(Vindicia::Request.new(:get, route(id)))
     end
 
-    #def save(model)
-      #Vindicia::Response.new(Vindicia::Request.new(:post, route(id), Vindicia::RequestMapper::Base.map(model)))
-    #end
+    def self.save(model)
+      Vindicia::Response::Object.new(Vindicia::Request.new(:post, route(model.vid), { body: model.to_json }))
+    end
 
     private
 

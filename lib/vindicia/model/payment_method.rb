@@ -1,5 +1,7 @@
 module Vindicia::Model
   class PaymentMethod < Base
+    include Vindicia::Model::Concern::Objectable
+
     property :id
     property :vid
     property :created, coerce: Vindicia::Type.DateTime
