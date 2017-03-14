@@ -6,9 +6,8 @@ describe 'Product' do
   end
 
   describe 'first products' do
-    subject do
-      Vindicia::Repository::Product.first
-    end
+    let(:first_product) { Vindicia::Repository::Product.first }
+    subject { first_product }
 
     before do
       stub_get('/products')
@@ -39,8 +38,12 @@ describe 'Product' do
       expect(subject.entitlements.first).to be_a(Vindicia::Model::Entitlement)
     end
 
-    it 'product prices are Vindicia::Model::ProductPrice' do
-      expect(subject.prices.first).to be_a(Vindicia::Model::ProductPrice)
+    context 'records in price' do
+      subject { first_product.prices.first }
+
+      it { is_expected.to be_a(Vindicia::Model::ProductPrice) }
+      its(:amount) { is_expected.to be_a(BigDecimal) }
+      its(:amount) { is_expected.to eq(9.99) }
     end
   end
 end

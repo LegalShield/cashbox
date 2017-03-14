@@ -60,7 +60,7 @@
         "data": [
           {
             "object": "ProductPrice",
-            "amount": 10,
+            "amount": 9.99,
             "currency": "USD"
           }
         ],
