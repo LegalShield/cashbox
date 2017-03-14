@@ -32,4 +32,7 @@ describe 'instance methods' do
   it { is_expected.not_to respond_to(:min) }
   it { is_expected.not_to respond_to(:max) }
   it { is_expected.not_to respond_to(:sort) }
+
+  context 'eager each' do
+  end
 end
