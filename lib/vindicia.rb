@@ -24,6 +24,10 @@ module Vindicia
 
   end
 
+  def self.production!
+    Vindicia::Request.base_uri('https://api.vindicia.com')
+  end
+
   def self.sandbox!
     Vindicia::Request.base_uri('https://api.prodtest.vindicia.com')
   end
