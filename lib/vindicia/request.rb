@@ -2,6 +2,7 @@ module Vindicia
   class Request
     include HTTParty
     format :json
+    base_uri 'https://api.vindicia.com'
 
     def initialize(method, path, options = {})
       @method  = method
