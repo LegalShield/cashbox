@@ -124,9 +124,8 @@ describe 'Product' do
         })
     end
 
-    it 'works' do
-      response = Vindicia::Repository::Product.save(product)
-      response.body
+    it 'makes the appropriate request that is mocked above' do
+      Vindicia::Repository::Product.save(product).body
     end
   end
 end
