@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Product' do
   before { Vindicia.test!  }
+  after { Vindicia.production! }
 
   describe 'first product' do
     subject do

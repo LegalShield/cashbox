@@ -13,6 +13,19 @@ module Vindicia
 
   class << self
     attr_accessor :username, :password
+
+    def config(hash = {})
+      if block_given?
+        yield(self)
+      else
+        hash.each { |k, v| self.send("#{k}=", v) }
+      end
+    end
+
+  end
+
+  def self.production!
+    Vindicia::Request.base_uri('https://api.vindicia.com')
   end
 
   def self.sandbox!
