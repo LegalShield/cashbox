@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 describe 'Transaction' do
-  before do
-    Vindicia.test!
-  end
+  before { Vindicia.test!  }
+  after { Vindicia.production! }
 
   describe 'first transaction' do
     subject do
