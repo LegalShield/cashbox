@@ -1,0 +1,8 @@
+{
+  "object": "List",
+  "data": [ ],
+  "total_count": 839,
+  "url": "/accounts?limit=100",
+  "next": "/accounts?limit=100&starting_after=bbbbbbbbbbbbbbbb",
+  "previous": "/accounts?limit=100&ending_before=cccccccccccccccc"
+}

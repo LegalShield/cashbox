@@ -5,6 +5,7 @@ require 'vindicia/type'
 require 'vindicia/model'
 require 'vindicia/repository'
 require 'vindicia/request'
+require 'vindicia/request_collection'
 require 'vindicia/response'
 
 module Vindicia

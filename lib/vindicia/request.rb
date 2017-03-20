@@ -3,6 +3,7 @@ module Vindicia
     include HTTParty
     format :json
     base_uri 'https://api.vindicia.com'
+    debug_output $stdout
 
     def initialize(method, path, options = {})
       @method  = method
@@ -10,7 +11,7 @@ module Vindicia
       @options = options
     end
 
-    def perform
+    def response
       self.class.send(@method, @path, @options.merge(default_options))
     end
 
