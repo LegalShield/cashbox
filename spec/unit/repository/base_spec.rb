@@ -17,7 +17,7 @@ describe Vindicia::Repository::Base do
         let(:response) do
           { 'total_count' => 200,
             'object' => 'List',
-            'data' => 100.times.map { |n| { 'object' => 'Account', 'id' => n, 'vid' => n } },
+            'data' => 100.times.map { |n| { 'object' => 'Base', 'id' => n, 'vid' => n } },
             'next' => nil,
             'previous' => nil }
         end
@@ -30,7 +30,7 @@ describe Vindicia::Repository::Base do
 
           allow(Vindicia::Response::Collection)
             .to receive(:new)
-            .with(array_including(kind_of(Vindicia::Model::Account)))
+            .with(array_including(kind_of(Vindicia::Model::Base)))
             .and_return(collection)
         end
 
@@ -51,31 +51,29 @@ describe Vindicia::Repository::Base do
 
           expect(Vindicia::Response::Collection)
             .to have_received(:new)
-            .with(array_including(kind_of(Vindicia::Model::Account)))
+            .with(array_including(kind_of(Vindicia::Model::Base)))
         end
       end
 
       context 'many fetches' do
-        let(:collection) { double('collection') }
-
         let(:response_one) do
-          { 'total_count' => 200,
+          { 'total_count' => 1000,
             'object' => 'List',
-            'data' => 100.times.map { |n| { 'object' => 'Account', 'id' => n, 'vid' => n } },
+            'data' => 100.times.map { |n| { 'object' => 'Base', 'id' => n, 'vid' => n } },
             'next' => '/bases?starting_after=100&limit=100&name=Jon',
             'previous' => '/bases?ending_before=0&limit=100&name=Jon' }
         end
 
         let(:response_two) do
-          { 'total_count' => 200,
+          { 'total_count' => 1000,
             'object' => 'List',
-            'data' => 100.times.map { |n| { 'object' => 'Account', 'id' => n, 'vid' => n } },
+            'data' => 100.times.map { |n| { 'object' => 'Base', 'id' => n, 'vid' => n } },
             'next' => '/bases?starting_after=200&limit=100&name=Jon',
             'previous' => '/bases?ending_before=100&limit=100&name=Jon' }
         end
 
         let(:response_three) do
-          { 'total_count' => 250,
+          { 'total_count' => 1000,
             'object' => 'List',
             'data' => [ ],
             'next' => nil,
@@ -95,12 +93,12 @@ describe Vindicia::Repository::Base do
 
           allow(Vindicia::Request)
             .to receive(:new)
-            .with(:get, '/bases', { query: {'starting_after' => '100', 'limit' => '100', 'name' => 'Jon' } })
+            .with(:get, '/bases', { query: { starting_after: '100', limit: 100, name: 'Jon' } })
             .and_return(double('request 2', response: response_two))
 
           allow(Vindicia::Request)
             .to receive(:new)
-            .with(:get, '/bases', { query: {'starting_after' => '200', 'limit' => '100', 'name' => 'Jon' } })
+            .with(:get, '/bases', { query: { starting_after: '200', limit: 50, name: 'Jon' } })
             .and_return(double('request 3', response: response_three))
         end
 
@@ -113,11 +111,11 @@ describe Vindicia::Repository::Base do
 
           expect(Vindicia::Request)
             .to have_received(:new)
-            .with(:get, '/bases', { query: { 'starting_after' => '100', 'limit' => '100', 'name' => 'Jon' } }).ordered
+            .with(:get, '/bases', { query: { starting_after: '100', limit: 100, name: 'Jon' } }).ordered
 
           expect(Vindicia::Request)
             .to have_received(:new)
-            .with(:get, '/bases', { query: { 'starting_after' =>'200', 'limit' => '100', 'name' => 'Jon' } }).ordered
+            .with(:get, '/bases', { query: { starting_after: '200', limit: 50, name: 'Jon' } }).ordered
 
           expect(Vindicia::Request).to have_received(:new).exactly(3).times
         end
@@ -152,7 +150,7 @@ describe Vindicia::Repository::Base do
 
     describe '#find' do
       let(:response) do
-        { 'object' => 'Account',
+        { 'object' => 'Base',
           'id' => 1,
           'vid'=> 'v1' }
       end
@@ -160,7 +158,7 @@ describe Vindicia::Repository::Base do
       context 'success' do
         before do
           allow(Vindicia::Request).to receive(:new).with(:get, '/bases/1').and_return(double('request', response: response))
-          allow(Vindicia::Response::Object).to receive(:new).with(kind_of(Vindicia::Model::Account))
+          allow(Vindicia::Response::Object).to receive(:new).with(kind_of(Vindicia::Model::Base))
           repository.find(1)
         end
 
@@ -169,7 +167,7 @@ describe Vindicia::Repository::Base do
         end
 
         it 'creates the correct response' do
-          expect(Vindicia::Response::Object).to have_received(:new).with(kind_of(Vindicia::Model::Account))
+          expect(Vindicia::Response::Object).to have_received(:new).with(kind_of(Vindicia::Model::Base))
         end
       end
 
