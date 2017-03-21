@@ -21,11 +21,12 @@ module Vindicia::Repository
     end
 
     def self.where(query = {})
-      max = query.delete(:limit)
-      limit = [ ( max || DEFAULT_LIMIT ), DEFAULT_LIMIT ].min
-      query = { limit: limit }.merge(query)
-      objects = self._where(query, max)
-      Vindicia::Response::Collection.new(objects)
+      Hashie.symbolize_keys!(query)
+
+      max = query[:limit]
+      query[:limit] = [(max || DEFAULT_LIMIT), DEFAULT_LIMIT].min
+
+      Vindicia::Response::Collection.new(self._where(query, max))
     end
 
     private
@@ -36,11 +37,13 @@ module Vindicia::Repository
 
       if (response['next'] && (max.nil? || objects.count < max))
         query = Hashie.symbolize_keys(Addressable::URI.parse(response['next']).query_values)
+        query[:limit] = query[:limit].to_i
+
         if (max)
           max -= objects.count
-          limit = [max, query[:limit].to_i].min
-          query = query.merge({ limit: limit })
+          query[:limit] = max if max < query[:limit]
         end
+
         objects.concat(self._where(query, max))
       end
 
