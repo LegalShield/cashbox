@@ -48,24 +48,4 @@ describe 'Transaction' do
       expect(subject.status_log.first).to be_a(Vindicia::Model::TransactionStatus)
     end
   end
-
-  describe 'all' do
-    subject { Vindicia::Repository::Transaction.all }
-
-    before do
-      stub_get('/transactions')
-        .with({ query: { limit: 100 } })
-        .to_return({
-          :status => 200,
-          :body => fixture('transactions'),
-          :headers => { 'Content-Type': 'application/json' }
-        })
-
-      subject.count
-    end
-
-    it 'makes 3 calls' do
-      expect(a_get('/transactions')).to have_been_made
-    end
-  end
 end

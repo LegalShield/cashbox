@@ -27,7 +27,7 @@ describe Vindicia::Request do
         basic_auth: { username: 'me', password: 'sekret' }
       })
 
-      subject.perform
+      subject.response
     end
 
     it 'makes the correct HTTP verb call' do

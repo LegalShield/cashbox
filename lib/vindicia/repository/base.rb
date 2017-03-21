@@ -4,22 +4,22 @@ require 'addressable/uri'
 module Vindicia::Repository
   class Base
     DEFAULT_QUERY = { limit: 100 }.freeze
+    DEFAULT_LIMIT = 100.freeze
 
     def self.where(query = {})
-      limit = query[:limit]
-      query = DEFAULT_QUERY.merge(query)
+      max = query.delete(:limit)
+      limit = [ ( max || DEFAULT_LIMIT ), DEFAULT_LIMIT ].min
+      query = { limit: limit }.merge(query)
 
-      response = Vindicia::Request.new(:get, route, { query: query }).response
-      limit = [(limit || response['total_count']), response['total_count']].min
-      objects = self.cast(response.to_h)
-      current_count = objects.size
+      objects = []
 
-      while ((next_page = response['next']) && current_count <= limit) do
-        query = Addressable::URI.parse(next_page).query_values
-
+      begin
         response = Vindicia::Request.new(:get, route, { query: query }).response
-        objects = objects.concat(self.cast(response.to_h))
-        current_count += objects.size
+        objects.concat(self.cast(response))
+      end while begin
+        if (response['next'] && (!max || objects.count < max))
+          query = Addressable::URI.parse(response['next']).query_values
+        end
       end
 
       Vindicia::Response::Collection.new(objects)
