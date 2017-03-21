@@ -3,7 +3,7 @@ module Vindicia
     include HTTParty
     format :json
     base_uri 'https://api.vindicia.com'
-    debug_output $stdout
+    #debug_output $stdout
 
     def initialize(method, path, options = {})
       @method  = method

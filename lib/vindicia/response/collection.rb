@@ -1,5 +1,5 @@
 module Vindicia::Response
-  class Collection < Base
+  class Collection < Object
     extend Forwardable
     include Enumerable
 

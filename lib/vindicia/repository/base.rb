@@ -3,7 +3,6 @@ require 'addressable/uri'
 
 module Vindicia::Repository
   class Base
-    DEFAULT_QUERY = { limit: 100 }.freeze
     DEFAULT_LIMIT = 100.freeze
 
     def self.where(query = {})
@@ -57,10 +56,6 @@ module Vindicia::Repository
       else
         Vindicia::Model.const_get(hash['object']).new(hash)
       end
-    end
-
-    def perform
-
     end
   end
 end

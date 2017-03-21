@@ -48,5 +48,4 @@ describe Vindicia::Request do
       })
     end
   end
-
 end
