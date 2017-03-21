@@ -49,8 +49,8 @@ module Vindicia::Repository
 
     def self.cast(hash)
       case hash['object']
-      when 'Error'
-        Vindicia::Exception.new(@response.to_h)
+      #when 'Error'
+        #Vindicia::Exception.new(@response.to_h)
       when 'List'
         hash['data'].map {|d| cast(d) }
       else
