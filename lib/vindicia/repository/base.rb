@@ -6,17 +6,17 @@ module Vindicia::Repository
     DEFAULT_LIMIT = 100.freeze
 
     def self.where(query = {})
+      objects = []
+
       max = query.delete(:limit)
       limit = [ ( max || DEFAULT_LIMIT ), DEFAULT_LIMIT ].min
       query = { limit: limit }.merge(query)
-
-      objects = []
 
       begin
         response = Vindicia::Request.new(:get, route, { query: query }).response
         objects.concat(self.cast(response))
       end while begin
-        if (response['next'] && (!max || objects.count < max))
+        if (response['next'] && (max.nil? || objects.count < max))
           query = Addressable::URI.parse(response['next']).query_values
         end
       end
@@ -49,8 +49,6 @@ module Vindicia::Repository
 
     def self.cast(hash)
       case hash['object']
-      #when 'Error'
-        #Vindicia::Exception.new(@response.to_h)
       when 'List'
         hash['data'].map {|d| cast(d) }
       else

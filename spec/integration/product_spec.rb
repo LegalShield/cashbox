@@ -1,6 +1,7 @@
 require 'spec_helper'
 
-describe 'Product' do before { Vindicia.test!  }
+describe 'Product' do
+  before { Vindicia.test! }
   after { Vindicia.production! }
 
   describe 'first products' do
