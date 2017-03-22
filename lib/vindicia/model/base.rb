@@ -3,10 +3,7 @@ module Vindicia::Model
     include Hashie::Extensions::MergeInitializer
     include Hashie::Extensions::IgnoreUndeclared
     include Hashie::Extensions::IndifferentAccess
+    include Hashie::Extensions::Dash::PropertyTranslation
     include Hashie::Extensions::Dash::Coercion
-
-    def object
-      self.class.name.split('::').last
-    end
   end
 end

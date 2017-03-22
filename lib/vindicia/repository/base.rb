@@ -23,6 +23,10 @@ module Vindicia::Repository
       self._where(query, query.delete(:limit))
     end
 
+    def self.save(model)
+      self.cast(Vindicia::Request.new(:post, route(model.vid), { body: model.to_json }).response)
+    end
+
     private
 
     def self._where(query, max)

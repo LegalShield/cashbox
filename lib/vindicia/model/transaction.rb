@@ -1,5 +1,7 @@
 module Vindicia::Model
   class Transaction < Base
+    include Vindicia::Model::Concern::Objectable
+
     property :id
     property :vid
     property :account, coerce: Vindicia::Model::Account

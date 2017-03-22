@@ -1,5 +1,7 @@
 module Vindicia::Model
   class BillingPlan < Base
+    include Vindicia::Model::Concern::Objectable
+
     property :id
     property :vid
     property :billing_descriptor

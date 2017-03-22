@@ -1,5 +1,7 @@
 module Vindicia::Model
   class Address < Base
+    include Vindicia::Model::Concern::Objectable
+
     property :vid
     property :city
     property :country

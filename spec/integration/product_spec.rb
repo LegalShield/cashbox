@@ -4,7 +4,7 @@ describe 'Product' do
   before { Vindicia.test! }
   after { Vindicia.production! }
 
-  describe 'first products' do
+  describe 'first product' do
     subject do
       Vindicia::Repository::Product.first
     end
@@ -81,6 +81,93 @@ describe 'Product' do
 
     it 'fetches 2 records' do
       expect(subject.count).to eql(2)
+    end
+  end
+
+  describe 'saving products' do
+    let(:product_description) do
+      Vindicia::Model::ProductDescription.new({
+        language: 'EN',
+        description: 'describy'
+      })
+    end
+
+    let(:billing_plan_period) do
+      Vindicia::Model::BillingPlanPeriod.new({
+        type: 'Day',
+        quantity: 1,
+        cycles: 0
+      })
+    end
+
+    let(:billing_plan) do
+      Vindicia::Model::BillingPlan.new({
+        id: '1',
+        description: 'daily',
+        status: 'Active',
+        periods: [ billing_plan_period ]
+      })
+    end
+
+    let(:entitlement) do
+      Vindicia::Model::Entitlement.new({
+        id: 'test-entitlement',
+        description: 'described entitlement'
+      })
+    end
+
+    let(:price) do
+      Vindicia::Model::ProductPrice.new({
+        amount: 9.99,
+        currency: 'USD'
+      })
+    end
+
+    let(:product) do
+      Vindicia::Model::Product.new({
+        id: '1',
+        descriptions: [ product_description ],
+        status: 'Active',
+        default_billing_plan: billing_plan,
+        entitlements: [ entitlement ],
+        prices: [ price ]
+      })
+    end
+
+    before do
+      stub_post('/products')
+        .with({
+          body: {
+            object: 'Product',
+            id: '1',
+            descriptions: [ { object: 'ProductDescription', language: 'EN', description: 'describy' } ],
+            status: 'Active',
+            default_billing_plan: {
+              object: 'BillingPlan',
+              id: '1',
+              description: 'daily',
+              status: 'Active',
+              periods: [ { object: 'BillingPlanPeriod', type: 'Day', quantity: 1, cycles: 0 } ]
+            },
+            entitlements: [ { object: 'Entitlement', id: 'test-entitlement', description: 'described entitlement' } ],
+            prices: [ { object: 'ProductPrice', amount: 9.99, currency: 'USD' } ],
+          }.to_json
+        })
+        .to_return({
+          :status => 200,
+          :body => fixture('product'),
+          :headers => { 'Content-Type': 'application/json' }
+        })
+    end
+
+    it 'makes the correct api call' do
+      Vindicia::Repository::Product.save(product)
+    end
+
+    it 'parses the response correctly' do
+      result = Vindicia::Repository::Product.save(product)
+      expect(result).to be_a(Vindicia::Model::Product)
+      expect(result).not_to eq(product)
     end
   end
 end
