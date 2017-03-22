@@ -161,7 +161,13 @@ describe 'Product' do
     end
 
     it 'makes the appropriate request that is mocked above' do
-      Vindicia::Repository::Product.save(product).body
+      Vindicia::Repository::Product.save(product)
+    end
+
+    it 'makes the appropriate request that is mocked above' do
+      result = Vindicia::Repository::Product.save(product)
+      expect(result).to be_a(Vindicia::Model::Product)
+      expect(result).not_to eq(product)
     end
   end
 end

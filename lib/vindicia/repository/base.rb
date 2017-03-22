@@ -24,7 +24,7 @@ module Vindicia::Repository
     end
 
     def self.save(model)
-      Vindicia::Response::Object.new(Vindicia::Request.new(:post, route(model.vid), { body: model.to_json }))
+      self.cast(Vindicia::Request.new(:post, route(model.vid), { body: model.to_json }).response)
     end
 
     private
