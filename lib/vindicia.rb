@@ -5,7 +5,6 @@ require 'vindicia/type'
 require 'vindicia/model'
 require 'vindicia/repository'
 require 'vindicia/request'
-require 'vindicia/response'
 
 module Vindicia
   autoload :VERSION, 'vindicia/version'

@@ -12,8 +12,6 @@ describe Vindicia::Repository::Base do
 
     describe '#where' do
       context 'single fetch' do
-        let(:collection) { double('collection') }
-
         let(:response) do
           Hashie::Mash.new({ 'total_count' => 200,
             'object' => 'List',
@@ -27,11 +25,6 @@ describe Vindicia::Repository::Base do
             .to receive(:new)
             .with(:get, '/bases', { query: { limit: 100, name: 'Jon' } })
             .and_return(double('request', response: response))
-
-          allow(Vindicia::Response::Collection)
-            .to receive(:new)
-            .with(array_including(kind_of(Vindicia::Model::Base)))
-            .and_return(collection)
         end
 
         it 'creates a request instance' do
@@ -42,16 +35,11 @@ describe Vindicia::Repository::Base do
             .with(:get, '/bases', { query: { limit: 100, name: 'Jon' } })
         end
 
-        it 'creates a response instance from the api response' do
-          expect(repository.where({ name: 'Jon' })).to eq(collection)
-        end
-
         it 'casts the response to vindicia models' do
-          repository.where({ name: 'Jon' })
-
-          expect(Vindicia::Response::Collection)
-            .to have_received(:new)
-            .with(array_including(kind_of(Vindicia::Model::Base)))
+          objects = repository.where({ name: 'Jon' })
+          expect(objects).to be_an(Array)
+          expect(objects.map(&:class).uniq.count).to eql(1)
+          expect(objects.first).to be_an(Vindicia::Model::Base)
         end
       end
 
@@ -155,10 +143,11 @@ describe Vindicia::Repository::Base do
           'vid'=> 'v1' }
       end
 
+      let(:result) { repository.find(1) }
+
       context 'success' do
         before do
           allow(Vindicia::Request).to receive(:new).with(:get, '/bases/1').and_return(double('request', response: response))
-          allow(Vindicia::Response::Object).to receive(:new).with(kind_of(Vindicia::Model::Base))
           repository.find(1)
         end
 
@@ -166,8 +155,8 @@ describe Vindicia::Repository::Base do
           expect(Vindicia::Request).to have_received(:new).with(:get, '/bases/1').once
         end
 
-        it 'creates the correct response' do
-          expect(Vindicia::Response::Object).to have_received(:new).with(kind_of(Vindicia::Model::Base))
+        it 'makes the correct request' do
+          expect(result).to be_a(Vindicia::Model::Base)
         end
       end
 
