@@ -37,9 +37,9 @@ module Vindicia::Repository
       response = Vindicia::Request.new(:get, route, { query: query }).response
       objects = self.cast(response)
 
-      if (response['next'] && (max.nil? || objects.count < max))
+      if (response.next && (max.nil? || objects.count < max))
         max -= objects.count if max
-        query = Addressable::URI.parse(response['next']).query_values
+        query = Addressable::URI.parse(response.next).query_values
         objects.concat(self._where(query, max))
       end
 

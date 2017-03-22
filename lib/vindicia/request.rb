@@ -11,7 +11,7 @@ module Vindicia
     end
 
     def response
-      self.class.send(@method, @path, @options.merge(default_options))
+      Hashie::Mash.new(self.class.send(@method, @path, @options.merge(default_options)))
     end
 
     private
