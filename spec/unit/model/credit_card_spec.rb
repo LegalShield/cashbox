@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Vindicia::Model::CreditCard do
-  it { is_expected.to be_a(Vindicia::Model::Base) }
+describe Vindicia::CreditCard do
+  it { is_expected.to be_a(Vindicia::Model) }
 
   it { is_expected.to have_property(:vid) }
   it { is_expected.to have_property(:account) }

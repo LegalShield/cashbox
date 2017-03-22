@@ -1,8 +1,8 @@
-module Vindicia::Model
-  class SubscriptionItem < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class SubscriptionItem < Model
+    include Vindicia::Concern::Objectable
 
     property :id
-    property :product, coerce: Vindicia::Model::Product
+    property :product, coerce: Vindicia::Product
   end
 end

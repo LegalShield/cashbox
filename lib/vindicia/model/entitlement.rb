@@ -1,6 +1,6 @@
-module Vindicia::Model
-  class Entitlement < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class Entitlement < Model
+    include Vindicia::Concern::Objectable
 
     property :id
     property :description

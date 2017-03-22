@@ -1,6 +1,6 @@
-module Vindicia::Model
-  class Address < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class Address < Model
+    include Vindicia::Concern::Objectable
 
     property :vid
     property :city

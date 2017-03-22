@@ -1,6 +1,6 @@
-module Vindicia::Model
-  class Price < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class Price < Model
+    include Vindicia::Concern::Objectable
 
     property :amount, coerce: Float
     property :currency

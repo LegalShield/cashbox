@@ -1,5 +1,5 @@
-module Vindicia::Model
-  class Base < Hashie::Trash
+module Vindicia
+  class Model < Hashie::Trash
     include Hashie::Extensions::MergeInitializer
     include Hashie::Extensions::IgnoreUndeclared
     include Hashie::Extensions::IndifferentAccess

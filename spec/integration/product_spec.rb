@@ -19,27 +19,27 @@ describe 'Product' do
         })
     end
 
-    it { is_expected.to be_a(Vindicia::Model::Product) }
+    it { is_expected.to be_a(Vindicia::Product) }
 
     its(:vid)                  { is_expected.to eql('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa') }
     its(:id)                   { is_expected.to eql('1') }
     its(:created)              { is_expected.to eql(DateTime.parse('2017-02-03T13:46:27-08:00')) }
-    its(:default_billing_plan) { is_expected.to be_a(Vindicia::Model::BillingPlan)  }
+    its(:default_billing_plan) { is_expected.to be_a(Vindicia::BillingPlan)  }
     its(:descriptions)         { is_expected.to be_an(Array)  }
     its(:entitlements)         { is_expected.to be_an(Array)  }
     its(:prices)               { is_expected.to be_an(Array)  }
     its(:status)               { is_expected.to eql('Active')  }
 
-    it 'descriptions are Vindicia::Model::ProductDescription' do
-      expect(subject.descriptions.first).to be_a(Vindicia::Model::ProductDescription)
+    it 'descriptions are Vindicia::ProductDescription' do
+      expect(subject.descriptions.first).to be_a(Vindicia::ProductDescription)
     end
 
-    it 'entitlements are Vindicia::Model::Entitlement' do
-      expect(subject.entitlements.first).to be_a(Vindicia::Model::Entitlement)
+    it 'entitlements are Vindicia::Entitlement' do
+      expect(subject.entitlements.first).to be_a(Vindicia::Entitlement)
     end
 
-    it 'product prices are Vindicia::Model::ProductPrice' do
-      expect(subject.prices.first).to be_a(Vindicia::Model::ProductPrice)
+    it 'product prices are Vindicia::ProductPrice' do
+      expect(subject.prices.first).to be_a(Vindicia::ProductPrice)
     end
   end
 
@@ -86,14 +86,14 @@ describe 'Product' do
 
   describe 'saving products' do
     let(:product_description) do
-      Vindicia::Model::ProductDescription.new({
+      Vindicia::ProductDescription.new({
         language: 'EN',
         description: 'describy'
       })
     end
 
     let(:billing_plan_period) do
-      Vindicia::Model::BillingPlanPeriod.new({
+      Vindicia::BillingPlanPeriod.new({
         type: 'Day',
         quantity: 1,
         cycles: 0
@@ -101,7 +101,7 @@ describe 'Product' do
     end
 
     let(:billing_plan) do
-      Vindicia::Model::BillingPlan.new({
+      Vindicia::BillingPlan.new({
         id: '1',
         description: 'daily',
         status: 'Active',
@@ -110,21 +110,21 @@ describe 'Product' do
     end
 
     let(:entitlement) do
-      Vindicia::Model::Entitlement.new({
+      Vindicia::Entitlement.new({
         id: 'test-entitlement',
         description: 'described entitlement'
       })
     end
 
     let(:price) do
-      Vindicia::Model::ProductPrice.new({
+      Vindicia::ProductPrice.new({
         amount: 9.99,
         currency: 'USD'
       })
     end
 
     let(:product) do
-      Vindicia::Model::Product.new({
+      Vindicia::Product.new({
         id: '1',
         descriptions: [ product_description ],
         status: 'Active',
@@ -166,7 +166,7 @@ describe 'Product' do
 
     it 'parses the response correctly' do
       result = Vindicia::Repository::Product.save(product)
-      expect(result).to be_a(Vindicia::Model::Product)
+      expect(result).to be_a(Vindicia::Product)
       expect(result).not_to eq(product)
     end
   end

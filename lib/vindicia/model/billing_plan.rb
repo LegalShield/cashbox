@@ -1,6 +1,6 @@
-module Vindicia::Model
-  class BillingPlan < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class BillingPlan < Model
+    include Vindicia::Concern::Objectable
 
     property :id
     property :vid
@@ -8,7 +8,7 @@ module Vindicia::Model
     property :billing_notification_days
     property :created, coerce: Vindicia::Type.DateTime
     property :description
-    property :periods, coerce: Vindicia::Type.List(Vindicia::Model::BillingPlanPeriod)
+    property :periods, coerce: Vindicia::Type.List(Vindicia::BillingPlanPeriod)
     property :status
   end
 end

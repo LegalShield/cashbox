@@ -1,6 +1,6 @@
-module Vindicia::Model
-  class Account < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class Account < Model
+    include Vindicia::Concern::Objectable
 
     property :id
     property :vid
@@ -11,7 +11,7 @@ module Vindicia::Model
     property :language
     property :name
     property :notify_before_billing
-    property :payment_methods, coerce: Vindicia::Type.List(Vindicia::Model::PaymentMethod)
-    property :shipping_address, coerce: Vindicia::Model::Address
+    property :payment_methods, coerce: Vindicia::Type.List(Vindicia::PaymentMethod)
+    property :shipping_address, coerce: Vindicia::Address
   end
 end
