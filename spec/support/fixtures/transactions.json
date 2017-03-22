@@ -821,7 +821,7 @@
       "to_be_captured": true
     }
   ],
-  "total_count": 3,
+  "total_count": 11,
   "url": "/transactions?limit=100&account=PPlotter",
   "next": "/transactions?limit=100&account=PPlotter&starting_after=bbbbbbbbbbbbbbbb",
   "previous": "/transactions?limit=100&account=PPlotter&ending_before=cccccccccccccccc"

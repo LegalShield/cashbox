@@ -10,8 +10,8 @@ module Vindicia
       @options = options
     end
 
-    def perform
-      self.class.send(@method, @path, @options.merge(default_options))
+    def response
+      Hashie::Mash.new(self.class.send(@method, @path, @options.merge(default_options)))
     end
 
     private
