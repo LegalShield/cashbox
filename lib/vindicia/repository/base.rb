@@ -28,11 +28,11 @@ module Vindicia::Repository
     private
 
     def self._where(query, max)
-      Hashie.symbolize_keys!(query)
+      query = Hashie::Mash.new(query)
 
-      query[:limit] ||= DEFAULT_LIMIT
-      query[:limit] = query[:limit].to_i
-      query[:limit] = max if max && max < query[:limit]
+      query.limit ||= DEFAULT_LIMIT
+      query.limit = query.limit.to_i
+      query.limit = max if max && max < query.limit
 
       response = Vindicia::Request.new(:get, route, { query: query }).response
       objects = self.cast(response)
