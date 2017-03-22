@@ -160,11 +160,11 @@ describe 'Product' do
         })
     end
 
-    it 'makes the appropriate request that is mocked above' do
+    it 'makes the correct api call' do
       Vindicia::Repository::Product.save(product)
     end
 
-    it 'makes the appropriate request that is mocked above' do
+    it 'parses the response correctly' do
       result = Vindicia::Repository::Product.save(product)
       expect(result).to be_a(Vindicia::Model::Product)
       expect(result).not_to eq(product)
