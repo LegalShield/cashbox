@@ -15,11 +15,11 @@ describe Vindicia::Repository::Base do
         let(:collection) { double('collection') }
 
         let(:response) do
-          { 'total_count' => 200,
+          Hashie::Mash.new({ 'total_count' => 200,
             'object' => 'List',
             'data' => 100.times.map { |n| { 'object' => 'Base', 'id' => n, 'vid' => n } },
             'next' => nil,
-            'previous' => nil }
+            'previous' => nil })
         end
 
         before do
@@ -57,27 +57,27 @@ describe Vindicia::Repository::Base do
 
       context 'many fetches' do
         let(:response_one) do
-          { 'total_count' => 1000,
+          Hashie::Mash.new({ 'total_count' => 1000,
             'object' => 'List',
             'data' => 100.times.map { |n| { 'object' => 'Base', 'id' => n, 'vid' => n } },
             'next' => '/bases?starting_after=100&limit=100&name=Jon',
-            'previous' => '/bases?ending_before=0&limit=100&name=Jon' }
+            'previous' => '/bases?ending_before=0&limit=100&name=Jon' })
         end
 
         let(:response_two) do
-          { 'total_count' => 1000,
+          Hashie::Mash.new({ 'total_count' => 1000,
             'object' => 'List',
             'data' => 100.times.map { |n| { 'object' => 'Base', 'id' => n, 'vid' => n } },
             'next' => '/bases?starting_after=200&limit=100&name=Jon',
-            'previous' => '/bases?ending_before=100&limit=100&name=Jon' }
+            'previous' => '/bases?ending_before=100&limit=100&name=Jon' })
         end
 
         let(:response_three) do
-          { 'total_count' => 1000,
+          Hashie::Mash.new({ 'total_count' => 1000,
             'object' => 'List',
             'data' => [ ],
             'next' => nil,
-            'previous' => nil }
+            'previous' => nil })
         end
 
         before do
