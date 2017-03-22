@@ -72,7 +72,7 @@ describe 'Product' do
         })
     end
 
-    it 'makes the right calls in the right order' do
+    it 'makes the right calls' do
       subject
       expect(a_get('/products').with({ query: { limit: 100 } })).to have_been_made.times(1)
       expect(a_get('/products').with({ query: { limit: 100, starting_after: 1 } })).to have_been_made.times(1)
