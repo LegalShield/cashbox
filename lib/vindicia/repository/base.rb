@@ -15,14 +15,12 @@ module Vindicia::Repository
 
     def self.find(id)
       raise ArgumentError.new("Cannot find Resource with id 'nil'") unless id
-      response = Vindicia::Request.new(:get, route(id)).response
-      object = self.cast(response)
-      Vindicia::Response::Object.new(object)
+      self.cast(Vindicia::Request.new(:get, route(id)).response)
     end
 
     def self.where(query = {})
       Hashie.symbolize_keys!(query)
-      Vindicia::Response::Collection.new(self._where(query, query.delete(:limit)))
+      self._where(query, query.delete(:limit))
     end
 
     def self.save(model)
