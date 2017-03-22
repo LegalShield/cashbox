@@ -1,0 +1,75 @@
+{
+  "object": "List",
+  "data": [
+    {
+      "object": "Product",
+      "id": "2",
+      "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "created": "2017-02-03T13:46:27-08:00",
+      "descriptions": {
+        "object": "List",
+        "data": [
+          {
+            "object": "ProductDescription",
+            "language": "EN",
+            "description": "so descriptive"
+          }
+        ],
+        "total_count": 1
+      },
+      "status": "Active",
+      "default_billing_plan": {
+        "object": "BillingPlan",
+        "id": "1",
+        "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "created": "2017-02-03T13:44:10-08:00",
+        "description": "daily",
+        "status": "Active",
+        "periods": {
+          "object": "List",
+          "data": [
+            {
+              "object": "BillingPlanPeriod",
+              "type": "Day",
+              "quantity": 1,
+              "cycles": 0
+            }
+          ],
+          "total_count": 1
+        },
+        "billing_notification_days": 1,
+        "billing_descriptor": "1"
+      },
+      "entitlements": {
+        "object": "List",
+        "data": [
+          {
+            "object": "Entitlement",
+            "id": "my-entitlement",
+            "description": "Entitled"
+          }
+        ],
+        "total_count": 1
+      },
+      "billing_descriptor": "1",
+      "credit_granted": {
+        "object": "Credit"
+      },
+      "prices": {
+        "object": "List",
+        "data": [
+          {
+            "object": "ProductPrice",
+            "amount": 10,
+            "currency": "USD"
+          }
+        ],
+        "total_count": 1
+      }
+    }
+  ],
+  "total_count": 2,
+  "url": "/products?limit=100&starting_after=1",
+  "next": "/products?limit=100&starting_after=2",
+  "previous": "/products?limit=100&ending_before=2"
+}
