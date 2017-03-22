@@ -15,7 +15,7 @@ describe Vindicia::Repository::Base do
         let(:response) do
           Hashie::Mash.new({ 'total_count' => 200,
             'object' => 'List',
-            'data' => 100.times.map { |n| { 'object' => 'Base', 'id' => n, 'vid' => n } },
+            'data' => 100.times.map { |n| { 'object' => 'Model', 'id' => n, 'vid' => n } },
             'next' => nil,
             'previous' => nil })
         end
@@ -39,7 +39,7 @@ describe Vindicia::Repository::Base do
           objects = repository.where({ name: 'Jon' })
           expect(objects).to be_an(Array)
           expect(objects.map(&:class).uniq.count).to eql(1)
-          expect(objects.first).to be_an(Vindicia::Model::Base)
+          expect(objects.first).to be_an(Vindicia::Model)
         end
       end
 
@@ -47,7 +47,7 @@ describe Vindicia::Repository::Base do
         let(:response_one) do
           Hashie::Mash.new({ 'total_count' => 1000,
             'object' => 'List',
-            'data' => 100.times.map { |n| { 'object' => 'Base', 'id' => n, 'vid' => n } },
+            'data' => 100.times.map { |n| { 'object' => 'Model', 'id' => n, 'vid' => n } },
             'next' => '/bases?starting_after=100&limit=100&name=Jon',
             'previous' => '/bases?ending_before=0&limit=100&name=Jon' })
         end
@@ -55,7 +55,7 @@ describe Vindicia::Repository::Base do
         let(:response_two) do
           Hashie::Mash.new({ 'total_count' => 1000,
             'object' => 'List',
-            'data' => 100.times.map { |n| { 'object' => 'Base', 'id' => n, 'vid' => n } },
+            'data' => 100.times.map { |n| { 'object' => 'Model', 'id' => n, 'vid' => n } },
             'next' => '/bases?starting_after=200&limit=100&name=Jon',
             'previous' => '/bases?ending_before=100&limit=100&name=Jon' })
         end
@@ -138,7 +138,7 @@ describe Vindicia::Repository::Base do
 
     describe '#find' do
       let(:response) do
-        { 'object' => 'Base',
+        { 'object' => 'Model',
           'id' => 1,
           'vid'=> 'v1' }
       end
@@ -156,7 +156,7 @@ describe Vindicia::Repository::Base do
         end
 
         it 'makes the correct request' do
-          expect(result).to be_a(Vindicia::Model::Base)
+          expect(result).to be_a(Vindicia::Model)
         end
       end
 

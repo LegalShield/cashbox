@@ -1,4 +1,4 @@
-module Vindicia::Model::Concern
+module Vindicia::Concern
   module Objectable
     def self.included(base)
       base.class_eval do

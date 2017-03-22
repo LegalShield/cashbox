@@ -1,6 +1,6 @@
-module Vindicia::Model
-  class Description < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class Description < Model
+    include Vindicia::Concern::Objectable
 
     property :description
     property :language

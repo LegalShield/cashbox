@@ -59,7 +59,7 @@ module Vindicia::Repository
       when 'List'
         hash['data'].map {|d| cast(d) }
       else
-        Vindicia::Model.const_get(hash['object']).new(hash)
+        Vindicia.const_get(hash['object']).new(hash)
       end
     end
   end

@@ -1,10 +1,10 @@
-module Vindicia::Model
-  class TransactionStatus < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class TransactionStatus < Model
+    include Vindicia::Concern::Objectable
 
     property :created, coerce: Vindicia::Type.DateTime
     property :payment_method_type
-    property :paypal_status, coerce: Vindicia::Model::TransactionStatusPayPal
+    property :paypal_status, coerce: Vindicia::TransactionStatusPayPal
     property :status
   end
 end

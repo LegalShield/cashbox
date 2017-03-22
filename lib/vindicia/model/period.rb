@@ -1,6 +1,6 @@
-module Vindicia::Model
-  class Period < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class Period < Model
+    include Vindicia::Concern::Objectable
 
     property :cycles
     property :quantity

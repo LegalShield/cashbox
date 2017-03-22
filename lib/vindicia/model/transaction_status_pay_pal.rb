@@ -1,6 +1,6 @@
-module Vindicia::Model
-  class TransactionStatusPayPal < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class TransactionStatusPayPal < Model
+    include Vindicia::Concern::Objectable
 
     property :token
     property :auth_code

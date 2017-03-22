@@ -1,5 +1,5 @@
-module Vindicia::Model
-  class ProductDescription < Vindicia::Model::Description
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class ProductDescription < Vindicia::Description
+    include Vindicia::Concern::Objectable
   end
 end

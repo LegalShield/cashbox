@@ -1,6 +1,6 @@
-module Vindicia::Model
-  class BillingPlanPeriod < Base
-    include Vindicia::Model::Concern::Objectable
+module Vindicia
+  class BillingPlanPeriod < Model
+    include Vindicia::Concern::Objectable
 
     property :cycles
     property :quantity
