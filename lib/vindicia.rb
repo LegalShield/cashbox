@@ -37,6 +37,7 @@ module Vindicia
     autoload :Exception
     autoload :Type
     autoload :Request
+    autoload :RepositoryProxy
 
     autoload_under 'model' do
       autoload :Model
@@ -65,6 +66,7 @@ module Vindicia
 
   module Concern
     autoload :Objectable, 'vindicia/concern/objectable'
+    autoload :Persistable, 'vindicia/concern/persistable'
   end
 
   module Vindicia::Repository
