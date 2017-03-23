@@ -8,107 +8,52 @@ describe Vindicia::Concern::Persistable do
     PersistableTestClass
   end
 
-  context '.all' do
-    subject { klass }
+  context '.repository' do
+    subject { klass.repository }
 
-    let(:repository) { double('repostiry', all: nil) }
-
-    before do
-      allow(Vindicia::Repository)
-        .to receive(:new)
-        .with(kind_of(PersistableTestClass))
-        .and_return(repository)
-
-      allow(repository).to receive(:all)
-
-      subject.all
+    it 'returns an instance of a repository' do
+      expect(subject).to be_a(Vindicia::Repository)
     end
 
-    it 'inits a new repository' do
+    it 'inits with the repository with an instance of the model' do
+      allow(Vindicia::Repository).to receive(:new).with(kind_of(PersistableTestClass))
+      subject
       expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
-    end
-
-    it 'calls all on the repository instance' do
-      expect(repository).to have_received(:all)
     end
   end
 
-  context '.where' do
-    subject { klass }
+  context '#repository' do
+    subject { klass.new.repository }
 
-    let(:repository) { double('repostiry', where: nil) }
-
-    before do
-      allow(Vindicia::Repository)
-        .to receive(:new)
-        .with(kind_of(PersistableTestClass))
-        .and_return(repository)
-
-      allow(repository).to receive(:where).with(any_args)
-
-      subject.where({ name: 'Jon' })
+    it 'returns an instance of a repository' do
+      expect(subject).to be_a(Vindicia::Repository)
     end
 
-    it 'inits a new repository' do
+    it 'inits with the repository with an instance of the model' do
+      allow(Vindicia::Repository).to receive(:new).with(kind_of(PersistableTestClass))
+      subject
       expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
-    end
-
-    it 'calls all on the repository instance' do
-      expect(repository).to have_received(:where)
-    end
-
-    it 'passes through args' do
-      expect(repository).to have_received(:where).with({ name: 'Jon' })
     end
   end
 
-  context '.first' do
+  context 'forwardable' do
     subject { klass }
 
-    let(:repository) { double('repostiry', first: nil) }
+    it { is_expected.to be_kind_of(SingleForwardable) }
+    it { is_expected.to be_kind_of(Forwardable) }
 
-    before do
-      allow(Vindicia::Repository)
-        .to receive(:new)
-        .with(kind_of(PersistableTestClass))
-        .and_return(repository)
+    context 'class methods' do
+      subject { klass }
 
-      allow(repository).to receive(:first)
-
-      subject.first
+      it { is_expected.to delegate_method(:all).to(:repository) }
+      it { is_expected.to delegate_method(:where).to(:repository) }
+      it { is_expected.to delegate_method(:first).to(:repository) }
     end
 
-    it 'inits a new repository' do
-      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
-    end
+    context 'instance methods' do
+      subject { klass.new }
 
-    it 'calls all on the repository instance' do
-      expect(repository).to have_received(:first)
-    end
-  end
-
-  context '#save' do
-    subject { klass.new }
-
-    let(:repository) { double('repostiry', save: nil) }
-
-    before do
-      allow(Vindicia::Repository)
-        .to receive(:new)
-        .with(kind_of(PersistableTestClass))
-        .and_return(repository)
-
-      allow(repository).to receive(:save)
-
-      subject.save
-    end
-
-    it 'inits a new repository' do
-      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
-    end
-
-    it 'calls all on the repository instance' do
-      expect(repository).to have_received(:save)
+      it { is_expected.to delegate_method(:save).to(:repository) }
     end
   end
 end

@@ -5,11 +5,11 @@ module Vindicia::Concern
     extend ActiveSupport::Concern
 
     included do
-      def save
-        repository.save
-      end
+      extend Forwardable
+      extend SingleForwardable
 
-      private
+      def_single_delegators :repository, :where, :all, :first
+      def_instance_delegator :repository, :save
 
       def repository
         Vindicia::Repository.new(self)
@@ -17,20 +17,6 @@ module Vindicia::Concern
     end
 
     class_methods do
-      def all
-        repository.all
-      end
-
-      def where(*args)
-        repository.where(*args)
-      end
-
-      def first(*args)
-        repository.first
-      end
-
-      private
-
       def repository
         Vindicia::Repository.new(self.new)
       end

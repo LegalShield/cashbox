@@ -6,6 +6,12 @@ describe Vindicia::Repository do
     let(:model) { Vindicia::Model.new }
     let(:repository) { Vindicia::Repository.new(model) }
 
+    context 'instance methods' do
+      subject { repository }
+
+      it { is_expected.to have_attr_reader(:instance) }
+    end
+
     before do
       Vindicia.username = 'u'
       Vindicia.password = 'p'
