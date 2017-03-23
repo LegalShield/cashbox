@@ -1,8 +1,8 @@
 require 'active_support/inflector'
 require 'addressable/uri'
 
-module Vindicia::Repository
-  class Base
+module Vindicia
+  class Repository
     DEFAULT_LIMIT = 100.freeze
 
     def initialize(instance)
@@ -28,7 +28,10 @@ module Vindicia::Repository
     end
 
     def save
-      cast(Vindicia::Request.new(:post, route(@instance.vid), { body: @instance.to_json }).response)
+      request = Vindicia::Request.new(:post, route(@instance.vid), { body: @instance.to_json })
+      response = request.response
+      binding.pry
+      cast(response)
     end
 
     private
@@ -62,6 +65,7 @@ module Vindicia::Repository
       case hash['object']
       when 'List'
         hash['data'].map do |data|
+          binding.pry
           @instance.deep_merge(data)
         end
       else
