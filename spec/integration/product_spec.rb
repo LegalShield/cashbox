@@ -6,7 +6,7 @@ describe 'Product' do
 
   describe 'first product' do
     subject do
-      Vindicia::Repository::Product.first
+      Vindicia::Repository.new(Vindicia::Product.new).first
     end
 
     before do
@@ -44,7 +44,7 @@ describe 'Product' do
   end
 
   describe 'all' do
-    subject { Vindicia::Repository::Product.all }
+    subject { Vindicia::Repository.new(Vindicia::Product.new).all }
 
     before do
       stub_get('/products')
@@ -152,8 +152,7 @@ describe 'Product' do
             entitlements: [ { object: 'Entitlement', id: 'test-entitlement', description: 'described entitlement' } ],
             prices: [ { object: 'ProductPrice', amount: 9.99, currency: 'USD' } ],
           }.to_json
-        })
-        .to_return({
+        }).to_return({
           :status => 200,
           :body => fixture('product'),
           :headers => { 'Content-Type': 'application/json' }
@@ -161,13 +160,13 @@ describe 'Product' do
     end
 
     it 'makes the correct api call' do
-      Vindicia::Repository::Product.save(product)
+      Vindicia::Repository.new(product).save
     end
 
     it 'parses the response correctly' do
-      result = Vindicia::Repository::Product.save(product)
-      expect(result).to be_a(Vindicia::Product)
-      expect(result).not_to eq(product)
+      model = Vindicia::Repository.new(product).save
+      expect(model).to be_a(Vindicia::Product)
+      expect(model).to eq(product)
     end
   end
 end

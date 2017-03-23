@@ -1,35 +1,40 @@
 require 'active_support/inflector'
 require 'addressable/uri'
 
-module Vindicia::Repository
-  class Base
+module Vindicia
+  class Repository
     DEFAULT_LIMIT = 100.freeze
 
-    def self.first
-      self.where({ limit: 1 }).first
+    def initialize(instance)
+      @instance = instance
     end
 
-    def self.all
-      self.where
+    def first
+      where({ limit: 1 }).first
     end
 
-    def self.find(id)
+    def all
+      where
+    end
+
+    def find(id)
       raise ArgumentError.new("Cannot find Resource with id 'nil'") unless id
-      self.cast(Vindicia::Request.new(:get, route(id)).response)
+      cast(Vindicia::Request.new(:get, route(id)).response)
     end
 
-    def self.where(query = {})
+    def where(query = {})
       Hashie.symbolize_keys!(query)
-      self._where(query, query.delete(:limit))
+      _where(query, query.delete(:limit))
     end
 
-    def self.save(model)
-      self.cast(Vindicia::Request.new(:post, route(model.vid), { body: model.to_json }).response)
+    def save
+      request = Vindicia::Request.new(:post, route(@instance.vid), { body: @instance.to_json })
+      cast(request.response)
     end
 
     private
 
-    def self._where(query, max)
+    def _where(query, max)
       query = Hashie::Mash.new(query)
 
       query.limit ||= DEFAULT_LIMIT
@@ -37,29 +42,31 @@ module Vindicia::Repository
       query.limit = max if max && max < query.limit
 
       response = Vindicia::Request.new(:get, route, { query: query }).response
-      objects = self.cast(response)
+      objects = cast(response)
 
       if (response.next && (max.nil? || objects.count < max))
         max -= objects.count if max
         query = Addressable::URI.parse(response.next).query_values
-        objects.concat(self._where(query, max))
+        objects.concat(_where(query, max))
       end
 
       objects
     end
 
-    def self.route(id=nil)
-      class_name = self.name.split('::').last.downcase
+    def route(id=nil)
+      class_name = @instance.class.name.split('::').last.downcase
       plural_class_name = ActiveSupport::Inflector.pluralize(class_name)
       [ '', plural_class_name, id ].compact.join('/')
     end
 
-    def self.cast(hash)
+    def cast(hash)
       case hash['object']
       when 'List'
-        hash['data'].map {|d| cast(d) }
+        hash['data'].map do |data|
+          @instance.class.new(data)
+        end
       else
-        Vindicia.const_get(hash['object']).new(hash)
+        @instance.deep_merge!(hash)
       end
     end
   end

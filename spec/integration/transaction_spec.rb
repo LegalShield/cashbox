@@ -6,7 +6,7 @@ describe 'Transaction' do
 
   describe 'first transaction' do
     subject do
-      Vindicia::Repository::Transaction.first
+      Vindicia::Repository.new(Vindicia::Transaction.new).first
     end
 
     before do
