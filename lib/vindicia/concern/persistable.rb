@@ -12,7 +12,7 @@ module Vindicia::Concern
       private
 
       def repository
-        Vindicia::RepositoryProxy.new(self)
+        Vindicia::Repository.new(self)
       end
     end
 
@@ -32,7 +32,7 @@ module Vindicia::Concern
       private
 
       def repository
-        Vindicia::RepositoryProxy.new(self.new)
+        Vindicia::Repository.new(self.new)
       end
     end
   end

@@ -14,7 +14,7 @@ describe Vindicia::Concern::Persistable do
     let(:repository) { double('repostiry', all: nil) }
 
     before do
-      allow(Vindicia::RepositoryProxy)
+      allow(Vindicia::Repository)
         .to receive(:new)
         .with(kind_of(PersistableTestClass))
         .and_return(repository)
@@ -25,7 +25,7 @@ describe Vindicia::Concern::Persistable do
     end
 
     it 'inits a new repository' do
-      expect(Vindicia::RepositoryProxy).to have_received(:new).with(kind_of(PersistableTestClass))
+      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
     end
 
     it 'calls all on the repository instance' do
@@ -39,7 +39,7 @@ describe Vindicia::Concern::Persistable do
     let(:repository) { double('repostiry', where: nil) }
 
     before do
-      allow(Vindicia::RepositoryProxy)
+      allow(Vindicia::Repository)
         .to receive(:new)
         .with(kind_of(PersistableTestClass))
         .and_return(repository)
@@ -50,7 +50,7 @@ describe Vindicia::Concern::Persistable do
     end
 
     it 'inits a new repository' do
-      expect(Vindicia::RepositoryProxy).to have_received(:new).with(kind_of(PersistableTestClass))
+      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
     end
 
     it 'calls all on the repository instance' do
@@ -68,7 +68,7 @@ describe Vindicia::Concern::Persistable do
     let(:repository) { double('repostiry', first: nil) }
 
     before do
-      allow(Vindicia::RepositoryProxy)
+      allow(Vindicia::Repository)
         .to receive(:new)
         .with(kind_of(PersistableTestClass))
         .and_return(repository)
@@ -79,7 +79,7 @@ describe Vindicia::Concern::Persistable do
     end
 
     it 'inits a new repository' do
-      expect(Vindicia::RepositoryProxy).to have_received(:new).with(kind_of(PersistableTestClass))
+      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
     end
 
     it 'calls all on the repository instance' do
@@ -93,7 +93,7 @@ describe Vindicia::Concern::Persistable do
     let(:repository) { double('repostiry', save: nil) }
 
     before do
-      allow(Vindicia::RepositoryProxy)
+      allow(Vindicia::Repository)
         .to receive(:new)
         .with(kind_of(PersistableTestClass))
         .and_return(repository)
@@ -104,7 +104,7 @@ describe Vindicia::Concern::Persistable do
     end
 
     it 'inits a new repository' do
-      expect(Vindicia::RepositoryProxy).to have_received(:new).with(kind_of(PersistableTestClass))
+      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
     end
 
     it 'calls all on the repository instance' do

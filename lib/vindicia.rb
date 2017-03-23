@@ -37,7 +37,6 @@ module Vindicia
     autoload :Exception
     autoload :Type
     autoload :Request
-    autoload :RepositoryProxy
     autoload :Repository
 
     autoload_under 'model' do

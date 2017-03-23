@@ -1,6 +1,7 @@
 module Vindicia
   class Subscription < Model
     include Vindicia::Concern::Objectable
+    include Vindicia::Concern::Persistable
 
     property :id
     property :vid

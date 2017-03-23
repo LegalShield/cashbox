@@ -1,6 +1,7 @@
 module Vindicia
   class Product < Model
     include Vindicia::Concern::Objectable
+    include Vindicia::Concern::Persistable
 
     property :id
     property :vid
