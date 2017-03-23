@@ -29,9 +29,7 @@ module Vindicia
 
     def save
       request = Vindicia::Request.new(:post, route(@instance.vid), { body: @instance.to_json })
-      response = request.response
-      binding.pry
-      cast(response)
+      cast(request.response)
     end
 
     private
@@ -65,8 +63,7 @@ module Vindicia
       case hash['object']
       when 'List'
         hash['data'].map do |data|
-          binding.pry
-          @instance.deep_merge(data)
+          @instance.class.new(data)
         end
       else
         @instance.deep_merge!(hash)

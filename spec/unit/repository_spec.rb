@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Vindicia::Repository::Base do
+describe Vindicia::Repository do
   context 'making calls' do
 
     let(:model) { Vindicia::Model.new }
-    let(:repository) { Vindicia::Repository::Base.new(model) }
+    let(:repository) { Vindicia::Repository.new(model) }
 
     before do
       Vindicia.username = 'u'
