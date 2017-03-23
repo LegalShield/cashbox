@@ -146,7 +146,7 @@ describe Vindicia::Repository do
     end
 
     describe '#find' do
-      let(:response) { { } }
+      let(:response) { Hash.new }
 
       let(:result) { repository.find(1) }
 
@@ -170,6 +170,33 @@ describe Vindicia::Repository do
       context 'failure' do
         it 'throws an error if an id is not supplied' do
           expect( -> { repository.find(nil) }).to raise_exception(ArgumentError)
+        end
+      end
+    end
+
+    describe '#save' do
+      let(:model) { Vindicia::Account.new({ vid: 'vid-1', id: 1 }) }
+      let(:repository) { Vindicia::Repository.new(model) }
+      let(:result) { repository.save }
+      let(:response) { Hash.new }
+
+      context 'success' do
+        before do
+          allow(Vindicia::Request)
+            .to receive(:new)
+            .with(:post, '/accounts/vid-1', { body: model.to_json })
+            .and_return(double('request', response: response))
+        end
+
+        it 'makes the correct request' do
+          repository.save
+          expect(Vindicia::Request).to have_received(:new).with(:post, '/accounts/vid-1', { body: model.to_json }).once
+        end
+
+        it 'parses the response correctly' do
+          expect(result).to be_a(Vindicia::Account)
+          expect(result).to eq(model)
+          expect(result.object_id).to eq(model.object_id)
         end
       end
     end
