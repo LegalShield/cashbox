@@ -15,6 +15,7 @@ module Vindicia
     property :original_billing_date, coerce: Vindicia::Type.DateTime
     property :payment_processor
     property :payment_processor_transaction_id
+    property :shipping_address, coerce: Vindicia::Address
     property :source_payment_method, coerce: Vindicia::PaymentMethod
     property :status_log, coerce: Vindicia::Type.List(Vindicia::TransactionStatus)
     property :subscription, coerce: Vindicia::Subscription
