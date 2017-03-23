@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Vindicia::Repository::Base do
   context 'making calls' do
 
-    let(:repository) { Vindicia::Repository::Base }
+    let(:model) { Vindicia::Model.new }
+    let(:repository) { Vindicia::Repository::Base.new(model) }
 
     before do
       Vindicia.username = 'u'
@@ -13,17 +14,19 @@ describe Vindicia::Repository::Base do
     describe '#where' do
       context 'single fetch' do
         let(:response) do
-          Hashie::Mash.new({ 'total_count' => 200,
+          Hashie::Mash.new({
+            'total_count' => 200,
             'object' => 'List',
-            'data' => 100.times.map { |n| { 'object' => 'Model', 'id' => n, 'vid' => n } },
+            'data' => 100.times.map { Hash.new },
             'next' => nil,
-            'previous' => nil })
+            'previous' => nil
+          })
         end
 
         before do
           allow(Vindicia::Request)
             .to receive(:new)
-            .with(:get, '/bases', { query: { limit: 100, name: 'Jon' } })
+            .with(:get, '/models', { query: { limit: 100, name: 'Jon' } })
             .and_return(double('request', response: response))
         end
 
@@ -32,61 +35,67 @@ describe Vindicia::Repository::Base do
 
           expect(Vindicia::Request)
             .to have_received(:new)
-            .with(:get, '/bases', { query: { limit: 100, name: 'Jon' } })
+            .with(:get, '/models', { query: { limit: 100, name: 'Jon' } })
         end
 
         it 'casts the response to vindicia models' do
           objects = repository.where({ name: 'Jon' })
           expect(objects).to be_an(Array)
           expect(objects.map(&:class).uniq.count).to eql(1)
-          expect(objects.first).to be_an(Vindicia::Model)
+          expect(objects.first).to eq(model)
         end
       end
 
       context 'many fetches' do
         let(:response_one) do
-          Hashie::Mash.new({ 'total_count' => 1000,
+          Hashie::Mash.new({
+            'total_count' => 1000,
             'object' => 'List',
-            'data' => 100.times.map { |n| { 'object' => 'Model', 'id' => n, 'vid' => n } },
-            'next' => '/bases?starting_after=100&limit=100&name=Jon',
-            'previous' => '/bases?ending_before=0&limit=100&name=Jon' })
+            'data' => 100.times.map { Hash.new },
+            'next' => '/models?starting_after=100&limit=100&name=Jon',
+            'previous' => '/models?ending_before=0&limit=100&name=Jon'
+          })
         end
 
         let(:response_two) do
-          Hashie::Mash.new({ 'total_count' => 1000,
+          Hashie::Mash.new({
+            'total_count' => 1000,
             'object' => 'List',
-            'data' => 100.times.map { |n| { 'object' => 'Model', 'id' => n, 'vid' => n } },
-            'next' => '/bases?starting_after=200&limit=100&name=Jon',
-            'previous' => '/bases?ending_before=100&limit=100&name=Jon' })
+            'data' => 100.times.map { Hash.new },
+            'next' => '/models?starting_after=200&limit=100&name=Jon',
+            'previous' => '/models?ending_before=100&limit=100&name=Jon'
+          })
         end
 
         let(:response_three) do
-          Hashie::Mash.new({ 'total_count' => 1000,
+          Hashie::Mash.new({
+            'total_count' => 1000,
             'object' => 'List',
             'data' => [ ],
             'next' => nil,
-            'previous' => nil })
+            'previous' => nil
+          })
         end
 
         before do
           allow(Vindicia::Request)
             .to receive(:new)
-            .with(:get, '/bases', { query: { limit: 25, name: 'Jon' } })
+            .with(:get, '/models', { query: { limit: 25, name: 'Jon' } })
             .and_return(double('request', response: response_one))
 
           allow(Vindicia::Request)
             .to receive(:new)
-            .with(:get, '/bases', { query: { limit: 100, name: 'Jon' } })
+            .with(:get, '/models', { query: { limit: 100, name: 'Jon' } })
             .and_return(double('request', response: response_one))
 
           allow(Vindicia::Request)
             .to receive(:new)
-            .with(:get, '/bases', { query: { starting_after: '100', limit: 100, name: 'Jon' } })
+            .with(:get, '/models', { query: { starting_after: '100', limit: 100, name: 'Jon' } })
             .and_return(double('request 2', response: response_two))
 
           allow(Vindicia::Request)
             .to receive(:new)
-            .with(:get, '/bases', { query: { starting_after: '200', limit: 50, name: 'Jon' } })
+            .with(:get, '/models', { query: { starting_after: '200', limit: 50, name: 'Jon' } })
             .and_return(double('request 3', response: response_three))
         end
 
@@ -95,15 +104,15 @@ describe Vindicia::Repository::Base do
 
           expect(Vindicia::Request)
             .to have_received(:new)
-            .with(:get, '/bases', { query: { limit: 100, name: 'Jon' } }).ordered
+            .with(:get, '/models', { query: { limit: 100, name: 'Jon' } }).ordered
 
           expect(Vindicia::Request)
             .to have_received(:new)
-            .with(:get, '/bases', { query: { starting_after: '100', limit: 100, name: 'Jon' } }).ordered
+            .with(:get, '/models', { query: { starting_after: '100', limit: 100, name: 'Jon' } }).ordered
 
           expect(Vindicia::Request)
             .to have_received(:new)
-            .with(:get, '/bases', { query: { starting_after: '200', limit: 50, name: 'Jon' } }).ordered
+            .with(:get, '/models', { query: { starting_after: '200', limit: 50, name: 'Jon' } }).ordered
 
           expect(Vindicia::Request).to have_received(:new).exactly(3).times
         end
@@ -113,7 +122,7 @@ describe Vindicia::Repository::Base do
 
           expect(Vindicia::Request)
             .to have_received(:new)
-            .with(:get, '/bases', { query: { limit: 25, name: 'Jon' } })
+            .with(:get, '/models', { query: { limit: 25, name: 'Jon' } })
 
           expect(Vindicia::Request).to have_received(:new).exactly(1).times
         end
@@ -122,41 +131,39 @@ describe Vindicia::Repository::Base do
 
     describe '#all' do
       it 'calls where' do
-        allow(Vindicia::Repository::Base).to receive(:where).and_return([])
+        allow(repository).to receive(:where).and_return([])
         repository.all
-        expect(Vindicia::Repository::Base).to have_received(:where)
+        expect(repository).to have_received(:where)
       end
     end
 
     describe '#first' do
       it 'calls where with limit 1' do
-        allow(Vindicia::Repository::Base).to receive(:where).with({ limit: 1 }).and_return([])
+        allow(repository).to receive(:where).with({ limit: 1 }).and_return([])
         repository.first
-        expect(Vindicia::Repository::Base).to have_received(:where).with({ limit: 1 })
+        expect(repository).to have_received(:where).with({ limit: 1 })
       end
     end
 
     describe '#find' do
-      let(:response) do
-        { 'object' => 'Model',
-          'id' => 1,
-          'vid'=> 'v1' }
-      end
+      let(:response) { { } }
 
       let(:result) { repository.find(1) }
 
       context 'success' do
         before do
-          allow(Vindicia::Request).to receive(:new).with(:get, '/bases/1').and_return(double('request', response: response))
+          allow(Vindicia::Request).to receive(:new).with(:get, '/models/1').and_return(double('request', response: response))
           repository.find(1)
         end
 
         it 'makes the correct request' do
-          expect(Vindicia::Request).to have_received(:new).with(:get, '/bases/1').once
+          expect(Vindicia::Request).to have_received(:new).with(:get, '/models/1').once
         end
 
         it 'makes the correct request' do
           expect(result).to be_a(Vindicia::Model)
+          expect(result).to eq(model)
+          expect(result.object_id).to eq(model.object_id)
         end
       end
 
