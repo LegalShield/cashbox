@@ -5,6 +5,8 @@ module Vindicia
   class Repository
     DEFAULT_LIMIT = 100.freeze
 
+    attr_reader :instance
+
     def initialize(instance)
       @instance = instance
     end

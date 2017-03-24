@@ -66,5 +66,6 @@ module Vindicia
 
   module Concern
     autoload :Objectable, 'vindicia/concern/objectable'
+    autoload :Persistable, 'vindicia/concern/persistable'
   end
 end

@@ -6,7 +6,7 @@ describe 'Product' do
 
   describe 'first product' do
     subject do
-      Vindicia::Repository.new(Vindicia::Product.new).first
+      Vindicia::Product.first
     end
 
     before do
@@ -44,7 +44,7 @@ describe 'Product' do
   end
 
   describe 'all' do
-    subject { Vindicia::Repository.new(Vindicia::Product.new).all }
+    subject { Vindicia::Product.all }
 
     before do
       stub_get('/products')
@@ -160,11 +160,11 @@ describe 'Product' do
     end
 
     it 'makes the correct api call' do
-      Vindicia::Repository.new(product).save
+      product.save
     end
 
     it 'parses the response correctly' do
-      model = Vindicia::Repository.new(product).save
+      model = product.save
       expect(model).to be_a(Vindicia::Product)
       expect(model).to eq(product)
     end
