@@ -57,6 +57,7 @@ describe Vindicia::Concern::Persistable do
       it { is_expected.to delegate_method(:all).to(:repository) }
       it { is_expected.to delegate_method(:where).to(:repository) }
       it { is_expected.to delegate_method(:first).to(:repository) }
+      it { is_expected.to delegate_method(:find).to(:repository) }
     end
 
     context 'instance methods' do
