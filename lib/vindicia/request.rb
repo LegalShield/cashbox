@@ -2,6 +2,7 @@ module Vindicia
   class Request
     include HTTParty
     format :json
+    base_uri 'https://api.vindicia.com'
 
     def initialize(method, path, options = {})
       @method  = method
@@ -9,8 +10,8 @@ module Vindicia
       @options = options
     end
 
-    def perform
-      self.class.send(@method, @path, @options.merge(default_options))
+    def response
+      Hashie::Mash.new(self.class.send(@method, @path, @options.merge(default_options)))
     end
 
     private

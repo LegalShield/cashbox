@@ -1,5 +1,7 @@
-module Vindicia::Model
-  class TransactionItem < Base
+module Vindicia
+  class TransactionItem < Model
+    include Vindicia::Concern::Objectable
+
     property :index_number
     property :item_type
     property :name

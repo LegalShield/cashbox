@@ -1,7 +1,10 @@
 module Vindicia::Type
   def self.List(type)
     @list ||= {}
-    @list[type] ||= -> (data) { data['data'].map { |value| type.new(value) } }
+    @list[type] ||= -> (data) do
+      data = data.is_a?(Hash) ? data['data'] : data
+      data.map { |value| type.new(value) }
+    end
     @list[type]
   end
 
@@ -10,7 +13,7 @@ module Vindicia::Type
   end
 
   def self.Boolean
-    @boolean ||= -> (value) {
+    @boolean ||= -> (value) do
       case value
       when String
         !!(value =~ /\A(true|t|yes|y|1)\z/i)
@@ -19,6 +22,6 @@ module Vindicia::Type
       else
         value == true
       end
-    }
+    end
   end
 end

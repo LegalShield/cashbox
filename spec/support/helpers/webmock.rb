@@ -8,6 +8,10 @@ def stub_get(path)
   stub_request(:get, Vindicia::Request.base_uri + path)
 end
 
+def stub_post(path)
+  stub_request(:post, Vindicia::Request.base_uri + path)
+end
+
 def a_get(path)
   a_request(:get, Vindicia::Request.base_uri + path)
 end

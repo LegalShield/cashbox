@@ -1,4 +1,5 @@
-module Vindicia::Model
-  class ProductPrice < Vindicia::Model::Price
+module Vindicia
+  class ProductPrice < Vindicia::Price
+    include Vindicia::Concern::Objectable
   end
 end

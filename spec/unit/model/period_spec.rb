@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Vindicia::Model::Period do
-  it { is_expected.to be_a(Vindicia::Model::Base) }
+describe Vindicia::Period do
+  it { is_expected.to be_a(Vindicia::Model) }
 
   it { is_expected.to have_property(:cycles) }
   it { is_expected.to have_property(:quantity) }

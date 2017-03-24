@@ -1,5 +1,8 @@
-module Vindicia::Model
-  class Account < Base
+module Vindicia
+  class Account < Model
+    include Vindicia::Concern::Objectable
+    include Vindicia::Concern::Persistable
+
     property :id
     property :vid
     property :created, coerce: Vindicia::Type.DateTime
@@ -9,7 +12,7 @@ module Vindicia::Model
     property :language
     property :name
     property :notify_before_billing
-    property :payment_methods, coerce: Vindicia::Type.List(Vindicia::Model::PaymentMethod)
-    property :shipping_address, coerce: Vindicia::Model::Address
+    property :payment_methods, coerce: Vindicia::Type.List(Vindicia::PaymentMethod)
+    property :shipping_address, coerce: Vindicia::Address
   end
 end

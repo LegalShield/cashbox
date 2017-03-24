@@ -1,5 +1,7 @@
-module Vindicia::Model
-  class CreditCard < Base
+module Vindicia
+  class CreditCard < Model
+    include Vindicia::Concern::Objectable
+
     property :vid
     property :account
     property :account_length
