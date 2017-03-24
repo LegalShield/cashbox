@@ -12,6 +12,10 @@ module Vindicia::Type
     @date_time ||= -> (value) { DateTime.parse(value) }
   end
 
+  def self.BigDecimal
+    @big_decimal ||= -> (value) { BigDecimal.new(value.to_s) }
+  end
+
   def self.Boolean
     @boolean ||= -> (value) do
       case value

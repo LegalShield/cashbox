@@ -6,7 +6,7 @@ module Vindicia
     property :id
     property :vid
     property :account, coerce: Vindicia::Account
-    property :amount, coerce: Float
+    property :amount, coerce: Vindicia::Type.BigDecimal
     property :billing_attempt, coerce: Integer
     property :billing_descriptor
     property :billing_plan_sequence, coerce: Integer

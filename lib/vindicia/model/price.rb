@@ -2,7 +2,7 @@ module Vindicia
   class Price < Model
     include Vindicia::Concern::Objectable
 
-    property :amount, coerce: BigDecimal
+    property :amount, coerce: Vindicia::Type.BigDecimal
     property :currency
   end
 end
