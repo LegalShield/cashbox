@@ -60,18 +60,18 @@ end
 #### Fetching
 
 ```ruby
-Vindicia::Product.all => [#<Vindicia::Product object="Product">, ...]
+Vindicia::Product.all => [<Vindicia::Product object="Product">, ...]
 
-Vindicia::Product.where(status: 'Active') => [#<Vindicia::Product object="Product">, ...]
+Vindicia::Product.where(status: 'Active') => [<Vindicia::Product object="Product">, ...]
 
-Vindicia::Product.first => #<Vindicia::Product object="Product">
+Vindicia::Product.first => <Vindicia::Product object="Product">
 ```
 
 #### Finding
 
 ```ruby
-Vindicia::Product.find("6fd70003fdb24c3b8104ccfccab4bb492b27a326") => #<Vindicia::Product object="Product">
-Vindicia::Product.find("my-user-defined-id") => #<Vindicia::Product object="Product">
+Vindicia::Product.find("6fd70003fdb24c3b8104ccfccab4bb492b27a326") => <Vindicia::Product object="Product">
+Vindicia::Product.find("my-user-defined-id") => <Vindicia::Product object="Product">
 
 product = Vindicia::Product.first
 product_by_id  = Vindicia::Product.find(product.id)
