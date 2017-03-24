@@ -23,7 +23,8 @@ describe Vindicia::Concern::Persistable do
   end
 
   context '#repository' do
-    subject { klass.new.repository }
+    let(:instance) { klass.new }
+    subject { instance.repository }
 
     it 'returns an instance of a repository' do
       expect(subject).to be_a(Vindicia::Repository)
@@ -34,6 +35,14 @@ describe Vindicia::Concern::Persistable do
       subject
       expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
     end
+
+    it 'memoizes the repository' do
+      allow(Vindicia::Repository).to receive(:new).with(kind_of(PersistableTestClass)).and_return(double('repository'))
+      instance.repository
+      instance.repository
+      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass)).once
+    end
+
   end
 
   context 'forwardable' do

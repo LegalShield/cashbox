@@ -12,7 +12,7 @@ module Vindicia::Concern
       def_instance_delegator :repository, :save
 
       def repository
-        Vindicia::Repository.new(self)
+        @repository ||= Vindicia::Repository.new(self)
       end
     end
 
