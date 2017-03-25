@@ -27,9 +27,9 @@ module Vindicia
   end
 
   def self.test!
+    Vindicia::Request.base_uri('http://example.com')
     Vindicia.username = 'username'
     Vindicia.password = 'password'
-    Vindicia::Request.base_uri('http://example.com')
   end
 
   eager_autoload do
