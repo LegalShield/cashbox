@@ -5,5 +5,6 @@ module Vindicia
 
     property :id
     property :description
+    property :message
   end
 end

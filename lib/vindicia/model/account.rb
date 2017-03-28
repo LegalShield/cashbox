@@ -10,6 +10,7 @@ module Vindicia
     property :email
     property :email_type
     property :language
+    property :metadata
     property :name
     property :notify_before_billing
     property :payment_methods, coerce: Vindicia::Type.List(Vindicia::PaymentMethod)

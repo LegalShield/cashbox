@@ -1,0 +1,226 @@
+{
+  "object": "List",
+  "data": [
+    {
+      "object": "Subscription",
+      "id": "8-1486761541",
+      "vid": "2297d68dbe0e4cc37aaf553c302af4b2bb20abbd",
+      "created": "2017-02-10T13:19:03-08:00",
+      "account": {
+        "object": "Account",
+        "id": "PPlotter",
+        "vid": "73ec69c4d7abc0ea82ffa2917dda6a7034dda452",
+        "created": "2017-01-22T11:06:00-08:00",
+        "default_currency": "USD",
+        "email": "paula.0@example.org",
+        "email_type": "html",
+        "language": "EN",
+        "notify_before_billing": false,
+        "name": "Paula Plotter",
+        "shipping_address": {
+          "object": "Address",
+          "vid": "1431f12fb95f3ef650e09aa17e220c3c59cdc131",
+          "name": "Paula Plotter",
+          "line1": "4635 Ingram Road",
+          "city": "Liberty",
+          "district": "NC",
+          "postal_code": "27298",
+          "country": "US",
+          "phone": "336-622-3355",
+          "fax": "752-331-6484"
+        },
+        "payment_methods": {
+          "object": "List",
+          "data": [
+            {
+              "object": "PaymentMethod",
+              "vid": "73da82eda2b651b63dc3b72828f3f50dd491af56",
+              "created": "2017-02-10T13:19:04-08:00",
+              "type": "PayPal",
+              "paypal": {
+                "object": "PayPal",
+                "return_url": "http://localhost:3000/success",
+                "cancel_url": "http://localhost:3000/cancel",
+                "request_reference_id": true,
+                "reference_id": null
+              },
+              "primary": true,
+              "active": true
+            },
+            {
+              "object": "PaymentMethod",
+              "vid": "0adfdaafd257b1f48ff6fb549ab011dbbee27009",
+              "created": "2017-01-22T11:06:00-08:00",
+              "type": "CreditCard",
+              "credit_card": {
+                "object": "CreditCard",
+                "vid": "cc8837c20cd4ab12bfdc5faf3a59383e4a408f16",
+                "account": "474169XXXXXX4447",
+                "bin": "474169",
+                "last_digits": "4447",
+                "account_length": 16,
+                "expiration_date": "201804"
+              },
+              "account_holder": "Paula Plotter",
+              "billing_address": {
+                "object": "Address",
+                "vid": "6d4eeb23629d5727d5d253ccda2ada663d66b0f6",
+                "name": "Paula Plotter",
+                "line1": "4635 Ingram Road",
+                "city": "Liberty",
+                "district": "NC",
+                "postal_code": "27298",
+                "country": "US",
+                "phone": "336-622-3355",
+                "fax": "752-331-6484"
+              },
+              "customer_specified_type": "Visa",
+              "customer_description": "My wifes Visa credit card",
+              "primary": false,
+              "active": true
+            }
+          ],
+          "total_count": 2
+        },
+        "metadata": {
+          "Created By": "Vindicia sandbox software"
+        }
+      },
+      "billing_plan": {
+        "object": "BillingPlan",
+        "id": "1",
+        "vid": "4d9cee99a1301a0cd91e4921b228bfedf329257a",
+        "created": "2017-02-03T13:44:10-08:00",
+        "description": "daily",
+        "status": "Active",
+        "periods": {
+          "object": "List",
+          "data": [
+            {
+              "object": "BillingPlanPeriod",
+              "type": "Day",
+              "quantity": 1,
+              "cycles": 0
+            }
+          ],
+          "total_count": 1
+        },
+        "billing_notification_days": 1,
+        "billing_descriptor": "1"
+      },
+      "payment_method": {
+        "object": "PaymentMethod",
+        "vid": "73da82eda2b651b63dc3b72828f3f50dd491af56",
+        "created": "2017-02-10T13:19:04-08:00",
+        "type": "PayPal",
+        "paypal": {
+          "object": "PayPal",
+          "return_url": "http://localhost:3000/success",
+          "cancel_url": "http://localhost:3000/cancel",
+          "request_reference_id": true,
+          "reference_id": null
+        },
+        "primary": true,
+        "active": true
+      },
+      "currency": "USD",
+      "status": "Cancelled",
+      "billing_state": "Failed To Collect",
+      "starts": "2017-02-10T13:19:03-08:00",
+      "ends": "2017-03-13T23:59:59-07:00",
+      "entitled_through": "2017-03-13T23:59:59-07:00",
+      "items": {
+        "object": "List",
+        "data": [
+          {
+            "object": "SubscriptionItem",
+            "vid": "f4d46c3031b69dd5d68e2effab40cd393a503499",
+            "index": 0,
+            "product": {
+              "object": "Product",
+              "id": "1",
+              "vid": "7118699d6406494d7672503761fa21809fefaf25",
+              "created": "2017-02-03T13:46:27-08:00",
+              "descriptions": {
+                "object": "List",
+                "data": [
+                  {
+                    "object": "ProductDescription",
+                    "language": "EN",
+                    "description": "Widgets"
+                  }
+                ],
+                "total_count": 1
+              },
+              "status": "Active",
+              "default_billing_plan": {
+                "object": "BillingPlan",
+                "id": "1",
+                "vid": "4d9cee99a1301a0cd91e4921b228bfedf329257a",
+                "created": "2017-02-03T13:44:10-08:00",
+                "description": "daily",
+                "status": "Active",
+                "periods": {
+                  "object": "List",
+                  "data": [
+                    {
+                      "object": "BillingPlanPeriod",
+                      "type": "Day",
+                      "quantity": 1,
+                      "cycles": 0
+                    }
+                  ],
+                  "total_count": 1
+                },
+                "billing_notification_days": 1,
+                "billing_descriptor": "1"
+              },
+              "entitlements": {
+                "object": "List",
+                "data": [
+                  {
+                    "object": "Entitlement",
+                    "id": "consultation",
+                    "description": "Consultations"
+                  }
+                ],
+                "total_count": 1
+              },
+              "billing_descriptor": "1",
+              "credit_granted": {
+                "object": "Credit"
+              },
+              "prices": {
+                "object": "List",
+                "data": [
+                  {
+                    "object": "ProductPrice",
+                    "amount": 10,
+                    "currency": "USD"
+                  }
+                ],
+                "total_count": 1
+              }
+            },
+            "quantity": 1,
+            "created": "2017-02-10T13:19:03-08:00",
+            "starts": "2017-02-10T00:00:00-08:00"
+          }
+        ],
+        "total_count": 1
+      },
+      "billing_day": 12,
+      "minimum_commitment": 0,
+      "notify_on_transition": false,
+      "cancel_reason": {
+        "object": "CancelReason",
+        "reason_code": "5",
+        "description": "CashBox:  Permanently Suspended for Non-Payment.  Unable to Collect Payment"
+      }
+    }
+  ],
+  "total_count": 1,
+  "url": "/subscriptions?account=73ec69c4d7abc0ea82ffa2917dda6a7034dda452&limit=1",
+  "next": "/subscriptions?account=73ec69c4d7abc0ea82ffa2917dda6a7034dda452&limit=1&starting_after=8-1486761541",
+  "previous": "/subscriptions?account=73ec69c4d7abc0ea82ffa2917dda6a7034dda452&limit=1&ending_before=8-1486761541"
+}

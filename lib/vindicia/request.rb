@@ -3,6 +3,7 @@ module Vindicia
     include HTTParty
     format :json
     base_uri 'https://api.vindicia.com'
+    #debug_output $stdout
 
     def initialize(method, path, options = {})
       @method  = method
@@ -11,7 +12,18 @@ module Vindicia
     end
 
     def response
-      Hashie::Mash.new(self.class.send(@method, @path, @options.merge(default_options)))
+      response = self.class.send(@method, @path, @options.merge(default_options))
+      #puts '--'
+      #puts response
+      #puts '--'
+      #require 'pry'
+      #binding.pry
+      #if response['data'] && response['data'][0] && response['data'][0]['items']
+        #puts '--'
+        #response['data'][0]['items'][0]
+        #puts '--'
+      #end
+      Hashie::Mash.new( response)
     end
 
     private

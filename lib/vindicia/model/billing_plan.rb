@@ -9,6 +9,7 @@ module Vindicia
     property :billing_notification_days
     property :created, coerce: Vindicia::Type.DateTime
     property :description
+    property :message
     property :periods, coerce: Vindicia::Type.List(Vindicia::BillingPlanPeriod)
     property :status
   end

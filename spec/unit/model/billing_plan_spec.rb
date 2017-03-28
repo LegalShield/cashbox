@@ -10,6 +10,7 @@ describe Vindicia::BillingPlan do
   it { is_expected.to have_property(:billing_descriptor) }
   it { is_expected.to have_property(:billing_notification_days) }
   it { is_expected.to have_property(:description) }
+  it { is_expected.to have_property(:message) }
   it { is_expected.to have_property(:periods) }
   it { is_expected.to have_property(:status) }
 

@@ -56,9 +56,9 @@ module Vindicia
     end
 
     def route(id=nil)
-      class_name = @instance.class.name.split('::').last.downcase
-      plural_class_name = ActiveSupport::Inflector.pluralize(class_name)
-      [ '', plural_class_name, id ].compact.join('/')
+      class_name = @instance.class.name.split('::').last
+      tableized_class_name = ActiveSupport::Inflector.tableize(class_name)
+      [ '', tableized_class_name, id ].compact.join('/')
     end
 
     def cast(hash)

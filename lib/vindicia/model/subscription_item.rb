@@ -4,5 +4,6 @@ module Vindicia
 
     property :id
     property :product, coerce: Vindicia::Product
+    property :index_number, from: :index
   end
 end

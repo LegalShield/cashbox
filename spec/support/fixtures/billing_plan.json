@@ -1,22 +1,36 @@
 {
   "object": "BillingPlan",
-  "id": "1",
-  "vid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-  "created": "2017-02-03T13:44:10-08:00",
-  "description": "daily",
+  "id": "TESTPLAN0",
+  "vid": "7835983e7d0608d36d4f40b01ab8843e011ab8d9",
+  "created": "2013-04-15T10:21:43-07:00",
+  "description": "TESTPLAN0 $0 Monthly",
   "status": "Active",
   "periods": {
     "object": "List",
     "data": [
       {
         "object": "BillingPlanPeriod",
-        "type": "Day",
+        "type": "Month",
         "quantity": 1,
-        "cycles": 0
+        "cycles": 0,
+        "prices": {
+          "object": "List",
+          "data": [
+            {
+              "object": "BillingPlanPrice",
+              "amount": 0,
+              "currency": "USD"
+            }
+          ],
+          "total_count": 1
+        }
       }
     ],
     "total_count": 1
   },
-  "billing_notification_days": 1,
-  "billing_descriptor": "1"
+  "metadata": {
+    "plansource": "External",
+    "plangroup": "April2013"
+  },
+  "billing_descriptor": "TESTPLAN0"
 }
