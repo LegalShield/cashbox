@@ -32,6 +32,10 @@ module Vindicia
     Vindicia::Request.base_uri('http://example.com')
   end
 
+  def self.debug!
+    Vindicia::Request.debug_output $stdout
+  end
+
   eager_autoload do
     autoload :VERSION
     autoload :Exception

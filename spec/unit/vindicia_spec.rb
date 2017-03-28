@@ -70,4 +70,14 @@ describe Vindicia do
       expect(Vindicia::Request.base_uri).to eql('http://example.com')
     end
   end
+
+  context '.debug!' do
+    subject { Vindicia }
+
+    it 'sets the debug strategy to $stdout' do
+      expect(Vindicia::Request.default_options[:debug_output]).to be_nil
+      subject.debug!
+      expect(Vindicia::Request.default_options[:debug_output]).to eq($stdout)
+    end
+  end
 end
