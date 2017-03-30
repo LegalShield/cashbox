@@ -8,7 +8,7 @@ module Vindicia::Concern
       extend Forwardable
       extend SingleForwardable
 
-      def_single_delegators :repository, :where, :all, :first
+      def_single_delegators :repository, :where, :all, :first, :find
       def_instance_delegator :repository, :save
 
       def repository
