@@ -11,7 +11,11 @@ module Vindicia
     end
 
     def response
-      Hashie::Mash.new(self.class.send(@method, @path, @options.merge(default_options)))
+      res = self.class.send(@method, @path, @options.merge(default_options))
+      #require 'pry'
+      #binding.pry
+      puts res
+      Hashie::Mash.new(res)
     end
 
     private

@@ -52,6 +52,7 @@ module Vindicia
       autoload :CreditCard
       autoload :Description
       autoload :Entitlement
+      autoload :Invoice
       autoload :PayPal
       autoload :PaymentMethod
       autoload :Period
