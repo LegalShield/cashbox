@@ -59,6 +59,7 @@ module Vindicia
       autoload :Product
       autoload :ProductDescription
       autoload :ProductPrice
+      autoload :RatePlan
       autoload :Subscription
       autoload :SubscriptionItem
       autoload :Transaction
