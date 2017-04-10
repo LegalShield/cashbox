@@ -8,7 +8,7 @@ module Vindicia::Concern
       extend Forwardable
       extend SingleForwardable
 
-      def_single_delegators :repository, :where, :all, :first, :find
+      def_single_delegators :criteria, :where, :all, :first, :find
       def_instance_delegator :repository, :save
 
       def repository
@@ -17,8 +17,8 @@ module Vindicia::Concern
     end
 
     class_methods do
-      def repository
-        Vindicia::Repository.new(self.new)
+      def criteria
+        Vindicia::Criteria.new(self.new.repository)
       end
     end
   end

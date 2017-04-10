@@ -42,6 +42,7 @@ module Vindicia
     autoload :Type
     autoload :Request
     autoload :Repository
+    autoload :Criteria
 
     autoload_under 'model' do
       autoload :Model
