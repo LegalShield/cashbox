@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Vindicia::BillingPlanPeriod do
-  it { is_expected.to be_a(Vindicia::Model) }
+describe Cashbox::BillingPlanPeriod do
+  it { is_expected.to be_a(Cashbox::Model) }
 
   it { is_expected.to have_property(:cycles) }
   it { is_expected.to have_property(:quantity) }
