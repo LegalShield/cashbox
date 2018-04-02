@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'cashbox'
   spec.version       = Cashbox::VERSION
   spec.authors       = ['Jonathon Storer']
-  spec.email         = ['jonathon.scott.storer@gmail.com']
+  spec.email         = ['engineering@legalshieldcorp.com']
 
   spec.required_ruby_version = '~> 2.0'
 
