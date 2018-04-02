@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Vindicia do
+describe Cashbox do
   it 'has a version number' do
-    expect(Vindicia::VERSION).not_to be nil
+    expect(Cashbox::VERSION).not_to be nil
   end
 
   it 'sets the base url of the request object' do
-    expect(Vindicia::Request.base_uri).to eql('https://api.vindicia.com')
+    expect(Cashbox::Request.base_uri).to eql('https://api.vindicia.com')
   end
 
   it { is_expected.to have_attr_accessor(:username) }
@@ -14,7 +14,7 @@ describe Vindicia do
 
   context '#configure' do
     context 'with a block' do
-      subject { Vindicia }
+      subject { Cashbox }
 
       before do
         subject.config do |c|
@@ -28,7 +28,7 @@ describe Vindicia do
     end
 
     context 'with a hash' do
-      subject { Vindicia }
+      subject { Cashbox }
 
       before do
         subject.config({ username: 'name', password: 'so sekret' })
@@ -40,26 +40,26 @@ describe Vindicia do
   end
 
   context '.production!' do
-    subject { Vindicia }
+    subject { Cashbox }
     before { subject.production! }
 
     it 'sets sandbox values' do
-      expect(Vindicia::Request.base_uri).to eql('https://api.vindicia.com')
+      expect(Cashbox::Request.base_uri).to eql('https://api.vindicia.com')
     end
   end
 
   context '.sandbox!' do
-    subject { Vindicia }
+    subject { Cashbox }
     before { subject.sandbox! }
     after { subject.production! }
 
     it 'sets sandbox values' do
-      expect(Vindicia::Request.base_uri).to eql('https://api.prodtest.vindicia.com')
+      expect(Cashbox::Request.base_uri).to eql('https://api.prodtest.vindicia.com')
     end
   end
 
   context '.test!' do
-    subject { Vindicia }
+    subject { Cashbox }
     before { subject.test! }
     after { subject.production! }
 
@@ -67,7 +67,17 @@ describe Vindicia do
     its(:password) { is_expected.to eql('password') }
 
     it 'sets the base url of the request object' do
-      expect(Vindicia::Request.base_uri).to eql('http://example.com')
+      expect(Cashbox::Request.base_uri).to eql('http://example.com')
+    end
+  end
+
+  context '.debug!' do
+    subject { Cashbox }
+
+    it 'sets the debug strategy to $stdout' do
+      expect(Cashbox::Request.default_options[:debug_output]).to be_nil
+      subject.debug!
+      expect(Cashbox::Request.default_options[:debug_output]).to eq($stdout)
     end
   end
 end

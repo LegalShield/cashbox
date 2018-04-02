@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Vindicia::Concern::Persistable do
+describe Cashbox::Concern::Persistable do
   let!(:klass) do
     class PersistableTestClass
-      include Vindicia::Concern::Persistable
+      include Cashbox::Concern::Persistable
     end
     PersistableTestClass
   end
@@ -12,13 +12,13 @@ describe Vindicia::Concern::Persistable do
     subject { klass.repository }
 
     it 'returns an instance of a repository' do
-      expect(subject).to be_a(Vindicia::Repository)
+      expect(subject).to be_a(Cashbox::Repository)
     end
 
     it 'inits with the repository with an instance of the model' do
-      allow(Vindicia::Repository).to receive(:new).with(kind_of(PersistableTestClass))
+      allow(Cashbox::Repository).to receive(:new).with(kind_of(PersistableTestClass))
       subject
-      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
+      expect(Cashbox::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
     end
   end
 
@@ -27,20 +27,20 @@ describe Vindicia::Concern::Persistable do
     subject { instance.repository }
 
     it 'returns an instance of a repository' do
-      expect(subject).to be_a(Vindicia::Repository)
+      expect(subject).to be_a(Cashbox::Repository)
     end
 
     it 'inits with the repository with an instance of the model' do
-      allow(Vindicia::Repository).to receive(:new).with(kind_of(PersistableTestClass))
+      allow(Cashbox::Repository).to receive(:new).with(kind_of(PersistableTestClass))
       subject
-      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
+      expect(Cashbox::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
     end
 
     it 'memoizes the repository' do
-      allow(Vindicia::Repository).to receive(:new).with(kind_of(PersistableTestClass)).and_return(double('repository'))
+      allow(Cashbox::Repository).to receive(:new).with(kind_of(PersistableTestClass)).and_return(double('repository'))
       instance.repository
       instance.repository
-      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass)).once
+      expect(Cashbox::Repository).to have_received(:new).with(kind_of(PersistableTestClass)).once
     end
 
   end
@@ -57,6 +57,7 @@ describe Vindicia::Concern::Persistable do
       it { is_expected.to delegate_method(:all).to(:repository) }
       it { is_expected.to delegate_method(:where).to(:repository) }
       it { is_expected.to delegate_method(:first).to(:repository) }
+      it { is_expected.to delegate_method(:find).to(:repository) }
     end
 
     context 'instance methods' do
