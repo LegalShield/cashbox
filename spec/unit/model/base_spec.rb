@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Vindicia::Model do
+describe Cashbox::Model do
   it { is_expected.to be_a(Hashie::Trash) }
   it { is_expected.to be_a(Hashie::Extensions::MergeInitializer) }
   it { is_expected.to be_a(Hashie::Extensions::IgnoreUndeclared) }
