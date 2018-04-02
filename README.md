@@ -1,5 +1,9 @@
 # Cashbox
 
+### Status
+
+[ ![Codeship Status for LegalShield/cashbox](https://app.codeship.com/projects/02080c20-18df-0136-5060-1edfcc351556/status?branch=master)](https://app.codeship.com/projects/283978)
+
 ## Installation
 
 Add this line to your application's Gemfile:
