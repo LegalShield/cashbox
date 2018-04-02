@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Vindicia::Concern::Persistable do
+describe Cashbox::Concern::Persistable do
   let!(:klass) do
     class PersistableTestClass
-      include Vindicia::Concern::Persistable
+      include Cashbox::Concern::Persistable
     end
     PersistableTestClass
   end
@@ -12,7 +12,7 @@ describe Vindicia::Concern::Persistable do
     subject { klass.criteria }
 
     it 'returns an instance of a criteria' do
-      expect(subject).to be_a(Vindicia::Criteria)
+      expect(subject).to be_a(Cashbox::Criteria)
     end
 
     it 'inits with the criteria with an instance of the model' do
@@ -22,27 +22,41 @@ describe Vindicia::Concern::Persistable do
       expect(Vindicia::Criteria).to have_received(:new).with(kind_of(Vindicia::Repository))
       expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
     end
+
+    it 'returns an instance of a criteria' do
+      expect(subject).to be_a(Vindicia::Repository)
+    end
+
+    it 'inits with the repository with an instance of the model' do
+      allow(Cashbox::Repository).to receive(:new).with(kind_of(PersistableTestClass))
+      subject
+      expect(Cashbox::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
+    end
   end
 
   context '#repository' do
     let(:instance) { klass.new }
     subject { instance.repository }
 
-    it 'returns an instance of a criteria' do
-      expect(subject).to be_a(Vindicia::Repository)
+    it 'returns an instance of a repository' do
+      expect(subject).to be_a(Cashbox::Repository)
     end
 
     it 'inits with the criteria with an instance of the model' do
       allow(Vindicia::Repository).to receive(:new).with(kind_of(PersistableTestClass)).and_return(Vindicia::Repository.new(PersistableTestClass.new))
-      subject
-      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
     end
 
-    it 'memoizes the criteria' do
-      allow(Vindicia::Repository).to receive(:new).with(kind_of(PersistableTestClass)).and_return(double('repository'))
+    it 'inits with the repository with an instance of the model' do
+      allow(Cashbox::Repository).to receive(:new).with(kind_of(PersistableTestClass))
+      subject
+      expect(Cashbox::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
+    end
+
+    it 'memoizes the repository' do
+      allow(Cashbox::Repository).to receive(:new).with(kind_of(PersistableTestClass)).and_return(double('repository'))
       instance.repository
       instance.repository
-      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass)).once
+      expect(Cashbox::Repository).to have_received(:new).with(kind_of(PersistableTestClass)).once
     end
   end
 

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe 'Product' do
-  before { Vindicia.test! }
-  after { Vindicia.production! }
+  before { Cashbox.test! }
+  after { Cashbox.production! }
 
   describe 'first product' do
     subject do
-      Vindicia::Product.first
+      Cashbox::Product.first
     end
 
     before do
@@ -19,32 +19,32 @@ describe 'Product' do
         })
     end
 
-    it { is_expected.to be_a(Vindicia::Product) }
+    it { is_expected.to be_a(Cashbox::Product) }
 
     its(:vid)                  { is_expected.to eql('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa') }
     its(:id)                   { is_expected.to eql('1') }
     its(:created)              { is_expected.to eql(DateTime.parse('2017-02-03T13:46:27-08:00')) }
-    its(:default_billing_plan) { is_expected.to be_a(Vindicia::BillingPlan)  }
+    its(:default_billing_plan) { is_expected.to be_a(Cashbox::BillingPlan)  }
     its(:descriptions)         { is_expected.to be_an(Array)  }
     its(:entitlements)         { is_expected.to be_an(Array)  }
     its(:prices)               { is_expected.to be_an(Array)  }
     its(:status)               { is_expected.to eql('Active')  }
 
-    it 'descriptions are Vindicia::ProductDescription' do
-      expect(subject.descriptions.first).to be_a(Vindicia::ProductDescription)
+    it 'descriptions are Cashbox::ProductDescription' do
+      expect(subject.descriptions.first).to be_a(Cashbox::ProductDescription)
     end
 
-    it 'entitlements are Vindicia::Entitlement' do
-      expect(subject.entitlements.first).to be_a(Vindicia::Entitlement)
+    it 'entitlements are Cashbox::Entitlement' do
+      expect(subject.entitlements.first).to be_a(Cashbox::Entitlement)
     end
 
-    it 'product prices are Vindicia::ProductPrice' do
-      expect(subject.prices.first).to be_a(Vindicia::ProductPrice)
+    it 'product prices are Cashbox::ProductPrice' do
+      expect(subject.prices.first).to be_a(Cashbox::ProductPrice)
     end
   end
 
   describe 'all' do
-    subject { Vindicia::Product.all }
+    subject { Cashbox::Product.all }
 
     before do
       stub_get('/products')
@@ -86,14 +86,14 @@ describe 'Product' do
 
   describe 'saving products' do
     let(:product_description) do
-      Vindicia::ProductDescription.new({
+      Cashbox::ProductDescription.new({
         language: 'EN',
         description: 'describy'
       })
     end
 
     let(:billing_plan_period) do
-      Vindicia::BillingPlanPeriod.new({
+      Cashbox::BillingPlanPeriod.new({
         type: 'Day',
         quantity: 1,
         cycles: 0
@@ -101,7 +101,7 @@ describe 'Product' do
     end
 
     let(:billing_plan) do
-      Vindicia::BillingPlan.new({
+      Cashbox::BillingPlan.new({
         id: '1',
         description: 'daily',
         status: 'Active',
@@ -110,21 +110,21 @@ describe 'Product' do
     end
 
     let(:entitlement) do
-      Vindicia::Entitlement.new({
+      Cashbox::Entitlement.new({
         id: 'test-entitlement',
         description: 'described entitlement'
       })
     end
 
     let(:price) do
-      Vindicia::ProductPrice.new({
+      Cashbox::ProductPrice.new({
         amount: 9.99,
         currency: 'USD'
       })
     end
 
     let(:product) do
-      Vindicia::Product.new({
+      Cashbox::Product.new({
         id: '1',
         descriptions: [ product_description ],
         status: 'Active',
@@ -165,7 +165,7 @@ describe 'Product' do
 
     it 'parses the response correctly' do
       model = product.save
-      expect(model).to be_a(Vindicia::Product)
+      expect(model).to be_a(Cashbox::Product)
       expect(model).to eq(product)
     end
   end

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe 'Transaction' do
-  before { Vindicia.test!  }
-  after { Vindicia.production! }
+  before { Cashbox.test!  }
+  after { Cashbox.production! }
 
   describe 'first transaction' do
     subject do
-      Vindicia::Transaction.first
+      Cashbox::Transaction.first
     end
 
     before do
@@ -19,11 +19,11 @@ describe 'Transaction' do
         })
     end
 
-    it { is_expected.to be_a(Vindicia::Transaction) }
+    it { is_expected.to be_a(Cashbox::Transaction) }
 
     its(:id)                               { is_expected.to eql('bbbbbbbbbbbbbbbb') }
     its(:vid)                              { is_expected.to eql('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa') }
-    its(:account)                          { is_expected.to be_a(Vindicia::Account)  }
+    its(:account)                          { is_expected.to be_a(Cashbox::Account)  }
     its(:amount)                           { is_expected.to eql(10.71) }
     its(:billing_attempt)                  { is_expected.to eql(0) }
     its(:billing_descriptor)               { is_expected.to eql('1') }
@@ -34,18 +34,18 @@ describe 'Transaction' do
     its(:original_billing_date)            { is_expected.to eql(DateTime.parse('2017-02-11T00:00:00-08:00')) }
     its(:payment_processor)                { is_expected.to eql('PayPal') }
     its(:payment_processor_transaction_id) { is_expected.to eql("bbbbbbbbbbbbbbbb") }
-    its(:source_payment_method)            { is_expected.to be_a(Vindicia::PaymentMethod) }
+    its(:source_payment_method)            { is_expected.to be_a(Cashbox::PaymentMethod) }
     its(:status_log)                       { is_expected.to be_an(Array) }
-    its(:subscription)                     { is_expected.to be_a(Vindicia::Subscription)  }
+    its(:subscription)                     { is_expected.to be_a(Cashbox::Subscription)  }
     its(:subscription_sequence)            { is_expected.to eql(2) }
     its(:to_be_captured)                   { is_expected.to eql(nil) }
 
-    it 'has items as Vindicia::TransactionItem' do
-      expect(subject.items.first).to be_a(Vindicia::TransactionItem)
+    it 'has items as Cashbox::TransactionItem' do
+      expect(subject.items.first).to be_a(Cashbox::TransactionItem)
     end
 
-    it 'has status log as Vindicia::TransactionStatus' do
-      expect(subject.status_log.first).to be_a(Vindicia::TransactionStatus)
+    it 'has status log as Cashbox::TransactionStatus' do
+      expect(subject.status_log.first).to be_a(Cashbox::TransactionStatus)
     end
   end
 end
