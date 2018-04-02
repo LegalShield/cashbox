@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe 'BillingPlan' do
-  before { Vindicia.test! }
-  after { Vindicia.production! }
+  before { Cashbox.test! }
+  after { Cashbox.production! }
 
   describe 'first product' do
     subject do
-      Vindicia::BillingPlan.first
+      Cashbox::BillingPlan.first
     end
 
     before do
@@ -19,6 +19,6 @@ describe 'BillingPlan' do
         })
     end
 
-    it { is_expected.to be_a(Vindicia::BillingPlan) }
+    it { is_expected.to be_a(Cashbox::BillingPlan) }
   end
 end

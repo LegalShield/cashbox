@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Vindicia::Repository do
+describe Cashbox::Repository do
   context 'making calls' do
 
-    let(:model) { Vindicia::Model.new }
-    let(:repository) { Vindicia::Repository.new(model) }
+    let(:model) { Cashbox::Model.new }
+    let(:repository) { Cashbox::Repository.new(model) }
 
     context 'instance methods' do
       subject { repository }
@@ -13,8 +13,8 @@ describe Vindicia::Repository do
     end
 
     before do
-      Vindicia.username = 'u'
-      Vindicia.password = 'p'
+      Cashbox.username = 'u'
+      Cashbox.password = 'p'
     end
 
     describe '#where' do
@@ -30,7 +30,7 @@ describe Vindicia::Repository do
         end
 
         before do
-          allow(Vindicia::Request)
+          allow(Cashbox::Request)
             .to receive(:new)
             .with(:get, '/models', { query: { limit: 100, name: 'Jon' } })
             .and_return(double('request', response: response))
@@ -39,7 +39,7 @@ describe Vindicia::Repository do
         it 'creates a request instance' do
           repository.where({ name: 'Jon' })
 
-          expect(Vindicia::Request)
+          expect(Cashbox::Request)
             .to have_received(:new)
             .with(:get, '/models', { query: { limit: 100, name: 'Jon' } })
         end
@@ -84,22 +84,22 @@ describe Vindicia::Repository do
         end
 
         before do
-          allow(Vindicia::Request)
+          allow(Cashbox::Request)
             .to receive(:new)
             .with(:get, '/models', { query: { limit: 25, name: 'Jon' } })
             .and_return(double('request', response: response_one))
 
-          allow(Vindicia::Request)
+          allow(Cashbox::Request)
             .to receive(:new)
             .with(:get, '/models', { query: { limit: 100, name: 'Jon' } })
             .and_return(double('request', response: response_one))
 
-          allow(Vindicia::Request)
+          allow(Cashbox::Request)
             .to receive(:new)
             .with(:get, '/models', { query: { starting_after: '100', limit: 100, name: 'Jon' } })
             .and_return(double('request 2', response: response_two))
 
-          allow(Vindicia::Request)
+          allow(Cashbox::Request)
             .to receive(:new)
             .with(:get, '/models', { query: { starting_after: '200', limit: 50, name: 'Jon' } })
             .and_return(double('request 3', response: response_three))
@@ -108,29 +108,29 @@ describe Vindicia::Repository do
         it 'can fetch more than 100 records' do
           repository.where({ name: 'Jon', limit: 250 })
 
-          expect(Vindicia::Request)
+          expect(Cashbox::Request)
             .to have_received(:new)
             .with(:get, '/models', { query: { limit: 100, name: 'Jon' } }).ordered
 
-          expect(Vindicia::Request)
+          expect(Cashbox::Request)
             .to have_received(:new)
             .with(:get, '/models', { query: { starting_after: '100', limit: 100, name: 'Jon' } }).ordered
 
-          expect(Vindicia::Request)
+          expect(Cashbox::Request)
             .to have_received(:new)
             .with(:get, '/models', { query: { starting_after: '200', limit: 50, name: 'Jon' } }).ordered
 
-          expect(Vindicia::Request).to have_received(:new).exactly(3).times
+          expect(Cashbox::Request).to have_received(:new).exactly(3).times
         end
 
         it 'can fetch less than 100 records' do
           repository.where({ name: 'Jon', limit: 25 })
 
-          expect(Vindicia::Request)
+          expect(Cashbox::Request)
             .to have_received(:new)
             .with(:get, '/models', { query: { limit: 25, name: 'Jon' } })
 
-          expect(Vindicia::Request).to have_received(:new).exactly(1).times
+          expect(Cashbox::Request).to have_received(:new).exactly(1).times
         end
       end
     end
@@ -158,16 +158,16 @@ describe Vindicia::Repository do
 
       context 'success' do
         before do
-          allow(Vindicia::Request).to receive(:new).with(:get, '/models/1').and_return(double('request', response: response))
+          allow(Cashbox::Request).to receive(:new).with(:get, '/models/1').and_return(double('request', response: response))
           repository.find(1)
         end
 
         it 'makes the correct request' do
-          expect(Vindicia::Request).to have_received(:new).with(:get, '/models/1').once
+          expect(Cashbox::Request).to have_received(:new).with(:get, '/models/1').once
         end
 
         it 'makes the correct request' do
-          expect(result).to be_a(Vindicia::Model)
+          expect(result).to be_a(Cashbox::Model)
           expect(result).to eq(model)
           expect(result.object_id).to eq(model.object_id)
         end
@@ -181,14 +181,14 @@ describe Vindicia::Repository do
     end
 
     describe '#save' do
-      let(:model) { Vindicia::Account.new({ vid: 'vid-1', id: 1 }) }
-      let(:repository) { Vindicia::Repository.new(model) }
+      let(:model) { Cashbox::Account.new({ vid: 'vid-1', id: 1 }) }
+      let(:repository) { Cashbox::Repository.new(model) }
       let(:result) { repository.save }
       let(:response) { Hash.new }
 
       context 'success' do
         before do
-          allow(Vindicia::Request)
+          allow(Cashbox::Request)
             .to receive(:new)
             .with(:post, '/accounts/vid-1', { body: model.to_json })
             .and_return(double('request', response: response))
@@ -196,11 +196,11 @@ describe Vindicia::Repository do
 
         it 'makes the correct request' do
           repository.save
-          expect(Vindicia::Request).to have_received(:new).with(:post, '/accounts/vid-1', { body: model.to_json }).once
+          expect(Cashbox::Request).to have_received(:new).with(:post, '/accounts/vid-1', { body: model.to_json }).once
         end
 
         it 'parses the response correctly' do
-          expect(result).to be_a(Vindicia::Account)
+          expect(result).to be_a(Cashbox::Account)
           expect(result).to eq(model)
           expect(result.object_id).to eq(model.object_id)
         end
