@@ -15,5 +15,11 @@ module Cashbox
     property :notify_before_billing
     property :payment_methods, coerce: Cashbox::Type.List(Cashbox::PaymentMethod)
     property :shipping_address, coerce: Cashbox::Address
+
+    #has_many :subscriptions
+
+    def subscriptions
+      Subscription.where({ account: 1 })
+    end
   end
 end

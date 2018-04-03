@@ -18,4 +18,22 @@ describe Cashbox::Account do
   it { is_expected.to have_property(:shipping_address) }
 
   its(:object) { is_expected.to eql('Account') }
+
+
+  describe 'subscriptions' do
+    subject { Cashbox::Account.new({ vid: 1 }) }
+
+    before do
+      allow(Cashbox::Subscription).to receive_messages(:where => [])
+    end
+
+    it 'has many subscriptions' do
+      expect(subject).to respond_to(:subscriptions)
+    end
+
+    it 'makes the correct api call' do
+      expect(Cashbox::Subscription).to receive(:where).with({ account: 1 })
+      subject.subscriptions
+    end
+  end
 end
