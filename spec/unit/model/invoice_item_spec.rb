@@ -20,4 +20,5 @@ describe Cashbox::InvoiceItem do
   it { is_expected.to have_property(:item_removed).coercing_with(Cashbox::Type.DateTime) }
   it { is_expected.to have_property(:item_serviceperiod_start).coercing_with(Cashbox::Type.DateTime) }
   it { is_expected.to have_property(:item_serviceperiod_end).coercing_with(Cashbox::Type.DateTime) }
+  it { is_expected.to have_property(:subscription_item).coercing_with(Cashbox::SubscriptionItem) }
 end

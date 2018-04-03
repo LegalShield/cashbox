@@ -15,5 +15,6 @@ module Cashbox
     property :item_removed, coerce: Cashbox::Type.DateTime
     property :item_serviceperiod_start, coerce: Cashbox::Type.DateTime
     property :item_serviceperiod_end, coerce: Cashbox::Type.DateTime
+    property :subscription_item, coerce: Cashbox::SubscriptionItem
   end
 end
