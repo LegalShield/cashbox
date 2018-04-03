@@ -1,0 +1,251 @@
+{
+   "object": "List",
+   "data": [
+      {
+         "object": "Invoice",
+         "id": "69715e86cc5fb836e5c9e6be4b181b9869bb9230-00000059",
+         "billing_service_period_start": "2018-04-01T00:00:00-07:00",
+         "billing_service_period_end": "2018-04-01T00:00:00-07:00",
+         "due_date": "2018-04-01T00:00:00-07:00",
+         "invoice_date": "2018-04-01T00:00:00-07:00",
+         "status": "Paid",
+         "invoice_currency": "USD",
+         "invoice_balance": 0,
+         "gross_charges_total": 10,
+         "tax_charges_total": 0,
+         "credit_total": 0,
+         "payments_received_total": 10,
+         "invoice_line_items": {
+            "object": "List",
+            "data": [
+               {
+                  "object": "InvoiceItem",
+                  "index_number": 0,
+                  "type": "RecurringCharge",
+                  "sku": "1",
+                  "description": "daily",
+                  "quantity": 1,
+                  "unit_amount": 0,
+                  "tax_classification": null,
+                  "item_added": "2018-04-01T00:00:00-07:00",
+                  "item_removed": null,
+                  "item_serviceperiod_start": "2018-04-01T00:00:00-07:00",
+                  "item_serviceperiod_end": "2018-04-01T00:00:00-07:00"
+               },
+               {
+                  "object": "InvoiceItem",
+                  "index_number": 1,
+                  "type": "RecurringCharge",
+                  "sku": "1",
+                  "description": "Oklahoma Limited Personal Plan",
+                  "quantity": 1,
+                  "unit_amount": 10,
+                  "tax_classification": null,
+                  "item_added": "2018-04-01T00:00:00-07:00",
+                  "item_removed": null,
+                  "item_serviceperiod_start": "2018-04-01T00:00:00-07:00",
+                  "item_serviceperiod_end": "2018-04-01T00:00:00-07:00",
+                  "subscription_item": {
+                     "object": "SubscriptionItem",
+                     "vid": "ecad23305e021ffd597213ac27667aa0495ed7a3"
+                  }
+               }
+            ],
+            "total_count": 2
+         },
+         "invoice_tax_items": {
+            "object": "List",
+            "data": [
+               {
+                  "object": "InvoiceItem",
+                  "index_number": 2,
+                  "type": "Tax",
+                  "sku": "VIN_SALES_TAX",
+                  "description": "Sales Tax Total",
+                  "quantity": 1,
+                  "unit_amount": 0,
+                  "tax_classification": "TaxExempt",
+                  "item_added": "2018-04-01T00:00:00-07:00",
+                  "item_removed": null,
+                  "item_serviceperiod_start": "2018-04-01T00:00:00-07:00",
+                  "item_serviceperiod_end": "2018-04-01T00:00:00-07:00"
+               }
+            ],
+            "total_count": 1
+         },
+         "invoice_payments": {
+            "object": "List",
+            "data": [
+               {
+                  "object": "Transaction",
+                  "id": "LEGALSHI00021149",
+                  "vid": "b834dc1d95d0424bc06254b3394edf0eef5a813b",
+                  "created": "2018-04-01T00:15:28-07:00",
+                  "amount": 10,
+                  "currency": "USD",
+                  "account": {
+                     "object": "Account",
+                     "id": "104-1517518074",
+                     "vid": "fb76a538a325105641da67dfde9a2a7349efbd84",
+                     "created": "2018-02-01T12:47:55-08:00",
+                     "email_type": "html",
+                     "name": "Lessie Anderson",
+                     "payment_methods": {
+                        "object": "List",
+                        "data": [
+                           {
+                              "object": "PaymentMethod",
+                              "vid": "7ef15fe9600b7ee4e9875f0de95f715583fd43fd",
+                              "created": "2018-02-01T12:48:27-08:00",
+                              "type": "CreditCard",
+                              "credit_card": {
+                                 "object": "CreditCard",
+                                 "vid": "dc9b99622d3b58288bfbb24e5addd95f70c0aaa8",
+                                 "account": "411111XXXXXX1111",
+                                 "bin": "411111",
+                                 "last_digits": "1111",
+                                 "account_length": 16,
+                                 "expiration_date": "201518"
+                              },
+                              "primary": true,
+                              "active": true
+                           }
+                        ],
+                        "total_count": 1
+                     }
+                  },
+                  "source_payment_method": {
+                     "object": "PaymentMethod",
+                     "vid": "7ef15fe9600b7ee4e9875f0de95f715583fd43fd",
+                     "created": "2018-02-01T12:48:27-08:00",
+                     "type": "CreditCard",
+                     "credit_card": {
+                        "object": "CreditCard",
+                        "vid": "dc9b99622d3b58288bfbb24e5addd95f70c0aaa8",
+                        "account": "411111XXXXXX1111",
+                        "bin": "411111",
+                        "last_digits": "1111",
+                        "account_length": 16,
+                        "expiration_date": "201518"
+                     },
+                     "primary": true,
+                     "active": true
+                  },
+                  "status_log": {
+                     "object": "List",
+                     "data": [
+                        {
+                           "object": "TransactionStatus",
+                           "status": "Captured",
+                           "created": "2018-04-01T02:52:42-07:00",
+                           "payment_method_type": "CreditCard",
+                           "credit_card_status": {
+                              "object": "TransactionStatusCreditCard",
+                              "auth_code": "T00"
+                           }
+                        },
+                        {
+                           "object": "TransactionStatus",
+                           "status": "New",
+                           "created": "2018-04-01T00:15:29-07:00",
+                           "payment_method_type": "CreditCard",
+                           "credit_card_status": {
+                              "object": "TransactionStatusCreditCard",
+                              "auth_code": "T00"
+                           }
+                        }
+                     ],
+                     "total_count": 2
+                  },
+                  "payment_processor": "Test",
+                  "payment_processor_transaction_id": "LEGALSHI00021149",
+                  "metadata": {
+                     "vin:MerchantAutoBillIdentifier": null,
+                     "vin:RetryNumber": "0",
+                     "vin:BillingCycle": "59"
+                  },
+                  "items": {
+                     "object": "List",
+                     "data": [
+                        {
+                           "object": "TransactionItem",
+                           "sku": "1",
+                           "index_number": 1,
+                           "item_type": "Purchase",
+                           "name": "daily",
+                           "quantity": 1,
+                           "tax_classification": null,
+                           "service_period_starts": "2018-04-01T00:00:00-07:00",
+                           "service_period_ends": "2018-04-01T00:00:00-07:00",
+                           "tax_type": "Exclusive Sales",
+                           "total": 0
+                        },
+                        {
+                           "object": "TransactionItem",
+                           "sku": "1",
+                           "index_number": 2,
+                           "item_type": "Purchase",
+                           "name": "Oklahoma Limited Personal Plan",
+                           "subscription_item": {
+                              "object": "SubscriptionItem",
+                              "vid": "ecad23305e021ffd597213ac27667aa0495ed7a3"
+                           },
+                           "price": 10,
+                           "quantity": 1,
+                           "tax_classification": null,
+                           "service_period_starts": "2018-04-01T00:00:00-07:00",
+                           "service_period_ends": "2018-04-01T00:00:00-07:00",
+                           "tax_type": "Exclusive Sales",
+                           "subtotal": 10,
+                           "total": 10
+                        },
+                        {
+                           "object": "TransactionItem",
+                           "sku": "Total Tax",
+                           "index_number": 3,
+                           "item_type": "Purchase",
+                           "name": "Total Tax",
+                           "price": 0,
+                           "quantity": 1,
+                           "tax_classification": "TaxExempt",
+                           "service_period_starts": "2018-04-01T00:00:00-07:00",
+                           "service_period_ends": "2018-04-01T00:00:00-07:00",
+                           "tax_type": "Exclusive Sales",
+                           "discount": 0,
+                           "subtotal": 0,
+                           "total": 0
+                        }
+                     ],
+                     "total_count": 3
+                  },
+                  "billing_descriptor": "1",
+                  "subscription_sequence": 60,
+                  "billing_plan_sequence": 60,
+                  "original_billing_date": "2018-04-01T00:00:00-07:00",
+                  "billing_attempt": 0,
+                  "subscription": {
+                     "object": "Subscription",
+                     "id": null,
+                     "vid": "69715e86cc5fb836e5c9e6be4b181b9869bb9230"
+                  }
+               }
+            ],
+            "total_count": 1
+         },
+         "account": {
+            "object": "Account",
+            "id": "104-1517518074",
+            "vid": "fb76a538a325105641da67dfde9a2a7349efbd84"
+         },
+         "subscription": {
+            "object": "Subscription",
+            "vid": "69715e86cc5fb836e5c9e6be4b181b9869bb9230"
+         },
+         "billing_sequence": 59
+      }
+   ],
+   "total_count": 17630,
+   "url": "/invoices?invoice_date=2018-04-01&limit=1",
+   "next": "/invoices?invoice_date=2018-04-01&limit=1&starting_after=69715e86cc5fb836e5c9e6be4b181b9869bb9230-00000059",
+   "previous": "/invoices?invoice_date=2018-04-01&limit=1&ending_before=69715e86cc5fb836e5c9e6be4b181b9869bb9230-00000059"
+}

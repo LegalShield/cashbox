@@ -14,7 +14,8 @@ module Cashbox
       res = self.class.send(@method, @path, @options.merge(default_options))
       #require 'pry'
       #binding.pry
-      puts res
+      #puts res
+      #File.open('./invoice.json', 'w') {|f| f.write(res)}
       Hashie::Mash.new(res)
     end
 
