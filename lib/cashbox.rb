@@ -52,6 +52,8 @@ module Cashbox
       autoload :CreditCard
       autoload :Description
       autoload :Entitlement
+      autoload :Invoice
+      autoload :InvoiceItem
       autoload :PayPal
       autoload :PaymentMethod
       autoload :Period
