@@ -8,7 +8,7 @@ module Cashbox::Concern
       extend Forwardable
       extend SingleForwardable
 
-      def_single_delegators :repository, :where, :all, :first, :find
+      def_single_delegators :criteria, :where, :all, :first, :find
       def_instance_delegator :repository, :save
 
       def repository
@@ -17,6 +17,10 @@ module Cashbox::Concern
     end
 
     class_methods do
+      def criteria
+        Cashbox::Criteria.new(self.new.repository)
+      end
+
       def repository
         Cashbox::Repository.new(self.new)
       end

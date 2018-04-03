@@ -8,11 +8,23 @@ describe Cashbox::Concern::Persistable do
     PersistableTestClass
   end
 
-  context '.repository' do
-    subject { klass.repository }
+  context '.criteria' do
+    subject { klass.criteria }
 
-    it 'returns an instance of a repository' do
-      expect(subject).to be_a(Cashbox::Repository)
+    it 'returns an instance of a criteria' do
+      expect(subject).to be_a(Cashbox::Criteria)
+    end
+
+    it 'inits with the criteria with an instance of the model' do
+      allow(Vindicia::Repository).to receive(:new).with(kind_of(PersistableTestClass)).and_return(Vindicia::Repository.new(PersistableTestClass.new))
+      allow(Vindicia::Criteria).to receive(:new).with(kind_of(Vindicia::Repository))
+      subject
+      expect(Vindicia::Criteria).to have_received(:new).with(kind_of(Vindicia::Repository))
+      expect(Vindicia::Repository).to have_received(:new).with(kind_of(PersistableTestClass))
+    end
+
+    it 'returns an instance of a criteria' do
+      expect(subject).to be_a(Vindicia::Repository)
     end
 
     it 'inits with the repository with an instance of the model' do
@@ -30,6 +42,10 @@ describe Cashbox::Concern::Persistable do
       expect(subject).to be_a(Cashbox::Repository)
     end
 
+    it 'inits with the criteria with an instance of the model' do
+      allow(Vindicia::Repository).to receive(:new).with(kind_of(PersistableTestClass)).and_return(Vindicia::Repository.new(PersistableTestClass.new))
+    end
+
     it 'inits with the repository with an instance of the model' do
       allow(Cashbox::Repository).to receive(:new).with(kind_of(PersistableTestClass))
       subject
@@ -42,7 +58,6 @@ describe Cashbox::Concern::Persistable do
       instance.repository
       expect(Cashbox::Repository).to have_received(:new).with(kind_of(PersistableTestClass)).once
     end
-
   end
 
   context 'forwardable' do
@@ -54,10 +69,10 @@ describe Cashbox::Concern::Persistable do
     context 'class methods' do
       subject { klass }
 
-      it { is_expected.to delegate_method(:all).to(:repository) }
-      it { is_expected.to delegate_method(:where).to(:repository) }
-      it { is_expected.to delegate_method(:first).to(:repository) }
-      it { is_expected.to delegate_method(:find).to(:repository) }
+      it { is_expected.to delegate_method(:all).to(:criteria) }
+      it { is_expected.to delegate_method(:where).to(:criteria) }
+      it { is_expected.to delegate_method(:first).to(:criteria) }
+      it { is_expected.to delegate_method(:find).to(:criteria) }
     end
 
     context 'instance methods' do
