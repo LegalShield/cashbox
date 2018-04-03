@@ -17,7 +17,6 @@ module Cashbox
     property :credit_total
     property :payments_received_total
     property :billing_sequence
-
     property :invoice_line_items, coerce: Cashbox::Type.List(Cashbox::InvoiceItem)
     property :invoice_tax_items, coerce: Cashbox::Type.List(Cashbox::InvoiceItem)
     property :invoice_payments, coerce: Cashbox::Type.List(Cashbox::Transaction)

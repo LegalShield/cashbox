@@ -27,5 +27,4 @@ describe Cashbox::Invoice do
   it { is_expected.to have_property(:invoice_payments) }
   it { is_expected.to have_property(:account).coercing_with(Cashbox::Account) }
   it { is_expected.to have_property(:subscription).coercing_with(Cashbox::Subscription) }
-
 end
