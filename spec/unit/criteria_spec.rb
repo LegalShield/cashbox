@@ -1,47 +1,39 @@
 require 'spec_helper'
 
-describe Vindicia::Criteria do
-  let(:model) { Vindicia::Model.new }
-  let(:repository) { Vindicia::Repository.new(model) }
-
-  #context 'init' do
-    #let(:criteria) { Vindicia::Criteria.new(repository) }
-
-    #it 'inits with a model repository' do
-      #expect(criteria.repository).to eql(repository)
-    #end
-  #end
+describe Cashbox::Criteria do
+  let(:model) { Cashbox::Model.new }
+  let(:repository) { Cashbox::Repository.new(model) }
 
   context '#where' do
-    subject { Vindicia::Criteria.new(repository) }
+    subject { Cashbox::Criteria.new(repository) }
 
     it 'returns the criteria' do
       expect(subject.where).to eql(subject)
     end
 
-    it 'adds the where clause to the query' do
-      query = subject.where({ name: 'jon' }).to_query
+    it 'adds criteria to the query' do
+      query = subject.where({ name: 'jon' }).explain
 
-      expect(query).to eql({ name: 'jon', limit: 100 })
+      expect(query).to eql({ name: 'jon' })
     end
   end
 
   context '#limit' do
-    subject { Vindicia::Criteria.new(repository) }
+    subject { Cashbox::Criteria.new(repository) }
 
     it 'returns the criteria' do
       expect(subject.limit).to eql(subject)
     end
 
-    it 'adds the where clause to the query' do
-      query = subject.limit(10).to_query
+    it 'adds limit to the query' do
+      query = subject.limit(10).explain
 
       expect(query).to eql({ limit: 10 })
     end
   end
 
   #context '#first' do
-    #subject { Vindicia::Criteria.new(repository) }
+    #subject { Cashbox::Criteria.new(repository) }
 
     #it 'returns the criteria' do
       #expect(subject.first).to eql(subject)
