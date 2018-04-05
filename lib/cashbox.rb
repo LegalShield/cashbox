@@ -61,6 +61,7 @@ module Cashbox
       autoload :Product
       autoload :ProductDescription
       autoload :ProductPrice
+      autoload :Refund
       autoload :Subscription
       autoload :SubscriptionItem
       autoload :Transaction
