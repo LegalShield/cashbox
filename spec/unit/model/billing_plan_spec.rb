@@ -13,6 +13,8 @@ describe Cashbox::BillingPlan do
   it { is_expected.to have_property(:message) }
   it { is_expected.to have_property(:periods) }
   it { is_expected.to have_property(:status) }
+  it { is_expected.to have_property(:times_to_run) }
+  it { is_expected.to have_property(:used_on_subscriptions) }
 
   its(:object) { is_expected.to eql('BillingPlan') }
 end

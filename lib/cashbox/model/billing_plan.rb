@@ -12,5 +12,7 @@ module Cashbox
     property :message
     property :periods, coerce: Cashbox::Type.List(Cashbox::BillingPlanPeriod)
     property :status
+    property :times_to_run
+    property :used_on_subscriptions
   end
 end
