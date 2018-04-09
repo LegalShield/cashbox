@@ -26,6 +26,10 @@ module Cashbox
     Cashbox::Request.base_uri('https://api.prodtest.vindicia.com')
   end
 
+  def self.development!
+    Cashbox::Request.base_uri('https://api.prodtest.vindicia.com')
+  end
+
   def self.test!
     Cashbox.username = 'username'
     Cashbox.password = 'password'
