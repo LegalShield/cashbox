@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      vindicia.setup({
+        formId: "cashbox_credit_card",                                // dom element of form
+        vindiciaAuthId: "aXdjbF9vbmVfdGltZV9sb2dpbjpBTG5JWnRjZA==",   // will be issued to you by Vindicia // Authorization: Basic header
+        vindiciaServer: "secure.prodtest.sj.vindicia.com",            // to load the iframes from, will be different for production
+        vindiciaRestServer: "api.prodtest.vindicia.com",              // REST server to submit JSON to, will be diff for production
+        hostedFields: {
+          cardNumber:     { selector: "#vin_credit_card_account",         placeholder: "Enter Credit Card Number (optional)" },
+          expirationDate: { selector: "#vin_credit_card_expiration_date", placeholder: "Expiration Date MM/YY (optional)", format: "MM/YY (optional)" },
+          cvn:            { selector: "#vin_credit_card_cvn",             placeholder: "Enter CVV (optional)" },
+          styles: { //optional
+            input: {
+              width: "100%",
+              font-family: "'Helvetica Neue',Helvetica,Arial,sans-serif",
+              font-size: "14px",
+              color: "#555",
+              height: "34px",
+              padding: "6px 12px",
+              margin: "5px 0px",
+              line-height: "1.42857",
+              border: "1px solid #ccc",
+              border-radius: "4px",
+              box-shadow: "0px 1px 1px rgba(0,0,0,0.075) inset",
+              -webkit-transition: "border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s",
+              transition: "border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s",
+            },
+            ":focus": { // optional
+              border-color: "#66afe9",
+              outline: "0",
+              "-webkit-box-shadow": "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6)",
+              "box-shadow": "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6)"
+            },
+            ".valid": { // optional
+              "border-color": "#228B22",
+            },
+            ".notValid": { // optional
+              "border-color": "#ff0000",
+            },
+            // custom width
+            "@media (min-width: 600px) and (max-width: 800px)": {
+              "input": {
+                "font-size": "16pt"
+              }
+            }
+          },
+        },
+        iframeHeightPadding: 2, // optional
+        onSubmitEvent: function(myform) {
+          return merchantValidate(myform);
+        },
+        onSubmitCompleteFailedEvent: function(data) {
+          $('#message').html('submitted Failed');
+          console.log(data.detail.status); // server return code
+          if (data.detail.error) {
+            console.log(data.detail.error);
+          }
+          return true;
+        },
+        onVindiciaFieldEvent: function(event) { // optional
+          if (event.detail.fieldType == 'cardNumber') {
+            setCardImage(event.detail.cardType); // bright or dim the card logo
+          }
+          if (event.detail.fieldType == 'expirationDate') {
+            if (!event.detail.isValid) {
+              console.log('vindiciaEvent expirationDate not valid');
+            }
+          }
+          if (event.detail.fieldType == 'cvn') {
+            if (!event.detail.isValid) {
+              console.log('vindiciaEvent cvn not valid');
+            }
+            console.log('cvn length ' + event.detail.dataLength);
+          }
+        }
+      });
+
+      // custom/optional function shown being used above
+      function setCardImage(type) {
+        var sprint_map = {
+          visa:          '0 -23px',
+          visa_electron: '0 -23px',
+          mastercard:    '0 -46px',
+          maestro:       '0 -46px',
+          amex:          '0 -69px'
+          discover:      '0 -92px',
+          default:       '0 0'
+        };
+
+        var position = sprint_map[type] || sprint_map.default;
+
+        $('#ccTypeImage').css('background-position', position);
+      }
+    </script>
+  </head>
+  <body>
+    <form id='cashbox_credit_card'>
+      <input type="hidden" name="vin_one_time_login" value="<%= @vin_one_time_login %>" />
+      <input type="hidden" name="vin_signed_one_time_login" value="<%= @vin_signed_one_time_login %>" />
+      <input type="hidden" name="vin_id" value="<%= @vin_id %>" />
+      <input type="text" id="vin_account_holder" name="vin_account_holder" />
+      <input type="text" id="vin_billing_address_line1" name="vin_billing_address_line1" />
+      <input type="text" id="vin_billing_address_line2" name="vin_billing_address_line2" />
+      <input type="text" id="vin_billing_address_line3" name="vin_billing_address_line3" />
+      <input type="text" id="vin_billing_address_city" name="vin_billing_address_city" />
+      <input type="text" id="vin_billing_address_district" name="vin_billing_address_district" />
+      <input type="text" id="vin_billing_address_postal_code" name="vin_billing_address_postal_code" />
+      <input type="text" id="vin_billing_address_country" name="vin_billing_address_country" />
+      <input type="text" id="vin_billing_address_phone" name="vin_billing_address_phone" />
+      <div id="vin_credit_card_account"></div>
+      <div id="vin_credit_card_expiration_date"></div>
+      <div id="vin_credit_card_cvn"></div>
+    </form>
+  </body>
+</html>

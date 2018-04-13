@@ -58,19 +58,6 @@ describe Cashbox do
     end
   end
 
-  context '.test!' do
-    subject { Cashbox }
-    before { subject.test! }
-    after { subject.production! }
-
-    its(:username) { is_expected.to eql('username') }
-    its(:password) { is_expected.to eql('password') }
-
-    it 'sets the base url of the request object' do
-      expect(Cashbox::Request.base_uri).to eql('http://example.com')
-    end
-  end
-
   context '.debug!' do
     subject { Cashbox }
 

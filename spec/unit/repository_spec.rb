@@ -44,7 +44,7 @@ describe Cashbox::Repository do
             .with(:get, '/models', { query: { limit: 100, name: 'Jon' } })
         end
 
-        it 'casts the response to vindicia models' do
+        it 'casts the response to cashbox models' do
           objects = repository.where({ name: 'Jon' })
           expect(objects).to be_an(Array)
           expect(objects.map(&:class).uniq.count).to eql(1)
