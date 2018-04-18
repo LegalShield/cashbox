@@ -30,11 +30,17 @@ module Cashbox
     end
 
     def save
-      request = Cashbox::Request.new(:post, route(@instance.vid), { body: @instance.to_json })
-      cast(request.response)
+      _save
     end
 
     private
+
+    def _save
+      request = Cashbox::Request.new(:post, route(@instance.vid), { body: @instance.to_json })
+      #TODO Once test is ready, add the following and throw a SaveException to make the test pass.
+      #return cast(request.response) unless request.message?
+      case(request.response)
+    end
 
     def _where(query, max)
       query = Hashie::Mash.new(query)

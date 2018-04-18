@@ -205,6 +205,20 @@ describe Cashbox::Repository do
           expect(result.object_id).to eq(model.object_id)
         end
       end
+
+      context 'failure' do
+        let(:failure_response) { Mash.new({message: "This is a test error message."}) }
+        before do
+          allow(Cashbox::Request)
+              .to receive(:new)
+              .with(:post, '/accounts/vid-1', { body: model.to_json })
+              .and_return(failure_response)
+        end
+
+        it "throws a SaveException" do
+
+        end
+      end
     end
   end
 end
