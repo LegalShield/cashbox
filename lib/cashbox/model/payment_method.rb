@@ -7,6 +7,7 @@ module Cashbox
     property :vid
     property :created, coerce: Cashbox::Type.DateTime
     property :credit_card, coerce: Cashbox::CreditCard
+    property :direct_debit, coerce: Cashbox::DirectDebit
     property :paypal, coerce: Cashbox::PayPal
     property :primary
     property :type

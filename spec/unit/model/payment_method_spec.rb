@@ -8,6 +8,7 @@ describe Cashbox::PaymentMethod do
   it { is_expected.to have_property(:vid) }
   it { is_expected.to have_property(:created).coercing_with(Cashbox::Type.DateTime) }
   it { is_expected.to have_property(:credit_card).coercing_with(Cashbox::CreditCard) }
+  it { is_expected.to have_property(:direct_debit).coercing_with(Cashbox::DirectDebit) }
   it { is_expected.to have_property(:paypal).coercing_with(Cashbox::PayPal) }
   it { is_expected.to have_property(:primary) }
   it { is_expected.to have_property(:type) }
