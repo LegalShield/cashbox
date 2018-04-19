@@ -22,6 +22,8 @@ module Cashbox
     def errors
       error_messages = ErrorMessages.new
 
+      return error_messages if message.nil?
+
       error_messages.messages = Hash[type, [message, code, url]]
       error_messages
     end
