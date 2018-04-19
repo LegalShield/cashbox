@@ -207,16 +207,17 @@ describe Cashbox::Repository do
       end
 
       context 'failure' do
-        let(:failure_response) { Mash.new({message: "This is a test error message."}) }
+        let(:failure_response) { Hashie::Mash.new({type: 'card_error_test', code: 'expired card (test)', message: 'This is a test error message.', url: 'http://developer.vindicia.com/api#expired_card'}) }
+
         before do
           allow(Cashbox::Request)
               .to receive(:new)
               .with(:post, '/accounts/vid-1', { body: model.to_json })
-              .and_return(failure_response)
+              .and_return(double('request', response: failure_response))
         end
 
-        it "throws a SaveException" do
-
+        it 'saves errors in the model object' do
+          expect(result.errors.messages['card_error_test'][0]).to eq('This is a test error message.')
         end
       end
     end

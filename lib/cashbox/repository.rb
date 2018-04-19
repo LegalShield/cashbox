@@ -3,6 +3,7 @@ require 'addressable/uri'
 
 module Cashbox
   class Repository
+
     DEFAULT_LIMIT = 100.freeze
 
     attr_reader :instance
@@ -39,7 +40,7 @@ module Cashbox
       request = Cashbox::Request.new(:post, route(@instance.vid), { body: @instance.to_json })
       #TODO Once test is ready, add the following and throw a SaveException to make the test pass.
       #return cast(request.response) unless request.message?
-      case(request.response)
+      cast(request.response)
     end
 
     def _where(query, max)
