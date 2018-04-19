@@ -31,5 +31,11 @@ describe Cashbox::Model do
     it "returns the expected error code" do
       expect(model.errors.messages['test'][2]).to eq('www.testing.legalshield')
     end
+
+    it "does not populate the error messages if there is no message" do
+      model.message = nil;
+
+      expect(model.errors.messages.empty?).to eq(true)
+    end
   end
 end
