@@ -1,5 +1,6 @@
 require 'active_support/inflector'
 require 'addressable/uri'
+require_relative 'exception'
 
 module Cashbox
   class Repository
@@ -32,14 +33,14 @@ module Cashbox
 
     def save
       _save
+      return @instance if @instance.errors.messages.empty?
+      raise Cashbox::SaveError.new("#{@instance.type}: #{@instance.code}: #{@instance.message} [#{@instance.url}]")
     end
 
     private
 
     def _save
       request = Cashbox::Request.new(:post, route(@instance.vid), { body: @instance.to_json })
-      #TODO Once test is ready, add the following and throw a SaveException to make the test pass.
-      #return cast(request.response) unless request.message?
       cast(request.response)
     end
 

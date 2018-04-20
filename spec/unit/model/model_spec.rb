@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Cashbox::Model do
   it { is_expected.to have_property(:message) }

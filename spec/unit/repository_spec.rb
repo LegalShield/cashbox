@@ -216,8 +216,8 @@ describe Cashbox::Repository do
               .and_return(double('request', response: failure_response))
         end
 
-        it 'has the expected error message' do
-          expect(result.errors.messages['card_error_test'][0]).to eq('This is a test error message.')
+        it 'throws an exception' do
+          expect( -> {result.save}).to raise_exception(Cashbox::SaveError)
         end
       end
     end

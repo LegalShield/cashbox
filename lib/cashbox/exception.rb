@@ -7,5 +7,4 @@ module Cashbox
       super(message)
     end
   end
-
 end
