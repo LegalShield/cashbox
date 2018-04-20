@@ -46,7 +46,7 @@ describe 'Account' do
     end
   end
 
-  describe 'throwing errors' do
+  describe 'handling a returned error' do
     let!(:stub) do
       stub_post('/accounts')
         .with({ body: { object: 'Account', id: 1 }.to_json })
