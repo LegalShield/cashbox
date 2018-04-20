@@ -67,6 +67,8 @@ module Cashbox
         hash['data'].map do |data|
           @instance.class.new(data)
         end
+      when 'Error'
+        raise Cashbox::Error.new(hash['message'])
       else
         @instance.deep_merge!(hash)
       end
