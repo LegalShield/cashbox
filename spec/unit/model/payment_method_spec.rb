@@ -10,6 +10,7 @@ describe Cashbox::PaymentMethod do
   it { is_expected.to have_property(:credit_card).coercing_with(Cashbox::CreditCard) }
   it { is_expected.to have_property(:paypal).coercing_with(Cashbox::PayPal) }
   it { is_expected.to have_property(:primary) }
+  it { is_expected.to have_property(:active) }
   it { is_expected.to have_property(:type) }
 
   its(:object) { is_expected.to eql('PaymentMethod') }

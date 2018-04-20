@@ -9,6 +9,7 @@ module Cashbox
     property :credit_card, coerce: Cashbox::CreditCard
     property :paypal, coerce: Cashbox::PayPal
     property :primary
+    property :active
     property :type
   end
 end

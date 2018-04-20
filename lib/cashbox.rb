@@ -42,7 +42,7 @@ module Cashbox
 
   eager_autoload do
     autoload :VERSION
-    autoload :Exception
+    autoload :Error
     autoload :Type
     autoload :Request
     autoload :Repository
