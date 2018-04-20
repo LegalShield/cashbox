@@ -205,6 +205,21 @@ describe Cashbox::Repository do
           expect(result.object_id).to eq(model.object_id)
         end
       end
+
+      context 'failure' do
+        let(:failure_response) { Hashie::Mash.new({type: 'card_error_test', code: 'expired card (test)', message: 'This is a test error message.', url: 'http://developer.vindicia.com/api#expired_card'}) }
+
+        before do
+          allow(Cashbox::Request)
+              .to receive(:new)
+              .with(:post, '/accounts/vid-1', { body: model.to_json })
+              .and_return(double('request', response: failure_response))
+        end
+
+        it 'throws an exception' do
+          expect( -> {result.save}).to raise_exception(Cashbox::SaveError)
+        end
+      end
     end
   end
 end

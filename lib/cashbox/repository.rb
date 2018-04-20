@@ -1,5 +1,6 @@
 require 'active_support/inflector'
 require 'addressable/uri'
+require_relative 'exception'
 
 module Cashbox
   class Repository
@@ -30,11 +31,17 @@ module Cashbox
     end
 
     def save
-      request = Cashbox::Request.new(:post, route(@instance.vid), { body: @instance.to_json })
-      cast(request.response)
+      _save
+      return @instance if @instance.errors.messages.empty?
+      raise Cashbox::SaveError.new("#{@instance.type}: #{@instance.code}: #{@instance.message} [#{@instance.url}]")
     end
 
     private
+
+    def _save
+      request = Cashbox::Request.new(:post, route(@instance.vid), { body: @instance.to_json })
+      cast(request.response)
+    end
 
     def _where(query, max)
       query = Hashie::Mash.new(query)
