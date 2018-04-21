@@ -30,8 +30,15 @@ module Cashbox
     end
 
     def save
+      save!
+    rescue Exception
+      false
+    end
+
+    def save!
       request = Cashbox::Request.new(:post, route(@instance.vid), { body: @instance.to_json })
       cast(request.response)
+      true
     end
 
     private
