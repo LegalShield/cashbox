@@ -205,6 +205,19 @@ describe Cashbox::Repository do
           expect(result.object_id).to eq(model.object_id)
         end
       end
+
+      context 'failure' do
+        before do
+          allow(Cashbox::Request)
+            .to receive(:new)
+            .with(:post, '/accounts/vid-1', { body: model.to_json })
+            .and_return(double('request', response: { 'message' => 'Danger', 'object' => 'Error' }))
+        end
+
+        it 'raises an error' do
+          expect { repository.save }.to raise_error(Cashbox::Error, "Danger")
+        end
+      end
     end
   end
 end

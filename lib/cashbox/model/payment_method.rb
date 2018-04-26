@@ -10,6 +10,7 @@ module Cashbox
     property :direct_debit, coerce: Cashbox::DirectDebit
     property :paypal, coerce: Cashbox::PayPal
     property :primary
+    property :active
     property :type
   end
 end
