@@ -9,11 +9,6 @@
     "expiration_date": "201805"
   },
 
-  "direct_debit": {
-    "object": "DirectDebit",
-    "account": "34XXXXXXXXXX1111"
-  },
-
   "account_holder": "Charles X. Brown",
 
   "billing_address": {
