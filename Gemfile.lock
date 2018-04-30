@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cashbox (0.0.4)
+    cashbox (0.0.6)
       activesupport
       addressable
       hashie
@@ -32,7 +32,7 @@ GEM
     hashie (3.5.7)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
-    i18n (1.0.0)
+    i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     method_source (0.8.2)
     minitest (5.11.3)
