@@ -11,5 +11,7 @@ module Cashbox
     property :primary
     property :active
     property :type
+    property :account_holder
+    property :billing_address
   end
 end
