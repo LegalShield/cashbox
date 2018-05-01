@@ -1,6 +1,7 @@
 module Cashbox
   class DirectDebit < Model
-    include Cashbox::Concern::Objectable
+    include Concern::Objectable
+    include Concern::Persistable
 
     property :vid
     property :account
