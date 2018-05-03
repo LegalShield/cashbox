@@ -1,4 +1,4 @@
 module Cashbox
-  class Error < Exception
+  class Error < RuntimeError
   end
 end
