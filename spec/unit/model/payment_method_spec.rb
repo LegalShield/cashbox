@@ -15,6 +15,7 @@ describe Cashbox::PaymentMethod do
   it { is_expected.to have_property(:type) }
   it { is_expected.to have_property(:account_holder) }
   it { is_expected.to have_property(:billing_address) }
+  it { is_expected.to have_property(:validation_status) }
 
   its(:object) { is_expected.to eql('PaymentMethod') }
 end

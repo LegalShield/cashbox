@@ -14,5 +14,6 @@ module Cashbox
     property :type
     property :account_holder
     property :billing_address
+    property :validation_status
   end
 end
