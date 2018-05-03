@@ -11,7 +11,6 @@ describe Cashbox::Account do
   it { is_expected.to have_property(:email) }
   it { is_expected.to have_property(:email_type) }
   it { is_expected.to have_property(:language) }
-  it { is_expected.to have_property(:metadata) }
   it { is_expected.to have_property(:notify_before_billing) }
   it { is_expected.to have_property(:name) }
   it { is_expected.to have_property(:payment_methods) }
