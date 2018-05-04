@@ -20,7 +20,7 @@ describe Cashbox::Subscription do
   it { is_expected.to have_property(:items) }
   it { is_expected.to have_property(:message) }
   it { is_expected.to have_property(:minimum_commitment) }
-  it { is_expected.to have_property(:most_recent_billing).coercing_with(Cashbox::Type.DateTime) }
+  it { is_expected.to have_property(:most_recent_billing) }
   it { is_expected.to have_property(:next_billing).coercing_with(Cashbox::Type.DateTime) }
   it { is_expected.to have_property(:notify_on_transition).coercing_with(Cashbox::Type.Boolean) }
   it { is_expected.to have_property(:payment_method).coercing_with(Cashbox::PaymentMethod) }
