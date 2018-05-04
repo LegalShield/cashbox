@@ -11,6 +11,7 @@ describe Cashbox::Subscription do
   it { is_expected.to have_property(:billing_day) }
   it { is_expected.to have_property(:billing_plan).coercing_with(Cashbox::BillingPlan) }
   it { is_expected.to have_property(:billing_state) }
+  it { is_expected.to have_property(:balance) }
   it { is_expected.to have_property(:cancel_reason) }
   it { is_expected.to have_property(:currency) }
   it { is_expected.to have_property(:default_billing_plan).coercing_with(Cashbox::BillingPlan) }
