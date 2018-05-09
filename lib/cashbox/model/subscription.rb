@@ -21,7 +21,7 @@ module Cashbox
     property :message
     property :minimum_commitment
     property :most_recent_billing, coerce: Cashbox::Transaction
-    property :next_billing, coerce: Cashbox::Type.DateTime
+    property :next_billing, coerce: Cashbox::Transaction
     property :notify_on_transition, coerce: Cashbox::Type.Boolean
     property :payment_method, coerce: Cashbox::PaymentMethod
     property :policy
