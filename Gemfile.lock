@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cashbox (0.0.12)
+    cashbox (0.0.13)
       activesupport
       addressable
       hashie

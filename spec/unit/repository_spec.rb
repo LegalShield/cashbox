@@ -219,5 +219,39 @@ describe Cashbox::Repository do
         end
       end
     end
+
+    describe "#destroy" do
+      let(:model) { Cashbox::Subscription.new({ vid: 'vid-1', id: 1 }) }
+      let(:repository) { Cashbox::Repository.new(model) }
+      let(:result) { repository.destroy }
+      let(:response) { Hash.new }
+
+      context "failure" do
+        before do
+          allow(Cashbox::Request)
+            .to receive(:new)
+            .with(:post, '/subscriptions/vid-1/actions/cancel')
+            .and_return(double('request', response: { 'message' => 'Danger', 'object' => 'Error' }))
+        end
+
+        it 'raises an error' do
+          expect { repository.destroy }.to raise_error(Cashbox::Error, "Danger")
+        end
+      end
+
+      context "success" do
+        before do
+          allow(Cashbox::Request)
+            .to receive(:new)
+            .with(:post, '/subscriptions/vid-1/actions/cancel')
+            .and_return(double('request', response: response ))
+        end
+
+        it 'makes the correct request' do
+          repository.destroy
+          expect(Cashbox::Request).to have_received(:new).with(:post, '/subscriptions/vid-1/actions/cancel').once
+        end
+      end
+    end
   end
 end
