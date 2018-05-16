@@ -64,6 +64,7 @@ describe Cashbox::Concern::Persistable do
       subject { klass.new }
 
       it { is_expected.to delegate_method(:save).to(:repository) }
+      it { is_expected.to delegate_method(:destroy).to(:repository) }
     end
   end
 end
