@@ -1,7 +1,11 @@
 module Cashbox
   class Product < Model
     include Cashbox::Concern::Objectable
-    include Cashbox::Concern::Persistable
+    extend Cashbox::Rest::Read
+    #include Cashbox::Rest::All
+    #include Cashbox::Rest::Create
+    #include Cashbox::Rest::Update
+    #include Cashbox::Rest::Delete
 
     property :id
     property :vid

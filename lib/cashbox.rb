@@ -75,6 +75,11 @@ module Cashbox
     end
   end
 
+  module Rest
+    autoload :Read, 'cashbox/rest/read'
+    autoload :StaticRepositry, 'cashbox/rest/static_repository'
+  end
+
   module Concern
     autoload :Objectable, 'cashbox/concern/objectable'
     autoload :Persistable, 'cashbox/concern/persistable'
