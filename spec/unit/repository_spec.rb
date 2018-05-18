@@ -18,6 +18,26 @@ describe Cashbox::Repository do
     end
 
     describe '#where' do
+      context 'failure' do
+        let(:response) do
+          Hashie::Mash.new({
+            'object' => 'Error',
+            'message' => 'Danger'
+          })
+        end
+
+        before do
+          allow(Cashbox::Request)
+            .to receive(:new)
+            .with(:get, '/models', { query: { limit: 100 } })
+            .and_return(double('request', response: response))
+        end
+
+        it 'raises an error' do
+          expect { repository.where({ }) }.to raise_error(Cashbox::Error, 'Danger')
+        end
+      end
+
       context 'single fetch' do
         let(:response) do
           Hashie::Mash.new({
@@ -153,7 +173,6 @@ describe Cashbox::Repository do
 
     describe '#find' do
       let(:response) { Hash.new }
-
       let(:result) { repository.find(1) }
 
       context 'success' do
@@ -177,13 +196,17 @@ describe Cashbox::Repository do
         it 'throws an error if an id is not supplied' do
           expect( -> { repository.find(nil) }).to raise_exception(ArgumentError)
         end
+
+        it 'throws an error if the response is an error' do
+          allow(Cashbox::Request).to receive(:new).with(:get, '/models/1').and_return(double('request', response: { 'object' => 'Error', 'message' => 'Danger' }))
+          expect { repository.find(1) }.to raise_error(Cashbox::Error, 'Danger')
+        end
       end
     end
 
     describe '#save' do
       let(:model) { Cashbox::Account.new({ vid: 'vid-1', id: 1 }) }
       let(:repository) { Cashbox::Repository.new(model) }
-      let(:result) { repository.save }
       let(:response) { Hash.new }
 
       context 'success' do
@@ -199,10 +222,8 @@ describe Cashbox::Repository do
           expect(Cashbox::Request).to have_received(:new).with(:post, '/accounts/vid-1', { body: model.to_json }).once
         end
 
-        it 'parses the response correctly' do
-          expect(result).to be_a(Cashbox::Account)
-          expect(result).to eq(model)
-          expect(result.object_id).to eq(model.object_id)
+        it 'returns true when the request is successful' do
+          expect(repository.save).to be true
         end
       end
 
@@ -214,8 +235,12 @@ describe Cashbox::Repository do
             .and_return(double('request', response: { 'message' => 'Danger', 'object' => 'Error' }))
         end
 
-        it 'raises an error' do
-          expect { repository.save }.to raise_error(Cashbox::Error, "Danger")
+        it '#save! raises an error' do
+          expect { repository.save!  }.to raise_error(Cashbox::Error, "Danger")
+        end
+
+        it '#save returns false' do
+          expect(repository.save).to be false
         end
       end
     end
