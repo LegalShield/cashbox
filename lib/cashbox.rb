@@ -55,6 +55,7 @@ module Cashbox
       autoload :BillingPlanPeriod
       autoload :CreditCard
       autoload :Description
+      autoload :DirectDebit
       autoload :Entitlement
       autoload :Invoice
       autoload :InvoiceItem

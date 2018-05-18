@@ -9,7 +9,7 @@ module Cashbox::Concern
       extend SingleForwardable
 
       def_single_delegators :repository, :where, :all, :first, :find
-      def_instance_delegators :repository, :save, :save!
+      def_instance_delegators :repository, :save, :save!, :destroy
 
       def repository
         @repository ||= Cashbox::Repository.new(self)

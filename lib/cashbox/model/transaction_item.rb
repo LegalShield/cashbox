@@ -12,5 +12,6 @@ module Cashbox
     property :tax_classification
     property :tax_type
     property :total
+    property :price
   end
 end

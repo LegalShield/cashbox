@@ -41,6 +41,11 @@ module Cashbox
       true
     end
 
+    def destroy
+      request = Cashbox::Request.new(:post, "#{route(@instance.vid)}/actions/cancel")
+      cast(request.response)
+    end
+
     private
 
     def _where(query, max)
