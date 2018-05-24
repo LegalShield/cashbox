@@ -1,6 +1,5 @@
 module Cashbox
   class Subscription < Model
-    include Cashbox::Concern::Objectable
     include Cashbox::Concern::Persistable
 
     property :id

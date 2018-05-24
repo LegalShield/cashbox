@@ -1,6 +1,5 @@
 module Cashbox
   class PaymentMethod < Model
-    include Cashbox::Concern::Objectable
     include Cashbox::Concern::Persistable
 
     property :id

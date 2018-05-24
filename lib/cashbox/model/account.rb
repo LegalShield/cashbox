@@ -1,7 +1,6 @@
 module Cashbox
   class Account < Model
-    include Concern::Objectable
-    include Concern::Persistable
+    include Rest::All
 
     property :id
     property :vid

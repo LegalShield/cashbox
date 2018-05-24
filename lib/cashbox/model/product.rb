@@ -1,6 +1,5 @@
 module Cashbox
   class Product < Model
-    include Cashbox::Concern::Objectable
     extend Cashbox::Rest::Read
     #include Cashbox::Rest::All
     #include Cashbox::Rest::Create

@@ -4,11 +4,13 @@ module Rest
   extend ActiveSupport::Autoload
 
   eager_autoload do
-    autoload :Archiveable
-    autoload :Cancelable
-    autoload :Createable
-    autoload :Filterable
-    autoload :Findable
-    autoload :Updateable
+    autoload :All
+    autoload :Basic
+    autoload :Archive
+    autoload :Cancel
+    autoload :Create
+    autoload :Filter
+    autoload :Find
+    autoload :Update
   end
 end
