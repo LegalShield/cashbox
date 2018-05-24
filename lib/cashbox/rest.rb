@@ -8,6 +8,7 @@ module Cashbox::Rest
     autoload :Archive
     autoload :Basic
     autoload :Cancel
+    autoload :Disentitle
     autoload :Find
     autoload :Helpers
     autoload :Save

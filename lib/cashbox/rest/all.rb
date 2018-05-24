@@ -8,6 +8,7 @@ module Cashbox::Rest
       include Cashbox::Rest::Archive
       include Cashbox::Rest::Cancel
       include Cashbox::Rest::Basic
+      include Cashbox::Rest::Disentitle
     end
   end
 end
