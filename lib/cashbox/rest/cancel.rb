@@ -11,10 +11,6 @@ module Cashbox::Rest
         request = Cashbox::Request.new(:post, "#{route(self.vid)}/actions/cancel", { body: params })
         cast(self, request.response)
       end
-
-      def disentitle
-        cancel({ disentitle: 'Yes' })
-      end
     end
   end
 end

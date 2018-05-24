@@ -2,7 +2,7 @@ module Cashbox
   class Subscription < Model
     include Concern::Objectable
     include Rest::Basic
-    include Rest::Cancel
+    include Rest::Disentitle
 
     property :id
     property :vid
