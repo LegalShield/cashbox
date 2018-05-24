@@ -1,10 +1,6 @@
 module Cashbox
   class Product < Model
-    extend Cashbox::Rest::Read
-    #include Cashbox::Rest::All
-    #include Cashbox::Rest::Create
-    #include Cashbox::Rest::Update
-    #include Cashbox::Rest::Delete
+    include Cashbox::Rest::All
 
     property :id
     property :vid
