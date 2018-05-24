@@ -57,9 +57,20 @@ describe 'Account' do
         })
     end
 
+    let(:account) { Cashbox::Account.new({ id: 1 }) }
+
+    it 'returns false' do
+      expect(account.save).to be false
+    end
+
     it 'throws the error correctly' do
-      account = Cashbox::Account.new({ id: 1 })
-      expect { account.save }.to raise_error(Cashbox::Error, "No id (unique identifier) specified for Account.")
+      expect {
+        account.save!
+      }.to raise_error(Cashbox::Error, "No id (unique identifier) specified for Account.")
+    end
+
+    it 'makes the correct api call' do
+      account.save
       expect(stub).to have_been_requested
     end
   end

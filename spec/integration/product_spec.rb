@@ -134,7 +134,7 @@ describe 'Product' do
       })
     end
 
-    before do
+    let!(:stub) do
       stub_post('/products')
         .with({
           body: {
@@ -159,14 +159,16 @@ describe 'Product' do
         })
     end
 
-    it 'makes the correct api call' do
+    before do
       product.save
     end
 
+    it 'makes the correct api call' do
+      expect(stub).to have_been_requested
+    end
+
     it 'parses the response correctly' do
-      model = product.save
-      expect(model).to be_a(Cashbox::Product)
-      expect(model).to eq(product)
+      expect(product.vid).to eq('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     end
   end
 end
