@@ -8,9 +8,7 @@ module Rest
     autoload :Basic
     autoload :Archive
     autoload :Cancel
-    autoload :Create
-    autoload :Filter
+    autoload :Save
     autoload :Find
-    autoload :Update
   end
 end
