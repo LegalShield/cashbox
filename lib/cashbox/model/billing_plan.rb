@@ -1,7 +1,7 @@
 module Cashbox
   class BillingPlan < Model
-    include Cashbox::Concern::Objectable
-    include Cashbox::Concern::Persistable
+    include Concern::Objectable
+    include Rest::Basic
 
     property :id
     property :vid

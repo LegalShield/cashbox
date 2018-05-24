@@ -1,7 +1,7 @@
 module Cashbox
   class Entitlement < Model
-    include Cashbox::Concern::Objectable
-    include Cashbox::Concern::Persistable
+    include Concern::Objectable
+    include Rest::Basic
 
     property :id
     property :description

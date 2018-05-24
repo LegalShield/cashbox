@@ -9,6 +9,5 @@ module Cashbox
     def initialize(instance)
       @instance = instance
     end
-
   end
 end

@@ -1,7 +1,8 @@
 module Cashbox
   class Transaction < Model
-    include Cashbox::Concern::Objectable
-    include Cashbox::Concern::Persistable
+    include Concern::Objectable
+    include Rest::Basic
+    include Rest::Cancel
 
     property :id
     property :vid

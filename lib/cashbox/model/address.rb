@@ -1,6 +1,6 @@
 module Cashbox
   class Address < Model
-    include Cashbox::Concern::Objectable
+    include Concern::Objectable
 
     property :vid
     property :city

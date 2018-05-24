@@ -9,17 +9,18 @@ module Cashbox::Rest
     end
 
     class_methods do
+      def find(id)
+        raise ArgumentError.new("Cannot find Resource with id 'nil'") unless id
+        request = Cashbox::Request.new(:get, route(id))
+        self.cast(self.new, request.response)
+      end
+
       def first
         where({ limit: 1 }).first
       end
 
       def all
         where
-      end
-
-      def find(id)
-        raise ArgumentError.new("Cannot find Resource with id 'nil'") unless id
-        self.cast(self.new, Cashbox::Request.new(:get, route(id)).response)
       end
 
       def where(params = {})

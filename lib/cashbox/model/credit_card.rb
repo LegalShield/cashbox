@@ -1,6 +1,6 @@
 module Cashbox
   class CreditCard < Model
-    include Cashbox::Concern::Objectable
+    include Concern::Objectable
 
     property :vid
     property :account

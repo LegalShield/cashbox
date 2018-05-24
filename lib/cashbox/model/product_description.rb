@@ -1,5 +1,5 @@
 module Cashbox
   class ProductDescription < Cashbox::Description
-    include Cashbox::Concern::Objectable
+    include Concern::Objectable
   end
 end
