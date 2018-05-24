@@ -12,10 +12,6 @@ module Cashbox::Rest
       def route(id=nil)
         self.class.route(id)
       end
-
-      def cast(hash)
-        self.class._cast(self, hash)
-      end
     end
 
     class_methods do
@@ -30,7 +26,7 @@ module Cashbox::Rest
         [ '', tableized_class_name, id ].compact.join('/')
       end
 
-      def _cast(instance, hash)
+      def cast(instance, hash)
         case hash['object']
         when 'List'
           hash['data'].map do |data|
