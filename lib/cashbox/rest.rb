@@ -1,14 +1,15 @@
 require 'active_support/dependencies/autoload'
 
-module Rest
+module Cashbox::Rest
   extend ActiveSupport::Autoload
 
   eager_autoload do
     autoload :All
-    autoload :Basic
     autoload :Archive
+    autoload :Basic
     autoload :Cancel
-    autoload :Save
     autoload :Find
+    autoload :Helpers
+    autoload :Save
   end
 end

@@ -5,6 +5,8 @@ module Cashbox::Rest
     extend ActiveSupport::Concern
 
     included do
+      include Cashbox::Rest::Helpers
+
       def save
         save!
       rescue Exception

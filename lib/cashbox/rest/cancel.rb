@@ -5,7 +5,7 @@ module Cashbox::Rest
     extend ActiveSupport::Concern
 
     included do
-      include Rest::Helpers
+      include Cashbox::Rest::Helpers
 
     #def destroy
       #request = Cashbox::Request.new(:post, "#{route(@instance.vid)}/actions/cancel")

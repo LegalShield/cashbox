@@ -1,6 +1,12 @@
+require 'active_support/concern'
+
 module Cashbox::Rest
   module Basic
-    include Cashbox::Rest::Save
-    include Cashbox::Rest::Find
+    extend ActiveSupport::Concern
+
+    included do
+      include Cashbox::Rest::Save
+      include Cashbox::Rest::Find
+    end
   end
 end
