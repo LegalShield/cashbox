@@ -9,7 +9,7 @@ module Cashbox::Rest
 
       def archive
         request = Cashbox::Request.new(:post, route(self.vid), { active: false })
-        cast(request.response)
+        cast(self, request.response)
       end
     end
   end

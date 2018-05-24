@@ -1,5 +1,6 @@
 module Cashbox
   class InvoiceItem < Model
+    include Concern::Objectable
 
     property :id
     property :vid

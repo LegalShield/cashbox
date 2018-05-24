@@ -1,5 +1,7 @@
 module Cashbox
   class Address < Model
+    include Cashbox::Concern::Objectable
+
     property :vid
     property :city
     property :country

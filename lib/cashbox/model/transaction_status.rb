@@ -1,5 +1,6 @@
 module Cashbox
   class TransactionStatus < Model
+    include Cashbox::Concern::Objectable
 
     property :created, coerce: Cashbox::Type.DateTime
     property :payment_method_type

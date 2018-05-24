@@ -1,5 +1,6 @@
 module Cashbox
   class DirectDebit < Model
+    include Cashbox::Concern::Objectable
 
     property :vid
     property :account

@@ -1,5 +1,6 @@
 module Cashbox
   class TransactionItem < Model
+    include Cashbox::Concern::Objectable
 
     property :index_number
     property :item_type

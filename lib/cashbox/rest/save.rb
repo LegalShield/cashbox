@@ -21,14 +21,3 @@ module Cashbox::Rest
     end
   end
 end
-
-
-
-
-      #extend Forwardable
-
-      #def_instance_delegators :repository, :save, :save!
-
-      #def repository
-        #Cashbox::Repository.new(self)
-      #end
