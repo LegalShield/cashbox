@@ -46,6 +46,7 @@ module Cashbox
     autoload :Type
     autoload :Request
     autoload :Repository
+    autoload :Rest
 
     autoload_under 'model' do
       autoload :Model
@@ -73,11 +74,6 @@ module Cashbox
       autoload :TransactionStatus
       autoload :TransactionStatusPayPal
     end
-  end
-
-  module Rest
-    autoload :Read, 'cashbox/rest/read'
-    autoload :StaticRepositry, 'cashbox/rest/static_repository'
   end
 
   module Concern
