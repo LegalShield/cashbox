@@ -6,10 +6,10 @@ module Cashbox::Rest
 
     included do
       include Cashbox::Rest::Helpers
-      include Cashbox::Rest::Cancel
 
       def disentitle
-        cancel({ disentitle: 'Yes' })
+        request = Cashbox::Request.new(:post, "#{route(self.vid)}/actions/cancel", { body: { disentitle: 'Yes' } })
+        cast(self, request.response)
       end
     end
   end

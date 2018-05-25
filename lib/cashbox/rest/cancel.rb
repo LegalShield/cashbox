@@ -7,8 +7,8 @@ module Cashbox::Rest
     included do
       include Cashbox::Rest::Helpers
 
-      def cancel(params = {})
-        request = Cashbox::Request.new(:post, "#{route(self.vid)}/actions/cancel", { body: params })
+      def cancel
+        request = Cashbox::Request.new(:post, "#{route(self.vid)}/actions/cancel")
         cast(self, request.response)
       end
     end

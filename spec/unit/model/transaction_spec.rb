@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Cashbox::Transaction do
   it { is_expected.to be_a(Cashbox::Model) }
   it { is_expected.to be_a(Cashbox::Concern::Objectable) }
-  it { is_expected.to be_a(Cashbox::Rest::Basic) }
+  it { is_expected.to be_a(Cashbox::Rest::ReadWrite) }
   it { is_expected.to be_a(Cashbox::Rest::Cancel) }
 
   it { is_expected.to have_property(:id) }

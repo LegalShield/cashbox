@@ -45,7 +45,7 @@ module Cashbox
     autoload :Error
     autoload :Type
     autoload :Request
-    autoload :Repository
+    #autoload :Repository
     autoload :Rest
 
     autoload_under 'model' do
