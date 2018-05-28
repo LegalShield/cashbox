@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-class TestCancelModel
-  include Cashbox::Rest::Cancel
-end
+describe Cashbox::Rest::Cancel do
+  class self::TestModel < Cashbox::Model
+    include Cashbox::Rest::Cancel
+    property :vid
+  end
 
-describe TestCancelModel do
-  context 'instance methods' do
-    it 'has a cancel' do
-      expect(TestCancelModel.new).to respond_to(:cancel)
-    end
+  describe '#cancel' do
+    it 'calls Cashbox::Request correctly'
+    it 'passes the response to cast correctly'
   end
 end

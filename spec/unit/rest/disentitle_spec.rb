@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-class TestDisentitleModel
-  include Cashbox::Rest::Disentitle
-end
+describe Cashbox::Rest::Disentitle do
+  class self::TestModel < Cashbox::Model
+    include Cashbox::Rest::Disentitle
+    property :vid
+  end
 
-describe TestDisentitleModel do
-  context 'instance methods' do
-    it 'has a archive' do
-      expect(TestDisentitleModel.new).to respond_to(:disentitle)
-    end
+  describe '#disentitle' do
+    it 'calls Cashbox::Request correctly'
+    it 'passes the response to cast correctly'
   end
 end
