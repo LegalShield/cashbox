@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Cashbox::Rest::ReadWrite do
   class self::TestModel < Cashbox::Model
     include Cashbox::Rest::ReadWrite
+
     property :id
     property :vid
     property :field
@@ -21,6 +22,8 @@ describe Cashbox::Rest::ReadWrite do
       subject.find('my-vid')
     end
 
+    it 'raises errors without args'
+
     it 'calls Cashbox::Request correctly' do
       expect(Cashbox::Request).to have_received(:new).with(:get, '/test_models/my-vid')
     end
@@ -33,13 +36,9 @@ describe Cashbox::Rest::ReadWrite do
   describe '.first' do
     subject { self.class::TestModel }
 
-    before do
-      allow(subject).to receive(:where).with({ limit: 1 }).and_return([ ])
-
-      subject.first
-    end
-
     it 'calls where correctly' do
+      allow(subject).to receive(:where).with({ limit: 1 }).and_return(['res'])
+      expect(subject.first).to eql('res')
       expect(subject).to have_received(:where).with({ limit: 1 })
     end
   end
@@ -47,13 +46,9 @@ describe Cashbox::Rest::ReadWrite do
   describe '.all' do
     subject { self.class::TestModel }
 
-    before do
-      allow(subject).to receive(:where).with(no_args).and_return([ ])
-
-      subject.all
-    end
-
     it 'calls where correctly' do
+      allow(subject).to receive(:where).with(no_args).and_return([ ])
+      subject.all
       expect(subject).to have_received(:where).with(no_args)
     end
   end

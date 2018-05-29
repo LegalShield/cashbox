@@ -8,8 +8,8 @@ module Cashbox::Rest
       include Cashbox::Rest::Helpers
 
       def archive
-        request = Cashbox::Request.new(:post, route(self.vid), { active: false })
-        cast(self, request.response)
+        request = Cashbox::Request.new(:post, route(self.vid), { body: { active: false }.to_json })
+        self.class.cast(self, request.response)
       end
     end
   end
