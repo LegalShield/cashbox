@@ -11,21 +11,21 @@ describe Cashbox::Rest::Archive do
     let(:request) { double('request', { response: 'my data' }) }
 
     before do
-      allow(subject).to receive(:cast)
+      allow(subject.class).to receive(:cast)
 
       allow(Cashbox::Request).to receive(:new)
-        .with(:post, '/test_models/my-vid', { active: false })
+        .with(:post, '/test_models/my-vid', { body: { active: false }.to_json })
         .and_return(request)
 
       subject.archive
     end
 
     it 'calls Cashbox::Request correctly' do
-      expect(Cashbox::Request).to have_received(:new).with(:post, '/test_models/my-vid', { active: false })
+      expect(Cashbox::Request).to have_received(:new).with(:post, '/test_models/my-vid', { body: { active: false }.to_json })
     end
 
     it 'passes the response to cast correctly' do
-      expect(subject).to have_received(:cast).with(subject, 'my data')
+      expect(subject.class).to have_received(:cast).with(subject, 'my data')
     end
   end
 end
