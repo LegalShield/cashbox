@@ -22,7 +22,6 @@ module Cashbox::Rest
 
     class_methods do
       def find(id)
-        raise ArgumentError.new("Cannot find Resource with id 'nil'") unless id
         request = Cashbox::Request.new(:get, route(id))
         self.cast(self.new, request.response)
       end

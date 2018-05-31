@@ -3,6 +3,10 @@ require 'spec_helper'
 describe 'Widget' do
   class self::Widget < Cashbox::Model
     include Cashbox::Rest::ReadWrite
+    include Cashbox::Rest::Cancel
+    include Cashbox::Rest::Disentitle
+    include Cashbox::Rest::Archive
+
     property :vid
     property :id
     property :name
@@ -221,8 +225,48 @@ describe 'Widget' do
       expect(stub).to have_been_requested
     end
 
+    it 'returns and instance that is the correct class' do
+      expect(subject).to be_a(self.class::Widget)
+    end
+
     its(:name) { is_expected.to eql('my-widget') }
     its(:id)   { is_expected.to eql(1) }
     its(:vid)  { is_expected.to eql(15) }
+  end
+
+  describe '#cancel' do
+    subject { self.class::Widget.new({ vid: 'vid', id: 1, name: 'my-widget' }) }
+    let(:body) { { 'object' => 'Widget', 'vid' => 1, 'id' => 1, 'name' => 'your-widget' }.to_json }
+    let!(:stub) { stub_post('/widgets/vid/actions/cancel').to_return(api_response(body)) }
+
+    before { subject.cancel }
+
+    it 'makes the correct api call to cancel' do
+      expect(stub).to have_been_requested
+    end
+  end
+
+  describe '#disentitle' do
+    subject { self.class::Widget.new({ vid: 'vid', id: 1, name: 'my-widget' }) }
+    let(:body) { { 'object' => 'Widget', 'vid' => 1, 'id' => 1, 'name' => 'your-widget' }.to_json }
+    let!(:stub) { stub_post('/widgets/vid/actions/cancel').with({ body: { disentitle: 'Yes' }.to_json }).to_return(api_response(body)) }
+
+    before { subject.disentitle }
+
+    it 'makes the correct api call to disentitle' do
+      expect(stub).to have_been_requested
+    end
+  end
+
+  describe '#archive' do
+    subject { self.class::Widget.new({ vid: 'vid', id: 1, name: 'my-widget' }) }
+    let(:body) { { 'object' => 'Widget', 'vid' => 1, 'id' => 1, 'name' => 'your-widget' }.to_json }
+    let!(:stub) { stub_post('/widgets/vid').with({ body: { active: false }.to_json }).to_return(api_response(body)) }
+
+    before { subject.archive }
+
+    it 'makes the correct api call to archive' do
+      expect(stub).to have_been_requested
+    end
   end
 end

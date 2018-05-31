@@ -8,8 +8,8 @@ module Cashbox::Rest
       include Cashbox::Rest::Helpers
 
       def disentitle
-        request = Cashbox::Request.new(:post, "#{route(self.vid)}/actions/cancel", { body: { disentitle: 'Yes' } })
-        cast(self, request.response)
+        request = Cashbox::Request.new(:post, "#{route(self.vid)}/actions/cancel", { body: { disentitle: 'Yes' }.to_json })
+        self.class.cast(self, request.response)
       end
     end
   end
