@@ -9,7 +9,7 @@ module Cashbox::Rest
 
       def cancel
         request = Cashbox::Request.new(:post, "#{route(self.vid)}/actions/cancel")
-        cast(self, request.response)
+        self.class.cast(self, request.response)
       end
     end
   end

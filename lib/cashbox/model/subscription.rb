@@ -2,6 +2,7 @@ module Cashbox
   class Subscription < Model
     include Concern::Objectable
     include Rest::ReadWrite
+    include Rest::Cancel
     include Rest::Disentitle
 
     property :id
