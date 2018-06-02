@@ -61,24 +61,70 @@ describe Cashbox::Rest::ReadWrite do
 
   describe '.where' do
     subject { self.class::TestModel }
+    let(:instance) { double('instance') }
 
     before do
-      allow(subject).to receive(:query)
+      allow(subject).to receive(:cast).and_return(['first'], ['second'])
+      allow(subject).to receive(:new).and_return(instance)
     end
 
-    it 'calls query with the correct params' do
-      subject.where({ field: 'value' })
-      expect(subject).to have_received(:query).with({ field: 'value' }, nil)
+    context 'with no limit' do
+      let(:response_two) { double('response_one', { next: nil }) }
+      let(:request_two) { double('request', { response: response_two }) }
+
+      let(:response_one) { double('response_two', { next: 'test_models?page=2&field=value' }) }
+      let(:request_one) { double('request', { response: response_one }) }
+
+      let(:results) { subject.where({ field: 'value' }) }
+
+      before do
+        allow(Cashbox::Request).to receive(:new).with(:get, '/test_models', { query: { 'field' => 'value', 'limit' => 100 } }).and_return(request_one)
+        allow(Cashbox::Request).to receive(:new).with(:get, '/test_models', { query: { 'page' => '2', 'field' => 'value', 'limit' => 100 } }).and_return(request_two)
+
+        results
+      end
+
+      it 'calls Cashbox::Request correctly' do
+        expect(Cashbox::Request).to have_received(:new).with(:get, '/test_models', { query: { field: 'value', limit: 100 } }).ordered
+        expect(Cashbox::Request).to have_received(:new).with(:get, '/test_models', { query: { 'field' => 'value', 'limit' => 100, 'page' => '2' } }).ordered
+      end
+
+      it 'passes the response to cast correctly' do
+        expect(subject).to have_received(:cast).with(instance, response_one).ordered
+        expect(subject).to have_received(:cast).with(instance, response_two).ordered
+      end
+
+      it 'contacts the response into a single result set' do
+        expect(results).to eql(['first', 'second'])
+      end
     end
 
-    it 'extracts a provided limit' do
-      subject.where({ field: 'value', limit: 1 })
-      expect(subject).to have_received(:query).with({ field: 'value' }, 1)
-    end
+    context 'limit 10' do
+      let(:response) { double('response_one', { next: nil }) }
+      let(:request) { double('request', { response: response }) }
 
-    it 'symbolizes keys' do
-      subject.where({ 'field' => 'value', 'limit' => 1 })
-      expect(subject).to have_received(:query).with({ field: 'value' }, 1)
+      let(:results) { subject.where({ field: 'value', limit: 10 }) }
+
+      before do
+        allow(Cashbox::Request).to receive(:new)
+          .with(:get, '/test_models', { query: { 'field' => 'value', 'limit' => 10 } })
+          .and_return(request)
+
+        results
+      end
+
+      it 'calls Cashbox::Request correctly' do
+        expect(Cashbox::Request).to have_received(:new)
+          .with(:get, '/test_models', { query: { field: 'value', limit: 10 } })
+      end
+
+      it 'passes the response to cast correctly' do
+        expect(subject).to have_received(:cast).with(instance, response)
+      end
+
+      it 'contacts the response into a single result set' do
+        expect(results).to eql(['first'])
+      end
     end
   end
 
