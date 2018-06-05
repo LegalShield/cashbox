@@ -76,10 +76,7 @@ describe 'Account' do
   end
 
   describe 'searching for an account' do
-    let(:json) do
-      json = JSON.parse(fixture('account'))
-      json
-    end
+    let(:json) { JSON.parse(fixture('account')) }
 
     let!(:stub_find) do
       stub_get("/accounts/#{json['vid']}")
