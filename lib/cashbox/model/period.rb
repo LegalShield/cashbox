@@ -1,6 +1,6 @@
 module Cashbox
   class Period < Model
-    include Cashbox::Concern::Objectable
+    include Concern::Objectable
 
     property :cycles
     property :quantity

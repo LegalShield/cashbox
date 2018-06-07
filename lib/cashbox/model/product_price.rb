@@ -1,5 +1,5 @@
 module Cashbox
   class ProductPrice < Cashbox::Price
-    include Cashbox::Concern::Objectable
+    include Concern::Objectable
   end
 end

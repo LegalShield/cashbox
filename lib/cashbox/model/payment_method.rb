@@ -1,7 +1,8 @@
 module Cashbox
   class PaymentMethod < Model
-    include Cashbox::Concern::Objectable
-    include Cashbox::Concern::Persistable
+    include Concern::Objectable
+    include Rest::ReadWrite
+    include Rest::Archive
 
     property :id
     property :vid

@@ -58,6 +58,16 @@ describe Cashbox do
     end
   end
 
+  context '.development!' do
+    subject { Cashbox }
+    before { subject.development! }
+    after { subject.production! }
+
+    it 'sets development values' do
+      expect(Cashbox::Request.base_uri).to eql('https://api.prodtest.vindicia.com')
+    end
+  end
+
   context '.test!' do
     subject { Cashbox }
     before { subject.test! }

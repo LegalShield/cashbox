@@ -1,6 +1,6 @@
 module Cashbox
   class PayPal < Model
-    include Cashbox::Concern::Objectable
+    include Concern::Objectable
 
     property :cancel_url
     property :reference_id
