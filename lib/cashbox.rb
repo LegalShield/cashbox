@@ -42,10 +42,10 @@ module Cashbox
 
   eager_autoload do
     autoload :VERSION
-    autoload :Exception
+    autoload :Error
     autoload :Type
     autoload :Request
-    autoload :Repository
+    autoload :Rest
 
     autoload_under 'model' do
       autoload :Model
@@ -55,6 +55,7 @@ module Cashbox
       autoload :BillingPlanPeriod
       autoload :CreditCard
       autoload :Description
+      autoload :DirectDebit
       autoload :Entitlement
       autoload :Invoice
       autoload :InvoiceItem

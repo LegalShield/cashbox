@@ -1,7 +1,9 @@
 module Cashbox
   class Subscription < Model
-    include Cashbox::Concern::Objectable
-    include Cashbox::Concern::Persistable
+    include Concern::Objectable
+    include Rest::ReadWrite
+    include Rest::Cancel
+    include Rest::Disentitle
 
     property :id
     property :vid
@@ -10,6 +12,7 @@ module Cashbox
     property :billing_day
     property :billing_plan, coerce: Cashbox::BillingPlan
     property :billing_state
+    property :balance
     property :cancel_reason
     property :currency
     property :default_billing_plan, coerce: Cashbox::BillingPlan
@@ -19,8 +22,8 @@ module Cashbox
     property :items, coerce: Cashbox::Type.List(Cashbox::SubscriptionItem)
     property :message
     property :minimum_commitment
-    property :most_recent_billing, coerce: Cashbox::Type.DateTime
-    property :next_billing, coerce: Cashbox::Type.DateTime
+    property :most_recent_billing, coerce: Cashbox::Transaction
+    property :next_billing, coerce: Cashbox::Transaction
     property :notify_on_transition, coerce: Cashbox::Type.Boolean
     property :payment_method, coerce: Cashbox::PaymentMethod
     property :policy

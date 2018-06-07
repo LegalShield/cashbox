@@ -13,6 +13,7 @@ describe Cashbox::TransactionItem do
   it { is_expected.to have_property(:tax_classification) }
   it { is_expected.to have_property(:tax_type) }
   it { is_expected.to have_property(:total) }
+  it { is_expected.to have_property(:price) }
 
   its(:object) { is_expected.to eql('TransactionItem') }
 end

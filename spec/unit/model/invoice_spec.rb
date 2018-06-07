@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Cashbox::Invoice do
   it { is_expected.to be_a(Cashbox::Model) }
-  it { is_expected.to be_a(Cashbox::Concern::Persistable) }
   it { is_expected.to be_a(Cashbox::Concern::Objectable) }
+  it { is_expected.to be_a(Cashbox::Rest::ReadWrite) }
 
   its(:object) { is_expected.to eql('Invoice') }
 
@@ -21,10 +21,9 @@ describe Cashbox::Invoice do
   it { is_expected.to have_property(:credit_total) }
   it { is_expected.to have_property(:payments_received_total) }
   it { is_expected.to have_property(:billing_sequence) }
-
-  it { is_expected.to have_property(:invoice_line_items) }
-  it { is_expected.to have_property(:invoice_tax_items) }
-  it { is_expected.to have_property(:invoice_payments) }
+  it { is_expected.to have_property(:invoice_line_items).coercing_with(Cashbox::Type.List(Cashbox::InvoiceItem)) }
+  it { is_expected.to have_property(:invoice_tax_items).coercing_with(Cashbox::Type.List(Cashbox::InvoiceItem)) }
+  it { is_expected.to have_property(:invoice_payments).coercing_with(Cashbox::Type.List(Cashbox::Transaction)) }
   it { is_expected.to have_property(:account).coercing_with(Cashbox::Account) }
   it { is_expected.to have_property(:subscription).coercing_with(Cashbox::Subscription) }
 end
