@@ -9,7 +9,7 @@ module Cashbox::Type
   end
 
   def self.DateTime
-    @date_time ||= -> (value) { DateTime.parse(value) }
+    @date_time ||= -> (value) { value.is_a?(DateTime) ? value : DateTime.parse(value) }
   end
 
   def self.Boolean

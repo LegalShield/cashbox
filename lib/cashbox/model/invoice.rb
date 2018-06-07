@@ -1,7 +1,7 @@
 module Cashbox
   class Invoice < Model
     include Concern::Objectable
-    include Concern::Persistable
+    include Rest::ReadWrite
 
     property :id
     property :vid

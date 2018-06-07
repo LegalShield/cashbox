@@ -26,6 +26,10 @@ module Cashbox
     Cashbox::Request.base_uri('https://api.prodtest.vindicia.com')
   end
 
+  def self.development!
+    Cashbox::Request.base_uri('https://api.prodtest.vindicia.com')
+  end
+
   def self.test!
     Cashbox.username = 'username'
     Cashbox.password = 'password'
@@ -38,10 +42,10 @@ module Cashbox
 
   eager_autoload do
     autoload :VERSION
-    autoload :Exception
+    autoload :Error
     autoload :Type
     autoload :Request
-    autoload :Repository
+    autoload :Rest
 
     autoload_under 'model' do
       autoload :Model
@@ -51,6 +55,7 @@ module Cashbox
       autoload :BillingPlanPeriod
       autoload :CreditCard
       autoload :Description
+      autoload :DirectDebit
       autoload :Entitlement
       autoload :Invoice
       autoload :InvoiceItem

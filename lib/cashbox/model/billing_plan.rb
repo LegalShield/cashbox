@@ -1,7 +1,7 @@
 module Cashbox
   class BillingPlan < Model
-    include Cashbox::Concern::Objectable
-    include Cashbox::Concern::Persistable
+    include Concern::Objectable
+    include Rest::ReadWrite
 
     property :id
     property :vid
@@ -12,5 +12,7 @@ module Cashbox
     property :message
     property :periods, coerce: Cashbox::Type.List(Cashbox::BillingPlanPeriod)
     property :status
+    property :times_to_run
+    property :used_on_subscriptions
   end
 end

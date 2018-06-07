@@ -1,7 +1,7 @@
 module Cashbox
   class Account < Model
     include Concern::Objectable
-    include Concern::Persistable
+    include Rest::ReadWrite
 
     property :id
     property :vid
@@ -10,7 +10,6 @@ module Cashbox
     property :email
     property :email_type
     property :language
-    property :metadata
     property :name
     property :notify_before_billing
     property :payment_methods, coerce: Cashbox::Type.List(Cashbox::PaymentMethod)

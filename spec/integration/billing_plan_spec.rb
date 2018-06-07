@@ -20,5 +20,6 @@ describe 'BillingPlan' do
     end
 
     it { is_expected.to be_a(Cashbox::BillingPlan) }
+
   end
 end
