@@ -1,7 +1,7 @@
 module Cashbox
   class Product < Model
-    include Cashbox::Concern::Objectable
-    include Cashbox::Concern::Persistable
+    include Concern::Objectable
+    include Rest::ReadWrite
 
     property :id
     property :vid

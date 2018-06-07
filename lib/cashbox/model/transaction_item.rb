@@ -1,6 +1,6 @@
 module Cashbox
   class TransactionItem < Model
-    include Cashbox::Concern::Objectable
+    include Concern::Objectable
 
     property :index_number
     property :item_type
@@ -12,5 +12,6 @@ module Cashbox
     property :tax_classification
     property :tax_type
     property :total
+    property :price
   end
 end
