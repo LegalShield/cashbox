@@ -24,8 +24,11 @@ describe Cashbox::PaymentMethod do
   describe "credit_card?" do
     let(:payment_method) { Cashbox::PaymentMethod.new(type: "CreditCard") }
 
-    it "is returns true for type credit card" do
+    it "returns true for type credit card" do
       expect(payment_method.credit_card?).to be(true)
+    end
+
+    it "returns false for type direct debit" do
       expect(payment_method.direct_debit?).to be(false)
     end
   end
@@ -33,16 +36,17 @@ describe Cashbox::PaymentMethod do
   describe "direct_debit?" do
     let(:payment_method) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
 
-    it "is returns true for type direct debit" do
+    it "returns true for type direct debit" do
       expect(payment_method.direct_debit?).to be(true)
+    end
+
+    it "returns false for type credit card" do
       expect(payment_method.credit_card?).to be(false)
     end
   end
 
   describe "last_digits" do
-    params = {
-      last_digits: "1234"
-    }
+    params = { last_digits: "1234" }
     let(:payment_method_credit_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: params) }
     let(:payment_method_direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit", direct_debit: params) }
 
