@@ -20,4 +20,38 @@ describe Cashbox::PaymentMethod do
   it { is_expected.to have_property(:validation_status) }
 
   its(:object) { is_expected.to eql('PaymentMethod') }
+
+  describe "credit_card?" do
+    let(:payment_method) { Cashbox::PaymentMethod.new(type: "CreditCard") }
+
+    it "is returns true for type credit card" do
+      expect(payment_method.credit_card?).to be(true)
+      expect(payment_method.direct_debit?).to be(false)
+    end
+  end
+
+  describe "direct_debit?" do
+    let(:payment_method) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
+
+    it "is returns true for type direct debit" do
+      expect(payment_method.direct_debit?).to be(true)
+      expect(payment_method.credit_card?).to be(false)
+    end
+  end
+
+  describe "last_digits" do
+    params = {
+      last_digits: "1234"
+    }
+    let(:payment_method_credit_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: params) }
+    let(:payment_method_direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit", direct_debit: params) }
+
+    it "returns the last digits for credit_card" do
+      expect(payment_method_credit_card.last_digits).to eq("1234")
+    end
+
+    it "returns the last digits for direct_debit" do
+      expect(payment_method_direct_debit.last_digits).to eq("1234")
+    end
+  end
 end
