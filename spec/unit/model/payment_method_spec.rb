@@ -22,26 +22,38 @@ describe Cashbox::PaymentMethod do
   its(:object) { is_expected.to eql('PaymentMethod') }
 
   describe "credit_card?" do
-    let(:payment_method) { Cashbox::PaymentMethod.new(type: "CreditCard") }
+    context "success" do
+      let(:payment_method) { Cashbox::PaymentMethod.new(type: "CreditCard") }
 
-    it "returns true for type credit card" do
-      expect(payment_method.credit_card?).to be(true)
+      it "returns true for type credit card" do
+        expect(payment_method.credit_card?).to be(true)
+      end
     end
 
-    it "returns false for type direct debit" do
-      expect(payment_method.direct_debit?).to be(false)
+    context "fail" do
+      let(:payment_method) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
+
+      it "returns false for type direct debit" do
+        expect(payment_method.credit_card?).to be(false)
+      end
     end
   end
 
   describe "direct_debit?" do
-    let(:payment_method) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
+    context "success" do
+      let(:payment_method) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
 
-    it "returns true for type direct debit" do
-      expect(payment_method.direct_debit?).to be(true)
+      it "returns true for type direct debit" do
+        expect(payment_method.direct_debit?).to be(true)
+      end
     end
 
-    it "returns false for type credit card" do
-      expect(payment_method.credit_card?).to be(false)
+    context "fail" do
+      let(:payment_method) { Cashbox::PaymentMethod.new(type: "CreditCard") }
+
+      it "returns false for type credit card" do
+        expect(payment_method.direct_debit?).to be(false)
+      end
     end
   end
 
