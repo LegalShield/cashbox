@@ -1,4 +1,7 @@
 module Cashbox
+  DIRECT_DEBIT = "DirectDebit"
+  CREDIT_CARD = "CreditCard"
+
   class PaymentMethod < Model
     include Concern::Objectable
     include Rest::ReadWrite
@@ -18,11 +21,11 @@ module Cashbox
     property :validation_status
 
     def credit_card?
-      type == "CreditCard"
+      type == CREDIT_CARD
     end
 
     def direct_debit?
-      type == "DirectDebit"
+      type == DIRECT_DEBIT
     end
 
     def last_digits
