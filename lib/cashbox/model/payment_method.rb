@@ -16,5 +16,17 @@ module Cashbox
     property :account_holder
     property :billing_address
     property :validation_status
+
+    def credit_card?
+      type == "CreditCard"
+    end
+
+    def direct_debit?
+      type == "DirectDebit"
+    end
+
+    def last_digits
+      self[type.underscore].last_digits
+    end
   end
 end
