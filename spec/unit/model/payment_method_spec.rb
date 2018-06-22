@@ -22,38 +22,28 @@ describe Cashbox::PaymentMethod do
   its(:object) { is_expected.to eql('PaymentMethod') }
 
   describe "credit_card?" do
-    context "success" do
-      let(:payment_method) { Cashbox::PaymentMethod.new(type: "CreditCard") }
+    let(:payment_method_credit_card) { Cashbox::PaymentMethod.new(type: "CreditCard") }
+    let(:payment_method_direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
 
-      it "returns true for type credit card" do
-        expect(payment_method.credit_card?).to be(true)
-      end
+    it "returns true for type credit card when asking if credit_card" do
+      expect(payment_method_credit_card.credit_card?).to be(true)
     end
 
-    context "fail" do
-      let(:payment_method) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
-
-      it "returns false for type direct debit" do
-        expect(payment_method.credit_card?).to be(false)
-      end
+    it "returns false for type direct debit when asking if credit_card" do
+      expect(payment_method_direct_debit.credit_card?).to be(false)
     end
   end
 
   describe "direct_debit?" do
-    context "success" do
-      let(:payment_method) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
+    let(:payment_method_credit_card) { Cashbox::PaymentMethod.new(type: "CreditCard") }
+    let(:payment_method_direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
 
-      it "returns true for type direct debit" do
-        expect(payment_method.direct_debit?).to be(true)
-      end
+    it "returns true for type direct debit when asking if direct debit" do
+      expect(payment_method_direct_debit.direct_debit?).to be(true)
     end
 
-    context "fail" do
-      let(:payment_method) { Cashbox::PaymentMethod.new(type: "CreditCard") }
-
-      it "returns false for type credit card" do
-        expect(payment_method.direct_debit?).to be(false)
-      end
+    it "returns false for type credit card when asking if direct_debit" do
+      expect(payment_method_credit_card.direct_debit?).to be(false)
     end
   end
 
