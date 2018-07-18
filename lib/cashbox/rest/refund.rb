@@ -8,7 +8,7 @@ module Cashbox::Rest
       include Cashbox::Rest::Helpers
 
       def refund
-        request = Cashbox::Request.new(:post, "/transactions#{route(self.vid)}/refunds")
+        request = Cashbox::Request.new(:post, "#{route(self.vid)}/refunds")
         self.class.cast(self, request.response)
       end
     end

@@ -14,14 +14,14 @@ describe Cashbox::Rest::Refund do
       allow(subject.class).to receive(:cast)
 
       allow(Cashbox::Request).to receive(:new)
-        .with(:post, '/transactions/test_models/my-vid/refunds')
+        .with(:post, '/test_models/my-vid/refunds')
         .and_return(request)
 
       subject.refund
     end
 
     it 'calls Cashbox::Request correctly' do
-      expect(Cashbox::Request).to have_received(:new).with(:post, '/transactions/test_models/my-vid/refunds')
+      expect(Cashbox::Request).to have_received(:new).with(:post, '/test_models/my-vid/refunds')
     end
 
     it 'passes the response to cast correctly' do
