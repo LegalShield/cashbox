@@ -5,6 +5,7 @@ describe Cashbox::Transaction do
   it { is_expected.to be_a(Cashbox::Concern::Objectable) }
   it { is_expected.to be_a(Cashbox::Rest::ReadWrite) }
   it { is_expected.to be_a(Cashbox::Rest::Cancel) }
+  it { is_expected.to be_a(Cashbox::Rest::Refund) }
 
   it { is_expected.to have_property(:id) }
   it { is_expected.to have_property(:vid) }
