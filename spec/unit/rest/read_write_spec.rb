@@ -81,21 +81,21 @@ describe Cashbox::Rest::ReadWrite do
         allow(Cashbox::Request).to receive(:new).with(
           :get,
           '/test_models',
-          { query: { 'field' => 'value', 'limit' => 100 }, timeout: 100 }
+          { query: { 'field' => 'value', 'limit' => 100 } }
         ).and_return(request_one)
 
         allow(Cashbox::Request).to receive(:new).with(
           :get,
           '/test_models',
-          { query: { 'page' => '2', 'field' => 'value', 'limit' => 100 }, timeout: 100 }
+          { query: { 'page' => '2', 'field' => 'value', 'limit' => 100 } }
         ).and_return(request_two)
 
         results
       end
 
       it 'calls Cashbox::Request correctly' do
-        expect(Cashbox::Request).to have_received(:new).with(:get, '/test_models', { query: { field: 'value', limit: 100 }, timeout: 100 }).ordered
-        expect(Cashbox::Request).to have_received(:new).with(:get, '/test_models', { query: { 'field' => 'value', 'limit' => 100, 'page' => '2' }, timeout: 100 }).ordered
+        expect(Cashbox::Request).to have_received(:new).with(:get, '/test_models', { query: { field: 'value', limit: 100 } }).ordered
+        expect(Cashbox::Request).to have_received(:new).with(:get, '/test_models', { query: { 'field' => 'value', 'limit' => 100, 'page' => '2' } }).ordered
       end
 
       it 'passes the response to cast correctly' do
@@ -116,7 +116,7 @@ describe Cashbox::Rest::ReadWrite do
 
       before do
         allow(Cashbox::Request).to receive(:new)
-          .with(:get, '/test_models', { query: { 'field' => 'value', 'limit' => 10 }, timeout: 100 })
+          .with(:get, '/test_models', { query: { 'field' => 'value', 'limit' => 10 } })
           .and_return(request)
 
         results
@@ -124,7 +124,7 @@ describe Cashbox::Rest::ReadWrite do
 
       it 'calls Cashbox::Request correctly' do
         expect(Cashbox::Request).to have_received(:new)
-          .with(:get, '/test_models', { query: { field: 'value', limit: 10 }, timeout: 100 })
+          .with(:get, '/test_models', { query: { field: 'value', limit: 10 } })
       end
 
       it 'passes the response to cast correctly' do

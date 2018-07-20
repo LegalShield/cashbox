@@ -17,7 +17,7 @@ module Cashbox
     private
 
     def default_options
-      { basic_auth: { username: Cashbox.username, password: Cashbox.password }}
+      { basic_auth: { username: Cashbox.username, password: Cashbox.password }, timeout: 100}
     end
   end
 end
