@@ -50,7 +50,7 @@ module Cashbox::Rest
         params.limit = params.limit.to_i
         params.limit = max if max && max < params.limit
 
-        response = Cashbox::Request.new(:get, route, { query: params }).response
+        response = Cashbox::Request.new(:get, route, { query: params, timeout: 100 }).response
         objects = cast(self.new, response)
 
         if (response.next && (max.nil? || objects.count < max))
