@@ -25,7 +25,7 @@ describe Cashbox::Rest::Refund do
     end
 
     it 'passes the response to cast correctly' do
-      expect(subject.class).to have_received(:cast).with(subject, 'my data')
+      expect(subject.class).to have_received(:cast).with(Cashbox::Refund.new, 'my data')
     end
   end
 end

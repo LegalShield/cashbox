@@ -9,7 +9,7 @@ module Cashbox::Rest
 
       def refund
         request = Cashbox::Request.new(:post, "#{route(self.vid)}/refunds")
-        self.class.cast(self, request.response)
+        self.class.cast(Cashbox::Refund.new, request.response)
       end
     end
   end
