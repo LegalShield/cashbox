@@ -15,8 +15,8 @@ describe 'Refund' do
   let(:headers) { { 'Content-Type': 'application/json' } }
 
   describe '#refund' do
-    subject { self.class::Widget.new({ vid: 'vid', amt: '14' }) }
-    let(:body) { { 'object' => 'Widget', 'vid' => 1, 'amt' => '14' }.to_json }
+    subject { self.class::Widget.new({ vid: 'vid', amt: 14 }) }
+    let(:body) { { 'object' => 'Widget', 'vid' => 1, 'amt' => 14 }.to_json }
     let!(:stub) { stub_post('/widgets/vid/refunds').to_return(api_response(body)) }
 
     before { subject.refund }
