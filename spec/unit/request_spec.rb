@@ -24,7 +24,8 @@ describe Cashbox::Request do
 
       allow(Cashbox::Request).to receive(:send).with(:method, 'path', {
         option: true,
-        basic_auth: { username: 'me', password: 'sekret' }
+        basic_auth: { username: 'me', password: 'sekret' },
+        timeout: 100
       })
 
       subject.response
@@ -44,7 +45,8 @@ describe Cashbox::Request do
         basic_auth: {
           username: 'me',
           password: 'sekret'
-        }
+        },
+        timeout: 100
       })
     end
   end

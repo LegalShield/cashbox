@@ -3,6 +3,7 @@ module Cashbox
     include Concern::Objectable
     include Rest::ReadWrite
     include Rest::Cancel
+    include Rest::Refund
 
     property :id
     property :vid

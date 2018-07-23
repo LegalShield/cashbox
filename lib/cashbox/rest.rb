@@ -9,5 +9,6 @@ module Cashbox::Rest
     autoload :Disentitle
     autoload :Helpers
     autoload :ReadWrite
+    autoload :Refund
   end
 end
