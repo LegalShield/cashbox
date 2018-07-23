@@ -78,18 +78,8 @@ describe Cashbox::Rest::ReadWrite do
       let(:results) { subject.where({ field: 'value' }) }
 
       before do
-        allow(Cashbox::Request).to receive(:new).with(
-          :get,
-          '/test_models',
-          { query: { 'field' => 'value', 'limit' => 100 } }
-        ).and_return(request_one)
-
-        allow(Cashbox::Request).to receive(:new).with(
-          :get,
-          '/test_models',
-          { query: { 'page' => '2', 'field' => 'value', 'limit' => 100 } }
-        ).and_return(request_two)
-
+        allow(Cashbox::Request).to receive(:new).with(:get, '/test_models', { query: { 'field' => 'value', 'limit' => 100 } }).and_return(request_one)
+        allow(Cashbox::Request).to receive(:new).with(:get, '/test_models', { query: { 'page' => '2', 'field' => 'value', 'limit' => 100 } }).and_return(request_two)
         results
       end
 
