@@ -30,11 +30,10 @@ module Cashbox
     end
 
     def card_network
-      return nil unless type == "CreditCard"
+      return unless type == "CreditCard"
       bin_number = credit_card.bin
       return "Visa" if bin_number.start_with?("3")
       return "Master Card" if bin_number.start_with?("2", "5")
-      nil
     end
   end
 end
