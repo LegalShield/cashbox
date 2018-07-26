@@ -28,5 +28,12 @@ module Cashbox
     def last_digits
       self[type.underscore].last_digits
     end
+
+    def card_network
+      return unless type == "CreditCard"
+      bin_number = credit_card.bin
+      return "Visa" if bin_number.start_with?("3")
+      return "Master Card" if bin_number.start_with?("2", "5")
+    end
   end
 end
