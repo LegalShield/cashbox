@@ -72,8 +72,8 @@ describe Cashbox::PaymentMethod do
       expect(credit_card_visa.card_network).to eq("Visa")
       expect(credit_card_master_card.card_network).to eq("Master Card")
       expect(credit_card_master_card_two.card_network).to eq("Master Card")
-      expect(credit_card_unknown.card_network).to eq("unknown network")
-      expect(direct_debit.card_network).to eq("not a card")
+      expect(credit_card_unknown.card_network).to eq(nil)
+      expect(direct_debit.card_network).to eq(nil)
     end
   end
 end
