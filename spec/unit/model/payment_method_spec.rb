@@ -60,4 +60,20 @@ describe Cashbox::PaymentMethod do
       expect(payment_method_direct_debit.last_digits).to eq("1234")
     end
   end
+
+  describe "card_network" do
+    let(:credit_card_visa) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "3210" }) }
+    let(:credit_card_master_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "2345" }) }
+    let(:credit_card_master_card_two) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "5432" }) }
+    let(:credit_card_unknown) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "9999" }) }
+    let(:direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit", direct_debit: {}) }
+
+    it "returns the correct card networks" do
+      expect(credit_card_visa.card_network).to eq("Visa")
+      expect(credit_card_master_card.card_network).to eq("Master Card")
+      expect(credit_card_master_card_two.card_network).to eq("Master Card")
+      expect(credit_card_unknown.card_network).to eq("unknown network")
+      expect(direct_debit.card_network).to eq("not a card")
+    end
+  end
 end
