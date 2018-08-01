@@ -33,4 +33,19 @@ describe Cashbox::Transaction do
   it { is_expected.to have_property(:to_be_captured).coercing_with(Cashbox::Type.Boolean) }
 
   its(:object) { is_expected.to eql('Transaction') }
+
+  describe "#payment_method" do
+    let(:payment_method_credit_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: 321 }) }
+    let(:payment_method_direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit", direct_debit: { account: 123 }) }
+    let(:transaction_cc) { Cashbox::Transaction.new(source_payment_method: payment_method_credit_card) }
+    let(:transaction_dd) { Cashbox::Transaction.new(source_payment_method: payment_method_direct_debit) }
+
+    it "returns the correct direct_debit payment method" do
+      expect(transaction_dd.payment_method.account).to eq(123)
+    end
+
+    it "returns the correct credit_card payment method" do
+      expect(transaction_cc.payment_method.bin).to eq(321)
+    end
+  end
 end
