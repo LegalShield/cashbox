@@ -57,5 +57,10 @@ describe Cashbox::Transaction do
       expect(transaction_dd.last_digits).to eq(1234)
       expect(transaction_cc.last_digits).to eq(1234)
     end
+
+    it "returns the the correct type of a payment method" do
+      expect(transaction_dd.type).to eq("DirectDebit")
+      expect(transaction_cc.type).to eq("CreditCard")
+    end
   end
 end
