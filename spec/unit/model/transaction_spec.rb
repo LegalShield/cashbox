@@ -35,17 +35,17 @@ describe Cashbox::Transaction do
   its(:object) { is_expected.to eql('Transaction') }
 
   describe "delegates" do
-    let(:payment_method_credit_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: 321, last_digits: 1234 }, account_holder: "test") }
-    let(:payment_method_direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit", direct_debit: { account: 123, last_digits: 1234 }, account_holder: "test") }
+    let(:payment_method_credit_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { last_digits: 1234 }, account_holder: "test") }
+    let(:payment_method_direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit", direct_debit: { last_digits: 1234 }, account_holder: "test") }
     let(:transaction_cc) { Cashbox::Transaction.new(source_payment_method: payment_method_credit_card) }
     let(:transaction_dd) { Cashbox::Transaction.new(source_payment_method: payment_method_direct_debit) }
 
     it "returns the correct direct_debit payment method" do
-      expect(transaction_dd.direct_debit.account).to eq(123)
+      expect(transaction_dd.direct_debit.object).to eq("DirectDebit")
     end
 
     it "returns the correct credit_card payment method" do
-      expect(transaction_cc.credit_card.bin).to eq(321)
+      expect(transaction_cc.credit_card.object).to eq("CreditCard")
     end
 
     it "returns the account_holder" do
