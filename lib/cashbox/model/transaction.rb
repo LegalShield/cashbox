@@ -32,7 +32,7 @@ module Cashbox
 
     def payment_method
       type = source_payment_method.type.underscore
-      source = source_payment_method[type]
+      source_payment_method[type]
     end
   end
 end
