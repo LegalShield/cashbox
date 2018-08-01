@@ -31,9 +31,5 @@ module Cashbox
     property :to_be_captured, coerce: Cashbox::Type.Boolean
 
     delegate :credit_card?, :direct_debit?, :direct_debit, :credit_card, to: :source_payment_method
-
-    def payment_method
-      credit_card? ? source_payment_method.credit_card : source_payment_method.direct_debit
-    end
   end
 end
