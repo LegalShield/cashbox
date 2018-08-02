@@ -29,5 +29,7 @@ module Cashbox
     property :subscription, coerce: Cashbox::Subscription
     property :subscription_sequence
     property :to_be_captured, coerce: Cashbox::Type.Boolean
+
+    delegate :credit_card?, :direct_debit?, :direct_debit, :credit_card, :account_holder, :last_digits, :card_network, to: :source_payment_method
   end
 end
