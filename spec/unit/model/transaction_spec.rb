@@ -39,7 +39,7 @@ describe Cashbox::Transaction do
     let(:settled_status_list) { [Cashbox::TransactionStatus.new(status: 'Pending'), Cashbox::TransactionStatus.new(status: 'Settled')] }
     let(:captured_status_transaction) { Cashbox::Transaction.new(status_log: captured_status_list) }
     let(:settled_status_transaction) { Cashbox::Transaction.new(status_log: settled_status_list) }
-    let(:settled_status_transaction) { Cashbox::Transaction.new(status_log: []) }
+    let(:empty_status_transaction) { Cashbox::Transaction.new(status_log: []) }
 
     it "returns true when a transaction contains a Captured status" do
       expect(captured_status_transaction.captured?).to be true
@@ -50,7 +50,7 @@ describe Cashbox::Transaction do
     end
 
     it "returns false when the status list is empty" do
-      expect(settled_status_transaction.captured?).to be false
+      expect(empty_status_transaction.captured?).to be false
     end
   end
 end
