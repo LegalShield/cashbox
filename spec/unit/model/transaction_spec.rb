@@ -33,4 +33,24 @@ describe Cashbox::Transaction do
   it { is_expected.to have_property(:to_be_captured).coercing_with(Cashbox::Type.Boolean) }
 
   its(:object) { is_expected.to eql('Transaction') }
+
+  describe "captured?" do
+    let(:captured_status_list) { [Cashbox::TransactionStatus.new(status: 'Captured'), Cashbox::TransactionStatus.new(status: 'Settled')] }
+    let(:settled_status_list) { [Cashbox::TransactionStatus.new(status: 'Pending'), Cashbox::TransactionStatus.new(status: 'Settled')] }
+    let(:captured_status_transaction) { Cashbox::Transaction.new(status_log: captured_status_list) }
+    let(:settled_status_transaction) { Cashbox::Transaction.new(status_log: settled_status_list) }
+    let(:settled_status_transaction) { Cashbox::Transaction.new(status_log: []) }
+
+    it "returns true when a transaction contains a Captured status" do
+      expect(captured_status_transaction.captured?).to be true
+    end
+
+    it "returns false when a transaction does not contain a Captured status" do
+      expect(settled_status_transaction.captured?).to be false
+    end
+
+    it "returns false when the status list is empty" do
+      expect(settled_status_transaction.captured?).to be false
+    end
+  end
 end

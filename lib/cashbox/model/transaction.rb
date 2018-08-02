@@ -29,5 +29,9 @@ module Cashbox
     property :subscription, coerce: Cashbox::Subscription
     property :subscription_sequence
     property :to_be_captured, coerce: Cashbox::Type.Boolean
+
+    def captured?
+      status_log.any? { |log| log.status == 'Captured'}
+    end
   end
 end
