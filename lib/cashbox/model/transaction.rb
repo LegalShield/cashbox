@@ -33,5 +33,7 @@ module Cashbox
     def captured?
       status_log.any? { |log| log.status == 'Captured'}
     end
+
+    delegate :credit_card?, :direct_debit?, :direct_debit, :credit_card, :account_holder, :last_digits, :card_network, to: :source_payment_method
   end
 end
