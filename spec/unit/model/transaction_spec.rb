@@ -34,6 +34,26 @@ describe Cashbox::Transaction do
 
   its(:object) { is_expected.to eql('Transaction') }
 
+  describe "captured?" do
+    let(:captured_status_list) { [Cashbox::TransactionStatus.new(status: 'Captured'), Cashbox::TransactionStatus.new(status: 'Settled')] }
+    let(:settled_status_list) { [Cashbox::TransactionStatus.new(status: 'Pending'), Cashbox::TransactionStatus.new(status: 'Settled')] }
+    let(:captured_status_transaction) { Cashbox::Transaction.new(status_log: captured_status_list) }
+    let(:settled_status_transaction) { Cashbox::Transaction.new(status_log: settled_status_list) }
+    let(:empty_status_transaction) { Cashbox::Transaction.new(status_log: []) }
+
+    it "returns true when a transaction contains a Captured status" do
+      expect(captured_status_transaction.captured?).to be true
+    end
+
+    it "returns false when a transaction does not contain a Captured status" do
+      expect(settled_status_transaction.captured?).to be false
+    end
+
+    it "returns false when the status list is empty" do
+      expect(empty_status_transaction.captured?).to be false
+    end
+  end
+
   describe "delegates" do
     let(:payment_method_credit_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { last_digits: 1234, bin: 321 }, account_holder: "test") }
     let(:payment_method_direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit", direct_debit: { last_digits: 1234 }, account_holder: "test") }
