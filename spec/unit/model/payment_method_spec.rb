@@ -62,7 +62,7 @@ describe Cashbox::PaymentMethod do
   end
 
   describe "card_network" do
-    let(:credit_card_visa) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "3210" }) }
+    let(:credit_card_visa) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "4321" }) }
     let(:credit_card_master_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "2345" }) }
     let(:credit_card_master_card_two) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "5432" }) }
     let(:credit_card_unknown) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "9999" }) }
