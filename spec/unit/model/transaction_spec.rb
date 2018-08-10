@@ -55,7 +55,7 @@ describe Cashbox::Transaction do
   end
 
   describe "delegates" do
-    let(:payment_method_credit_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { last_digits: 1234, bin: 321 }, account_holder: "test") }
+    let(:payment_method_credit_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { last_digits: 1234, bin: 4321 }, account_holder: "test") }
     let(:payment_method_direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit", direct_debit: { last_digits: 1234 }, account_holder: "test") }
     let(:transaction_cc) { Cashbox::Transaction.new(source_payment_method: payment_method_credit_card) }
     let(:transaction_dd) { Cashbox::Transaction.new(source_payment_method: payment_method_direct_debit) }
