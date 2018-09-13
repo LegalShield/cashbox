@@ -53,4 +53,3 @@ end
 
 Dir[File.dirname(__FILE__) + '/support/helpers/*.rb'].each {|f| require(f) }
 Dir[File.dirname(__FILE__) + '/support/matchers/*.rb'].each {|f| require(f) }
-
