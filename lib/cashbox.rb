@@ -53,6 +53,7 @@ module Cashbox
       autoload :Address
       autoload :BillingPlan
       autoload :BillingPlanPeriod
+      autoload :CashboxLog
       autoload :CreditCard
       autoload :Description
       autoload :DirectDebit

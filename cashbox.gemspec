@@ -20,14 +20,18 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.13'
+  spec.add_development_dependency 'generator_spec', '~> 0.9.4'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rspec-its', '~> 1.2'
   spec.add_development_dependency 'webmock', '~> 2.0'
   spec.add_development_dependency 'pry-byebug', '~> 2.0'
+  spec.add_development_dependency 'sqlite3', '~> 1.3.13'
+  spec.add_development_dependency 'database_cleaner', '~> 1.7.0'
 
   spec.add_dependency 'httparty'
   spec.add_dependency 'activesupport'
   spec.add_dependency 'hashie'
   spec.add_dependency 'addressable'
+  spec.add_dependency 'activerecord'
 end

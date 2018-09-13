@@ -49,5 +49,13 @@ describe Cashbox::Request do
         timeout: 100
       })
     end
+
+    it 'logs the request operation' do
+      expect(subject).to have_received(:log_request)
+    end
+
+    it 'logs the response operation' do
+      expect(subject).to have_received(:log_response)
+    end
   end
 end
