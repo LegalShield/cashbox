@@ -22,6 +22,8 @@ describe Cashbox::Request do
       Cashbox.password = 'sekret'
       Cashbox.username = 'me'
 
+      allow(subject).to receive(:log_request)
+      allow(subject).to receive(:log_response)
       allow(Cashbox::Request).to receive(:send).with(:method, 'path', {
         option: true,
         basic_auth: { username: 'me', password: 'sekret' },

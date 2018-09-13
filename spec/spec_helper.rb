@@ -21,18 +21,21 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:deletion)
     DatabaseCleaner.clean
 
-    ActiveRecord::Schema.define do
-      create_table :cashbox_logs do |t|
-        t.text "uuid"
-        t.text "operation"
-        t.text "method"
-        t.text "url"
-        t.text "headers"
-        t.text "body"
+    unless ActiveRecord::Base.connection.table_exists? 'cashbox_logs'
+      ActiveRecord::Schema.define do
+        create_table :cashbox_logs do |t|
+          t.text "uuid"
+          t.text "operation"
+          t.text "method"
+          t.text "url"
+          t.text "headers"
+          t.text "body"
 
-        t.timestamps
+          t.timestamps
+        end
       end
     end
+
   end
 
   config.before(:each) do
