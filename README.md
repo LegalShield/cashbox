@@ -106,7 +106,7 @@ After checking out the repo, run `bundle install` to install dependencies. Then,
 You can log the request and response of a call to Vindicia by defining a block in your calling application and passing it to this gem.
 
 ```ruby
-Cashbox::Request.after_request do |method, path, options, response|
+Cashbox::Request.after_request_log do |method, path, options, response|
   puts method
   puts path
   puts options
