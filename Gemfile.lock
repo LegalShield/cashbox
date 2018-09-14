@@ -5,7 +5,7 @@ PATH
       activerecord
       activesupport
       addressable
-      hashie (~> 3.5.7)
+      hashie (= 3.5.7)
       httparty
 
 GEM
