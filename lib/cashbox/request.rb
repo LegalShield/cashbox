@@ -10,8 +10,26 @@ module Cashbox
       @options = options
     end
 
+    def self.after_request_log(&block)
+      @@after_request_log = block
+    end
+
+    def self.after_request_log_block
+      @@after_request_log ||= nil
+    end
+
+    def self.after_request_log_block_call(method, path, options, r)
+      @@after_request_log.call(method, path, options, r)
+    end
+
     def response
-      Hashie::Mash.new(self.class.send(@method, @path, @options.merge(default_options)))
+      resp = self.class.send(@method, @path, @options.merge(default_options))
+
+      if self.class.after_request_log_block
+        self.class.after_request_log_block_call(@method, @path, @options, resp)
+      end
+
+      Hashie::Mash.new(resp)
     end
 
     private
