@@ -26,7 +26,7 @@ module Cashbox
       res = Hashie::Mash.new(self.class.send(@method, @path, @options.merge(default_options)))
 
       if self.class.after_request_log_block
-        self.class.after_request_log_block_call
+        self.class.after_request_log_block_call(@method, @path, @options, res)
       end
 
       res
