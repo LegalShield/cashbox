@@ -11,22 +11,20 @@ module Cashbox
     end
 
     def self.after_request_log(&block)
-      @@after_request_log = block
+      @@after_request_log = block if block_given?
     end
 
     def self.after_request_log_block
       @@after_request_log ||= nil
     end
 
-    def self.after_request_log_block_call(method, path, options, r)
-      @@after_request_log.call(method, path, options, r)
-    end
-
     def response
       resp = self.class.send(@method, @path, @options.merge(default_options))
 
       if self.class.after_request_log_block
-        self.class.after_request_log_block_call(@method, @path, @options, resp)
+        resp.tap do |r|
+          self.class.after_request_log_block.call(@method, @path, @options, r)
+        end
       end
 
       Hashie::Mash.new(resp)
