@@ -64,7 +64,6 @@ describe Cashbox::Request do
         basic_auth: { username: 'me', password: 'sekret' },
         timeout: 100
       })
-
     end
 
     context 'is defined' do

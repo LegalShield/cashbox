@@ -1,5 +1,3 @@
-require 'pry'
-
 module Cashbox
   class Request
     include HTTParty
