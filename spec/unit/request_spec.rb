@@ -51,7 +51,8 @@ describe Cashbox::Request do
     end
   end
 
-  context 'after_request_log_block' do
+  context 'logging block' do
+    let(:block) do end
     subject { Cashbox::Request.new(:method, 'path', { option: true }) }
 
     before do
@@ -62,26 +63,26 @@ describe Cashbox::Request do
         option: true,
         basic_auth: { username: 'me', password: 'sekret' },
         timeout: 100
-      })
+      }).and_return({msg:"hello"})
 
-      allow(Cashbox::Request).to receive(:after_request_log_block_call)
+      allow(block).to receive(:call).with(any_args)
     end
 
     context 'is defined' do
       it 'is called' do
-        Cashbox::Request.after_request_log do end
+        allow(Cashbox::Request).to receive(:after_request_log_block).and_return(block)
+        Cashbox::Request.after_request_log(&block)
         subject.response
 
-        expect(Cashbox::Request).to have_received(:after_request_log_block_call)
+        expect(block).to have_received(:call).with(any_args)
       end
     end
 
     context 'is not defined' do
       it 'is not called' do
-        allow(Cashbox::Request).to receive(:after_request_log_block).and_return(nil)
         subject.response
 
-        expect(Cashbox::Request).not_to have_received(:after_request_log_block_call)
+        expect(block).not_to have_received(:call)
       end
     end
   end
