@@ -15,7 +15,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     ActiveRecord::Base.establish_connection(
       adapter: 'sqlite3',
-      database: 'test_database'
+      database: 'test_database.sql'
     )
 
     DatabaseCleaner.clean_with(:deletion)
