@@ -101,6 +101,20 @@ account.save
 
 After checking out the repo, run `bundle install` to install dependencies. Then, run `bundle exec rake` to run the tests. You can also run `bundle console` for an interactive prompt that will allow you to experiment.
 
+### Logging
+
+You can log the request and response of a call to Vindicia by defining a block in your calling application and passing it to this gem.
+
+```ruby
+Cashbox::Request.after_request do |method, path, options, response|
+  puts method
+  puts path
+  puts options
+  puts response
+end
+```
+
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/LegalShield/cashbox. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
