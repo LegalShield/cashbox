@@ -107,9 +107,11 @@ You can log the request and response of a call to Vindicia by defining a block i
 
 ```ruby
 Cashbox::Request.after_request_log do |method, path, options, response|
+  puts "Request >>>"
   puts method
   puts path
   puts options
+  puts "Response >>>"
   puts response
 end
 ```
