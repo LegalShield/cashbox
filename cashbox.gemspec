@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'httparty'
   spec.add_dependency 'activesupport'
-  spec.add_dependency 'hashie'
+  spec.add_dependency 'hashie', '~> 3.5.7'
   spec.add_dependency 'addressable'
   spec.add_dependency 'activerecord'
 end

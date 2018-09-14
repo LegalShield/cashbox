@@ -31,10 +31,10 @@ describe 'Account' do
 
     let!(:stub) do
       stub_post("/accounts/#{json['vid']}")
-        .with({ body: json })
+        .with({ body: json.to_json })
         .to_return({
           :status => 200,
-          :body => json.to_json,
+          :body => fixture('account'),
           :headers => { 'Content-Type': 'application/json' }
         })
     end
