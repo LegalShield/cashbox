@@ -113,9 +113,3 @@ describe Cashbox::Request do
     end
   end
 end
-
-
-
-
-
-
