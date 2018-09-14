@@ -22,6 +22,8 @@ describe Cashbox::Request do
       Cashbox.password = 'sekret'
       Cashbox.username = 'me'
 
+      allow(subject).to receive(:log_request)
+      allow(subject).to receive(:log_response)
       allow(Cashbox::Request).to receive(:send).with(:method, 'path', {
         option: true,
         basic_auth: { username: 'me', password: 'sekret' },
@@ -48,6 +50,14 @@ describe Cashbox::Request do
         },
         timeout: 100
       })
+    end
+
+    it 'logs the request operation' do
+      expect(subject).to have_received(:log_request)
+    end
+
+    it 'logs the response operation' do
+      expect(subject).to have_received(:log_response)
     end
   end
 end
