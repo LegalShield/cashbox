@@ -13,7 +13,7 @@ module Cashbox
     end
 
     def self.after_request_log(&block)
-      @@after_request_log = block
+      @@after_request_log = block if block_given?
     end
 
     def self.after_request_log_block

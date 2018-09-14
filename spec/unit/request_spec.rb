@@ -51,8 +51,8 @@ describe Cashbox::Request do
     end
   end
 
-  context 'logging block' do
-    let(:block) do end
+  context '#response' do
+    let(:block) { double("block", call: true) }
     subject { Cashbox::Request.new(:method, 'path', { option: true }) }
 
     before do
@@ -63,23 +63,22 @@ describe Cashbox::Request do
         option: true,
         basic_auth: { username: 'me', password: 'sekret' },
         timeout: 100
-      }).and_return({msg:"hello"})
+      })
 
-      allow(block).to receive(:call).with(any_args)
     end
 
     context 'is defined' do
       it 'is called' do
         allow(Cashbox::Request).to receive(:after_request_log_block).and_return(block)
-        Cashbox::Request.after_request_log(&block)
         subject.response
 
-        expect(block).to have_received(:call).with(any_args)
+        expect(block).to have_received(:call)
       end
     end
 
     context 'is not defined' do
       it 'is not called' do
+        allow(Cashbox::Request).to receive(:after_request_log_block).and_return(nil)
         subject.response
 
         expect(block).not_to have_received(:call)
@@ -87,4 +86,36 @@ describe Cashbox::Request do
     end
   end
 
+  def return_block(&block)
+    block
+  end
+
+  describe ".after_request_log" do
+    let(:block) do
+      return_block do
+      end
+    end
+
+    it "assigns the block if one is given" do
+      Cashbox::Request.class_variable_set(:@@after_request_log, nil)
+
+      Cashbox::Request.after_request_log(&block)
+
+      expect(Cashbox::Request.class_variable_get(:@@after_request_log)).to eq(block)
+    end
+
+    it "assigns the block if one is not given" do
+      Cashbox::Request.class_variable_set(:@@after_request_log, nil)
+
+      Cashbox::Request.after_request_log
+
+      expect(Cashbox::Request.class_variable_get(:@@after_request_log)).to eq(nil)
+    end
+  end
 end
+
+
+
+
+
+
