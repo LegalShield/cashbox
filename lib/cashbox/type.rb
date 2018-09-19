@@ -24,4 +24,13 @@ module Cashbox::Type
       end
     end
   end
+
+  def self.Metadata
+    @metadata = {
+      "vin:MandateFlag" => "1",
+      "vin:MandateVersion" => "1.0",
+      "vin:MandateBankName" => "",
+      "vin:MandateID" => "123456789"
+    }
+  end
 end

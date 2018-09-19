@@ -1,4 +1,5 @@
 require 'active_support/concern'
+require 'pry-byebug'
 
 module Cashbox::Rest
   module ReadWrite
@@ -16,6 +17,7 @@ module Cashbox::Rest
       end
 
       def save!
+        binding.pry
         request = Cashbox::Request.new(:post, route(self.vid), { body: self.to_json })
         self.class.cast(self, request.response)
         true
