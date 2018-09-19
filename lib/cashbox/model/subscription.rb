@@ -20,7 +20,7 @@ module Cashbox
     property :ends, coerce: Cashbox::Type.DateTime
     property :entitled_through, coerce: Cashbox::Type.DateTime
     property :items, coerce: Cashbox::Type.List(Cashbox::SubscriptionItem)
-    property :metadata, default: Cashbox::Type.Metadata
+    property :metadata, default: Cashbox::Metadata.new()
     property :message
     property :minimum_commitment
     property :most_recent_billing, coerce: Cashbox::Transaction
@@ -30,10 +30,5 @@ module Cashbox
     property :policy
     property :starts, coerce: Cashbox::Type.DateTime
     property :status
-
-
-    def assign_metadata
-      Cashbox::Type.Metadata if self.payment_method.direct_debit?
-    end
   end
 end
