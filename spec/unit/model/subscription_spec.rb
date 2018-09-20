@@ -21,6 +21,7 @@ describe Cashbox::Subscription do
   it { is_expected.to have_property(:ends).coercing_with(Cashbox::Type.DateTime) }
   it { is_expected.to have_property(:entitled_through).coercing_with(Cashbox::Type.DateTime) }
   it { is_expected.to have_property(:items).coercing_with(Cashbox::Type.List(Cashbox::SubscriptionItem)) }
+  it { is_expected.to have_property(:metadata).coercing_with(Cashbox::Metadata) }
   it { is_expected.to have_property(:message) }
   it { is_expected.to have_property(:minimum_commitment) }
   it { is_expected.to have_property(:most_recent_billing).coercing_with(Cashbox::Transaction) }
