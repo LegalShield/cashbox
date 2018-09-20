@@ -29,4 +29,45 @@ describe 'Subscription' do
     its(:billing_plan)   { is_expected.to be_a(Cashbox::BillingPlan) }
     its(:payment_method) { is_expected.to be_a(Cashbox::PaymentMethod) }
   end
+
+  describe 'create subscription' do
+    let(:subscription) do
+      Cashbox::Subscription.new(
+        metadata: {
+          "vin:MandateFlag": "1",
+          "vin:MandateVersion": "1.0",
+          "vin:MandateBankName": "The Bank NA",
+          "vin:MandateID": "1234123412341234"
+        }
+      )
+    end
+
+    let!(:stub) do
+      stub_post('/subscriptions')
+        .with({
+          body: {
+            object: 'Subscription',
+            id: 'sub_1234',
+            metadata: {
+              "vin:MandateFlag": "1",
+              "vin:MandateVersion": "1.0",
+              "vin:MandateBankName": "The Bank NA",
+              "vin:MandateID": "1234123412341234"
+            }
+          }.to_json
+        }).to_return({
+          :status => 200,
+          :body => fixture('subscription'),
+          :headers => { 'Content-Type': 'application/json' }
+        })
+    end
+
+    before do
+      subscription.save
+    end
+
+    it 'makes the correct call' do
+      expect(stub).to have_been_requested
+    end
+  end
 end

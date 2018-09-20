@@ -1,7 +1,5 @@
 module Cashbox
   class Metadata < Model
-    include Concern::Objectable
-
     property "vin:MandateFlag", default: "1"
     property "vin:MandateVersion", default: "1.0"
     property "vin:MandateBankName", default: "The Bank NA"

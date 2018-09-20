@@ -7,6 +7,4 @@ describe Cashbox::Metadata do
   it { is_expected.to have_property("vin:MandateVersion") }
   it { is_expected.to have_property("vin:MandateBankName") }
   it { is_expected.to have_property("vin:MandateID") }
-
-  its(:object) { is_expected.to eql('Metadata') }
 end
