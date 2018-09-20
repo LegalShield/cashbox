@@ -33,6 +33,7 @@ describe 'Subscription' do
   describe 'create subscription' do
     let(:subscription) do
       Cashbox::Subscription.new(
+        id: 'sub_1234',
         metadata: {
           "vin:MandateFlag": "1",
           "vin:MandateVersion": "1.0",
