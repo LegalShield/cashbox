@@ -20,6 +20,7 @@ module Cashbox
     property :ends, coerce: Cashbox::Type.DateTime
     property :entitled_through, coerce: Cashbox::Type.DateTime
     property :items, coerce: Cashbox::Type.List(Cashbox::SubscriptionItem)
+    property :metadata, coerce: Cashbox::Metadata
     property :message
     property :minimum_commitment
     property :most_recent_billing, coerce: Cashbox::Transaction
