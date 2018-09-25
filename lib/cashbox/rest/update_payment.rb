@@ -17,9 +17,7 @@ module Cashbox::Rest
             }
           }.to_json
         })
-        binding.pry
-        put request.response
-        #self.class.cast(self, request.response)
+        self.class.cast(self, request.response)
       end
     end
   end
