@@ -15,8 +15,15 @@ describe Cashbox::Rest::UpdatePayment do
       allow(subject.class).to receive(:cast)
 
       allow(Cashbox::Request).to receive(:new)
-        .with(:post, '/test_models/my-vid?update_behavior=CatchUp&replace_on_all_subscriptions=0&ignore_avs=0&ignore_cvn=0',
-              {body: payment_method.to_json})
+        .with(:post, '/test_models/my-vid?update_behavior=CatchUp&replace_on_all_subscriptions=0&ignore_avs=0&ignore_cvn=0', {
+          body: {
+            id: 'my-vid',
+            payment_methods: {
+              object: "List",
+              data: [payment_method]
+            }
+          }.to_json
+        })
         .and_return(request)
 
       subject.update_payment(payment_method)
@@ -24,8 +31,15 @@ describe Cashbox::Rest::UpdatePayment do
 
     it 'calls Cashbox::Request correctly' do
       expect(Cashbox::Request).to have_received(:new)
-        .with(:post, '/test_models/my-vid?update_behavior=CatchUp&replace_on_all_subscriptions=0&ignore_avs=0&ignore_cvn=0',
-              {body: payment_method.to_json})
+        .with(:post, '/test_models/my-vid?update_behavior=CatchUp&replace_on_all_subscriptions=0&ignore_avs=0&ignore_cvn=0', {
+          body: {
+            id: 'my-vid',
+            payment_methods: {
+              object: "List",
+              data: [payment_method]
+            }
+          }.to_json
+        })
     end
 
     it 'passes the response to cast correctly' do
