@@ -10,5 +10,6 @@ module Cashbox::Rest
     autoload :Helpers
     autoload :ReadWrite
     autoload :Refund
+    autoload :UpdatePayment
   end
 end
