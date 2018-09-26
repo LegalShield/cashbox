@@ -134,4 +134,34 @@ describe 'Account' do
       expect(stub_all).to have_been_requested
     end
   end
+
+  describe 'updating the payment method on an account' do
+    let(:account) { Cashbox::Account.new({ vid: '1' }) }
+    let(:payment_method) { Cashbox::PaymentMethod.new }
+
+    let!(:stub) do
+      stub_post('/accounts/1?update_behavior=CatchUp&replace_on_all_subscriptions=0&ignore_avs=0&ignore_cvn=0')
+        .with({
+          body: {
+            id: '1',
+            payment_methods: {
+              object: "List",
+              data: [payment_method]
+            }
+          }.to_json})
+        .to_return({
+          :status => 200,
+          :body => fixture('payment_method'),
+          :headers => { 'Content-Type': 'application/json' }
+        })
+    end
+
+    before do
+      account.update_payment(payment_method)
+    end
+
+    it 'makes the correct api call' do
+      expect(stub).to have_been_requested
+    end
+  end
 end

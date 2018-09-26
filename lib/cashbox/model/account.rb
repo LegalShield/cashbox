@@ -2,6 +2,7 @@ module Cashbox
   class Account < Model
     include Concern::Objectable
     include Rest::ReadWrite
+    include Rest::UpdatePayment
 
     property :id
     property :vid
