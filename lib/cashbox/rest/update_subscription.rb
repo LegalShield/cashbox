@@ -1,4 +1,4 @@
-require 'active_support/concern'
+require "active_support/concern"
 
 module Cashbox::Rest
   module UpdateSubscription
@@ -7,31 +7,26 @@ module Cashbox::Rest
     included do
       include Cashbox::Rest::Helpers
 
-      def update_subscription(new_product, delete_product)
+      def update(new_product_id, replace_product_id = nil)
         body = {
           object: "Subscription",
           id: self.vid,
           product: {
             object: "Product",
-            id: new_product
+            id: new_product_id
           }
         }
-        if new_product
-          body.product = {
-            object: "Product",
-            id: new_product
-          }
-        end
 
-        if delete_product
-          body.replaces = {
+        if replace_product_id
+          body[:replaces] = {
             object: "SubscriptionItem",
             product: {
               object: "Product",
-              id: delete_product
+              id: replace_product_id
             }
           }
         end
+
         request = Cashbox::Request.new(:post, "#{route(self.vid)}?effective_date=today&bill_prorated_period=true", {
           body: {
             items: [
