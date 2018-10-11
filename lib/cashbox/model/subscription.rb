@@ -4,6 +4,7 @@ module Cashbox
     include Rest::ReadWrite
     include Rest::Cancel
     include Rest::Disentitle
+    include Rest::UpdateSubscription
 
     property :id
     property :vid
