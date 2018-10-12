@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Cashbox::Rest::UpdateSubscription do
   class self::TestModel < Cashbox::Model
@@ -6,9 +6,9 @@ describe Cashbox::Rest::UpdateSubscription do
     property :vid
   end
 
-  describe '#update' do
-    subject { self.class::TestModel.new({ vid: 'my-vid' }) }
-    let(:request) { double('request', { response: 'my data' }) }
+  describe "#update" do
+    subject { self.class::TestModel.new({ vid: "my-vid" }) }
+    let(:request) { double("request", { response: "my data" }) }
     let(:new_product_id) { "123" }
     let(:old_product_id) { "456" }
 
@@ -17,7 +17,7 @@ describe Cashbox::Rest::UpdateSubscription do
         allow(subject.class).to receive(:cast)
 
         allow(Cashbox::Request).to receive(:new)
-          .with(:post, '/test_models/my-vid?effective_date=today&bill_prorated_period=true', {
+          .with(:post, "/test_models/my-vid?effective_date=today&bill_prorated_period=true", {
           body: {
             items: [
               object: "Subscription",
@@ -34,9 +34,9 @@ describe Cashbox::Rest::UpdateSubscription do
         subject.update_subscription(new_product_id)
       end
 
-      it 'calls the Cashbox::Request correctly when sent in parameters contains only a new product id' do
+      it "calls the Cashbox::Request correctly when sent in parameters contains only a new product id" do
         expect(Cashbox::Request).to have_received(:new)
-          .with(:post, '/test_models/my-vid?effective_date=today&bill_prorated_period=true', {
+          .with(:post, "/test_models/my-vid?effective_date=today&bill_prorated_period=true", {
           body: {
             items: [
               object: "Subscription",
