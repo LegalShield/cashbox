@@ -12,7 +12,7 @@ describe Cashbox::Rest::UpdateSubscription do
     let(:new_product_id) { "123" }
     let(:replace_product_id) { "456" }
 
-    context "update with new product id" do
+    context "update with adding a new product id to the subscription" do
       before do
         allow(subject.class).to receive(:cast)
 
@@ -34,7 +34,7 @@ describe Cashbox::Rest::UpdateSubscription do
         subject.update(new_product_id)
       end
 
-      it 'calls the Cashbox::Request correctly when sent in value contains a new product id' do
+      it 'calls the Cashbox::Request correctly when sent in parameters contains only a new product id' do
         expect(Cashbox::Request).to have_received(:new)
           .with(:post, '/test_models/my-vid?effective_date=today&bill_prorated_period=true', {
           body: {
@@ -80,7 +80,7 @@ describe Cashbox::Rest::UpdateSubscription do
         subject.update(new_product_id, replace_product_id)
       end
 
-      it "calls the Cashbox:Request correctly when replace product id is sent in" do
+      it "calls the Cashbox:Request correctly when the replace product id paramenter is sent in" do
         expect(Cashbox::Request).to have_received(:new)
         .with(:post, "/test_models/my-vid?effective_date=today&bill_prorated_period=true", {
           body: {

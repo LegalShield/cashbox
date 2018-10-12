@@ -7,7 +7,7 @@ module Cashbox::Rest
     included do
       include Cashbox::Rest::Helpers
 
-      def update(new_product_id, replace_product_id = nil)
+      def update(new_product_id, old_product_id = nil)
         body = {
           object: "Subscription",
           id: self.vid,
@@ -17,12 +17,12 @@ module Cashbox::Rest
           }
         }
 
-        if replace_product_id
+        if old_product_id
           body[:replaces] = {
             object: "SubscriptionItem",
             product: {
               object: "Product",
-              id: replace_product_id
+              id: old_product_id
             }
           }
         end
