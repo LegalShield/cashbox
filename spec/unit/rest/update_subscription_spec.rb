@@ -10,7 +10,7 @@ describe Cashbox::Rest::UpdateSubscription do
     subject { self.class::TestModel.new({ vid: 'my-vid' }) }
     let(:request) { double('request', { response: 'my data' }) }
     let(:new_product_id) { "123" }
-    let(:replace_product_id) { "456" }
+    let(:old_product_id) { "456" }
 
     context "update with adding a new product id to the subscription" do
       before do
@@ -31,7 +31,7 @@ describe Cashbox::Rest::UpdateSubscription do
         })
         .and_return(request)
 
-        subject.update(new_product_id)
+        subject.update_subscription(new_product_id)
       end
 
       it 'calls the Cashbox::Request correctly when sent in parameters contains only a new product id' do
@@ -69,7 +69,7 @@ describe Cashbox::Rest::UpdateSubscription do
                 object: "SubscriptionItem",
                 product:  {
                   object: "Product",
-                  id: replace_product_id
+                  id: old_product_id
                 }
               }
             ]
@@ -77,7 +77,7 @@ describe Cashbox::Rest::UpdateSubscription do
         })
         .and_return(request)
 
-        subject.update(new_product_id, replace_product_id)
+        subject.update_subscription(new_product_id, old_product_id)
       end
 
       it "calls the Cashbox:Request correctly when the replace product id paramenter is sent in" do
@@ -95,7 +95,7 @@ describe Cashbox::Rest::UpdateSubscription do
                 object: "SubscriptionItem",
                 product:  {
                   object: "Product",
-                  id: replace_product_id
+                  id: old_product_id
                 }
               }
             ]

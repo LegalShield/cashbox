@@ -7,7 +7,7 @@ module Cashbox::Rest
     included do
       include Cashbox::Rest::Helpers
 
-      def update(new_product_id, old_product_id = nil)
+      def update_subscription(new_product_id, old_product_id = nil)
         body = {
           object: "Subscription",
           id: self.vid,
