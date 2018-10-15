@@ -42,7 +42,7 @@ module Cashbox
     def remove_subscription_item(product_to_remove)
       self.items.reject! do |subscription_item|
         subscription_item.product.id == product_to_remove.id
-      end
+      end || []
     end
 
     def replace_subscription_item(product_to_add, product_to_remove)
