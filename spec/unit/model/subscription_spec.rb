@@ -33,4 +33,86 @@ describe Cashbox::Subscription do
   it { is_expected.to have_property(:status) }
 
   its(:object) { is_expected.to eql('Subscription') }
+
+  context 'adding and removing subsription items' do
+    let(:product_description) do
+      Cashbox::ProductDescription.new({
+        language: 'EN',
+        description: 'describy'
+      })
+    end
+
+    let(:billing_plan_period) do
+      Cashbox::BillingPlanPeriod.new({
+        type: 'Day',
+        quantity: 1,
+        cycles: 0
+      })
+    end
+
+    let(:billing_plan) do
+      Cashbox::BillingPlan.new({
+        id: '1',
+        description: 'daily',
+        status: 'Active',
+        periods: [ billing_plan_period ]
+      })
+    end
+
+    let(:entitlement) do
+      Cashbox::Entitlement.new({
+        id: 'test-entitlement',
+        description: 'described entitlement'
+      })
+    end
+
+    let(:price) do
+      Cashbox::ProductPrice.new({
+        amount: 9.99,
+        currency: 'USD'
+      })
+    end
+
+    let(:product) do
+      Cashbox::Product.new({
+        id: '123456',
+        descriptions: [ product_description ],
+        status: 'Active',
+        default_billing_plan: billing_plan,
+        entitlements: [ entitlement ],
+        prices: [ price ]
+      })
+    end
+
+    let(:subscription) do
+      Cashbox::Subscription.new(
+        id: 'sub_1235',
+        metadata: {
+          "vin:MandateFlag": "1",
+          "vin:MandateVersion": "1.0",
+          "vin:MandateBankName": "The Bank NA",
+          "vin:MandateID": "1234123412341234"
+        }
+      )
+    end
+
+    describe 'add' do
+      it 'adds the subscription item to the items array' do
+        subscription.add(product)
+
+        expect(subscription.items.first.product).to eql(product)
+      end
+    end
+
+    describe 'remove' do
+      it 'removes the correct subscription item from the items' do
+        subscription.add(product)
+        expect(subscription.items).not_to be_empty
+
+        subscription.remove(product.id)
+
+        expect(subscription.items).to be_empty
+      end
+    end
+  end
 end

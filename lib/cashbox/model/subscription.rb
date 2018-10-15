@@ -4,7 +4,6 @@ module Cashbox
     include Rest::ReadWrite
     include Rest::Cancel
     include Rest::Disentitle
-    include Rest::UpdateSubscription
 
     property :id
     property :vid
@@ -31,5 +30,17 @@ module Cashbox
     property :policy
     property :starts, coerce: Cashbox::Type.DateTime
     property :status
+
+    def add(product)
+      new_subscription_item = SubscriptionItem.new({ product: product })
+      self.items = items || []
+      self.items.push(new_subscription_item)
+    end
+
+    def remove(product_id)
+      self.items.each do |item|
+        self.items.delete(item) if item.product.id == product_id
+      end
+    end
   end
 end
