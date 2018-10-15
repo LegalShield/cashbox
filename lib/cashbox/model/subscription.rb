@@ -40,10 +40,8 @@ module Cashbox
     end
 
     def remove_subscription_item(product_to_remove)
-      self.items.select do |subscription_item|
+      self.items.reject! do |subscription_item|
         subscription_item.product.id == product_to_remove.id
-      end.map do |subscription_item|
-        self.items.delete(subscription_item)
       end
     end
 
