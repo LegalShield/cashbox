@@ -31,16 +31,32 @@ module Cashbox
     property :starts, coerce: Cashbox::Type.DateTime
     property :status
 
-    def add(product)
-      new_subscription_item = SubscriptionItem.new({ product: product })
-      self.items = items || []
-      self.items.push(new_subscription_item)
+    def add_subscription_item(product_to_add)
+      subscription_item_to_add = Cashbox::SubscriptionItem.new({
+        product: product_to_add
+      })
+
+      self.items.push(subscription_item_to_add)
     end
 
-    def remove(product_id)
-      self.items.each do |item|
-        self.items.delete(item) if item.product.id == product_id
+    def remove_subscription_item(product_to_remove)
+      self.items.select do |subscription_item|
+        subscription_item.product.id == product_to_remove.id
+      end.map do |subscription_item|
+        self.items.delete(subscription_item)
       end
+    end
+
+    def replace_subscription_item(product_to_add, product_to_remove)
+      self.add_subscription_item(product_to_add)
+
+      subscription_items_to_remove = self.remove_subscription_item(product_to_remove)
+
+      self.items.last.replaces = subscription_items_to_remove[0].id
+    end
+
+    def update_subscription_items
+      Cashbox::Request.new(:post, "#{route(self.id)}?effective_date=today&bill_prorated_period=true", { body: self.to_json })
     end
   end
 end

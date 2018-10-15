@@ -5,5 +5,6 @@ module Cashbox
     property :id
     property :product, coerce: Cashbox::Product
     property :index_number, from: :index
+    property :replaces
   end
 end

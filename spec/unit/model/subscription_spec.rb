@@ -34,36 +34,81 @@ describe Cashbox::Subscription do
 
   its(:object) { is_expected.to eql('Subscription') }
 
-  context 'adding and removing subsription items' do
-    let(:product) do
-      Cashbox::Product.new({
-        id: '123456',
-        status: 'Active'
-      })
-    end
-
+  describe 'replacing subscribed items' do
     let(:subscription) do
-      Cashbox::Subscription.new(
-        id: 'sub_1235'
-      )
+      Cashbox::Subscription.new({ id: 'sub_1235', items: [ old_subscription_item ] })
     end
 
-    describe 'add' do
-      it 'adds the subscription item to the items array' do
-        subscription.add(product)
+    let(:old_subscription_item) do
+      Cashbox::SubscriptionItem.new({ product: old_product })
+    end
 
-        expect(subscription.items.first.product).to eql(product)
+    let(:new_subscription_item) do
+      Cashbox::SubscriptionItem.new({ product: new_product })
+    end
+
+    let(:new_product) do
+      Cashbox::Product.new({ id: 'new product' })
+    end
+
+    let(:old_product) do
+      Cashbox::Product.new({ id: 'existing product' })
+    end
+
+    describe '#replace_subscription_item' do
+      before do
+        subscription.replace_subscription_item(new_product, old_product)
+      end
+
+      it 'removes the old product & subscription item from the items array' do
+        expect(subscription.items).not_to include(old_subscription_item)
+      end
+
+      it 'adds the new product & subscription item to the items array' do
+        new_subscription_item.replaces = old_subscription_item.id
+        expect(subscription.items).to include(new_subscription_item)
+        expect(subscription.items[0].replaces).to eql(old_subscription_item.id)
       end
     end
 
-    describe 'remove' do
-      it 'removes the correct subscription item from the items' do
-        subscription.add(product)
-        expect(subscription.items).not_to be_empty
+    describe '#add_subscription_item' do
+      before do
+        subscription.add_subscription_item(new_product)
+      end
 
-        subscription.remove(product.id)
+      it 'adds the subscription item to the array' do
+        expect(subscription.items).to include(old_subscription_item)
+        expect(subscription.items).to include(new_subscription_item)
+      end
+    end
 
-        expect(subscription.items).to be_empty
+    describe '#remove_subscription_item' do
+      before do
+        subscription.remove_subscription_item(old_product)
+      end
+
+      it 'removes the subscription item from the array' do
+        expect(subscription.items).not_to include(old_subscription_item)
+      end
+    end
+
+    describe '#update_subscription_items' do
+      let(:request) { double('request', { response: 'my data' }) }
+
+      before do
+        allow(Cashbox::Request).to receive(:new)
+          .with(:post, '/subscriptions/sub_1235?effective_date=today&bill_prorated_period=true', {
+          body: subscription.to_json
+        }).and_return(request)
+
+        subscription.update_subscription_items
+      end
+
+      it 'makes the correct api call to cashbox' do
+        expect(Cashbox::Request).to have_received(:new)
+          .with(:post, '/subscriptions/sub_1235?effective_date=today&bill_prorated_period=true', {
+          body: subscription.to_json
+        })
       end
     end
   end
