@@ -40,7 +40,7 @@ module Cashbox
     end
 
     def remove_subscription_item(product_to_remove)
-      index = items.index {|subscription_item| subscription_item.product.id == product_to_remove.id } if items
+      index = (items || []).index {|subscription_item| subscription_item.product.id == product_to_remove.id }
       items.delete_at(index) if index
     end
 
