@@ -40,17 +40,23 @@ module Cashbox
     end
 
     def remove_subscription_item(product_to_remove)
-      self.items.reject! do |subscription_item|
-        subscription_item.product.id == product_to_remove.id
-      end || []
+      subscription_item_to_remove = nil
+
+      self.items.each do |subscription_item|
+        if subscription_item.product.id == product_to_remove.id
+          subscription_item_to_remove = subscription_item
+          self.items.delete(subscription_item)
+        end
+      end
+
+      subscription_item_to_remove
     end
 
     def replace_subscription_item(product_to_add, product_to_remove)
+      subscription_item_to_remove = self.remove_subscription_item(product_to_remove)
+
       self.add_subscription_item(product_to_add)
-
-      subscription_items_to_remove = self.remove_subscription_item(product_to_remove)
-
-      self.items.last.replaces = subscription_items_to_remove[0].id
+      self.items.last.replaces = subscription_item_to_remove.product.id if subscription_item_to_remove
     end
 
     def update_subscription_items

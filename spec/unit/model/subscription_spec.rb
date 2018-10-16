@@ -40,7 +40,7 @@ describe Cashbox::Subscription do
     end
 
     let(:old_subscription_item) do
-      Cashbox::SubscriptionItem.new({ product: old_product })
+      Cashbox::SubscriptionItem.new({ id: 'sub_item_old', product: old_product })
     end
 
     let(:new_subscription_item) do
@@ -55,19 +55,39 @@ describe Cashbox::Subscription do
       Cashbox::Product.new({ id: 'existing product' })
     end
 
+    let(:wrong_product) do
+      Cashbox::Product.new({ id: 'wrong product' })
+    end
+
     describe '#replace_subscription_item' do
-      before do
-        subscription.replace_subscription_item(new_product, old_product)
+      context 'old product is found within the subscription items' do
+        before do
+          expect(subscription.items).to include(old_subscription_item)
+          subscription.replace_subscription_item(new_product, old_product)
+        end
+
+        it 'removes the old product & subscription item from the items array' do
+          expect(subscription.items).not_to include(old_subscription_item)
+        end
+
+        it 'adds the new product & subscription item to the items array' do
+          new_subscription_item.replaces = old_subscription_item.product.id
+          expect(subscription.items).to include(new_subscription_item)
+        end
+
+        it 'sets replaces to the removed product id' do
+          expect(subscription.items[0].replaces).to eql(old_subscription_item.product.id)
+        end
       end
 
-      it 'removes the old product & subscription item from the items array' do
-        expect(subscription.items).not_to include(old_subscription_item)
-      end
+      context 'old product is not found within the subscription items' do
+        before do
+          subscription.replace_subscription_item(new_product, wrong_product)
+        end
 
-      it 'adds the new product & subscription item to the items array' do
-        new_subscription_item.replaces = old_subscription_item.id
-        expect(subscription.items).to include(new_subscription_item)
-        expect(subscription.items[0].replaces).to eql(old_subscription_item.id)
+        it 'sets replaces to nil' do
+          expect(subscription.items[0].replaces).to eql(nil)
+        end
       end
     end
 
