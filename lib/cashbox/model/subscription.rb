@@ -36,30 +36,23 @@ module Cashbox
         product: product_to_add
       })
 
-      self.items.push(subscription_item_to_add)
+      items.push(subscription_item_to_add)
     end
 
     def remove_subscription_item(product_to_remove)
-      subscription_item_to_remove = nil
-
-      self.items.each do |subscription_item|
-        if subscription_item.product.id == product_to_remove.id
-          subscription_item_to_remove = self.items.delete(subscription_item)
-        end
-      end
-
-      subscription_item_to_remove
+      index = items.index {|subscription_item| subscription_item.product.id == product_to_remove.id } if items
+      items.delete_at(index) if index
     end
 
     def replace_subscription_item(product_to_add, product_to_remove)
-      subscription_item_to_remove = self.remove_subscription_item(product_to_remove)
+      subscription_item_to_remove = remove_subscription_item(product_to_remove)
 
-      self.add_subscription_item(product_to_add)
-      self.items.last.replaces = subscription_item_to_remove.product.id if subscription_item_to_remove
+      add_subscription_item(product_to_add)
+      items.last.replaces = subscription_item_to_remove.product.id if subscription_item_to_remove
     end
 
     def update_subscription_items
-      Cashbox::Request.new(:post, "#{route(self.id)}?effective_date=today&bill_prorated_period=true", { body: self.to_json })
+      Cashbox::Request.new(:post, "#{route(id)}?effective_date=today&bill_prorated_period=true", { body: self.to_json })
     end
   end
 end
