@@ -135,7 +135,7 @@ describe Cashbox::Subscription do
     end
 
     before do
-      expect(subscription.items)
+      expect(subscription.items).to include(old_subscription_item)
       subscription.remove_subscription_item(old_product)
     end
 
