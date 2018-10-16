@@ -44,8 +44,7 @@ module Cashbox
 
       self.items.each do |subscription_item|
         if subscription_item.product.id == product_to_remove.id
-          subscription_item_to_remove = subscription_item
-          self.items.delete(subscription_item)
+          subscription_item_to_remove = self.items.delete(subscription_item)
         end
       end
 
