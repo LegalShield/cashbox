@@ -33,4 +33,17 @@ describe Cashbox::Subscription do
   it { is_expected.to have_property(:status) }
 
   its(:object) { is_expected.to eql('Subscription') }
+
+  describe "grace?" do
+    let(:subscription_in_grace) { Cashbox::PaymentMethod.new(type: "CreditCard") }
+    let(:subscription_not_in_grace) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
+
+    it "returns true for type credit card when asking if credit_card" do
+      expect(payment_method_credit_card.credit_card?).to be(true)
+    end
+
+    it "returns false for type direct debit when asking if credit_card" do
+      expect(payment_method_direct_debit.credit_card?).to be(false)
+    end
+  end
 end
