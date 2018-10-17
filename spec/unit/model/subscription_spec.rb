@@ -37,7 +37,7 @@ describe Cashbox::Subscription do
 
   describe "constants" do
     it "GRACE_STATUSES contains expected values" do
-      expect(Cashbox::Subscription::GRACE_STATUSES).to eql(%w[In\ Retry Grace\ Period Failure\ to\ collect])
+      expect(Cashbox::Subscription::GRACE_STATUSES).to eql(%w[In\ Retry Grace\ Period Failed\ To\ Collect])
     end
   end
 

@@ -4,7 +4,7 @@ module Cashbox
     include Rest::ReadWrite
     include Rest::Cancel
     include Rest::Disentitle
-    GRACE_STATUSES = %w[In\ Retry Grace\ Period Failure\ to\ collect].freeze
+    GRACE_STATUSES = %w[In\ Retry Grace\ Period Failed\ To\ Collect].freeze
 
     property :id
     property :vid
