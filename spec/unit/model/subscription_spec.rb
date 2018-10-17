@@ -34,16 +34,23 @@ describe Cashbox::Subscription do
 
   its(:object) { is_expected.to eql('Subscription') }
 
-  describe "grace?" do
-    let(:subscription_in_grace) { Cashbox::PaymentMethod.new(type: "CreditCard") }
-    let(:subscription_not_in_grace) { Cashbox::PaymentMethod.new(type: "DirectDebit") }
 
-    it "returns true for type credit card when asking if credit_card" do
-      expect(payment_method_credit_card.credit_card?).to be(true)
+  describe "constants" do
+    it "GRACE_STATUSES contains expected values" do
+      expect(Cashbox::Subscription::GRACE_STATUSES).to eql(%w[Retry Grace\ Period Failure\ to\ collect])
+    end
+  end
+
+  describe "grace?" do
+    let(:subscription_in_grace) { Cashbox::Subscription.new(billing_state: Cashbox::Subscription::GRACE_STATUSES[0]) }
+    let(:subscription_not_in_grace) { Cashbox::Subscription.new(bililng_state: "Current") }
+
+    it "returns true if subscription billing state is a grace / retry billing_state" do
+      expect(subscription_in_grace.grace?).to be(true)
     end
 
-    it "returns false for type direct debit when asking if credit_card" do
-      expect(payment_method_direct_debit.credit_card?).to be(false)
+    it "returns false if subscription billing state is not a grace / retry billing_state" do
+      expect(subscription_not_in_grace.grace?).to be(false)
     end
   end
 end

@@ -4,6 +4,7 @@ module Cashbox
     include Rest::ReadWrite
     include Rest::Cancel
     include Rest::Disentitle
+    GRACE_STATUSES = %w[Retry Grace\ Period Failure\ to\ collect].freeze
 
     property :id
     property :vid
@@ -30,5 +31,9 @@ module Cashbox
     property :policy
     property :starts, coerce: Cashbox::Type.DateTime
     property :status
+
+    def grace?
+      GRACE_STATUSES.include?(billing_state)
+    end
   end
 end
