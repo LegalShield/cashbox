@@ -5,6 +5,10 @@ module Cashbox
     include Rest::Cancel
     include Rest::Disentitle
 
+    IN_RETRY = "In Retry".freeze
+    FAILED_TO_COLLECT = "Failed To Collect".freeze
+    GRACE_PERIOD = "Grace Period".freeze
+
     property :id
     property :vid
     property :created, coerce: Cashbox::Type.DateTime
@@ -30,6 +34,18 @@ module Cashbox
     property :policy
     property :starts, coerce: Cashbox::Type.DateTime
     property :status
+
+    def in_retry?
+      billing_state == IN_RETRY
+    end
+
+    def failed_to_collect?
+      billing_state == FAILED_TO_COLLECT
+    end
+
+    def grace_period?
+      billing_state == GRACE_PERIOD
+    end
 
     def add_subscription_item(product_to_add)
       subscription_item_to_add = Cashbox::SubscriptionItem.new({

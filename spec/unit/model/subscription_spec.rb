@@ -34,6 +34,62 @@ describe Cashbox::Subscription do
 
   its(:object) { is_expected.to eql('Subscription') }
 
+
+  describe "constants" do
+    it "IN_RETRY is assigned to the correct value" do
+      expect(Cashbox::Subscription::IN_RETRY).to eql("In Retry")
+    end
+
+    it "FAILED_TO_COLLECT is assigned to the correct value" do
+      expect(Cashbox::Subscription::FAILED_TO_COLLECT).to eql("Failed To Collect")
+    end
+
+    it "GRACE_PERIOD is assigned to the correct value" do
+      expect(Cashbox::Subscription::GRACE_PERIOD).to eql("Grace Period")
+    end
+  end
+  
+  context "billing state methods" do
+    describe "in_retry?" do
+      let(:subscription_retry) { Cashbox::Subscription.new(billing_state: Cashbox::Subscription::IN_RETRY) }
+      let(:subscription_not_retry) { Cashbox::Subscription.new(billing_state: "Not") }
+
+      it "returns true if subscription billing state is 'in retry'" do
+        expect(subscription_retry.in_retry?).to be(true)
+      end
+
+      it "returns false if subscription billing state is not 'in retry'" do
+        expect(subscription_not_retry.in_retry?).to be(false)
+      end
+    end
+
+    describe "failed_to_collect?" do
+      let(:subscription_failed) { Cashbox::Subscription.new(billing_state: Cashbox::Subscription::FAILED_TO_COLLECT) }
+      let(:subscription_not_failed) { Cashbox::Subscription.new(billing_state: "Not") }
+
+      it "returns true if subscription billing state is 'failed to collect'" do
+        expect(subscription_failed.failed_to_collect?).to be(true)
+      end
+
+      it "returns false if subscription billing state is not 'failed to collect'" do
+        expect(subscription_not_failed.failed_to_collect?).to be(false)
+      end
+    end
+
+    describe "grace_period?" do
+      let(:subscription_in_grace) { Cashbox::Subscription.new(billing_state: Cashbox::Subscription::GRACE_PERIOD) }
+      let(:subscription_not_in_grace) { Cashbox::Subscription.new(billing_state: "Not") }
+
+      it "returns true if subscription billing state is 'grace period'" do
+        expect(subscription_in_grace.grace_period?).to be(true)
+      end
+
+      it "returns false if subscription billing state is not 'grace period'" do
+        expect(subscription_not_in_grace.grace_period?).to be(false)
+      end
+    end
+  end
+  
   describe '#replace_subscription_item' do
     let(:subscription) do
       Cashbox::Subscription.new({ id: 'sub_1235', items: [ old_subscription_item ] })
