@@ -4,7 +4,10 @@ module Cashbox
     include Rest::ReadWrite
     include Rest::Cancel
     include Rest::Disentitle
-    GRACE_STATUSES = %w[In\ Retry Grace\ Period Failed\ To\ Collect].freeze
+
+    IN_RETRY = "In Retry".freeze
+    FAILED_TO_COLLECT = "Failed To Collect".freeze
+    GRACE_PERIOD = "Grace Period".freeze
 
     property :id
     property :vid
@@ -32,8 +35,16 @@ module Cashbox
     property :starts, coerce: Cashbox::Type.DateTime
     property :status
 
-    def grace?
-      GRACE_STATUSES.include?(billing_state)
+    def in_retry?
+      billing_state == IN_RETRY
+    end
+
+    def failed_to_collect?
+      billing_state == FAILED_TO_COLLECT
+    end
+
+    def grace_period?
+      billing_state == GRACE_PERIOD
     end
 
     def add_subscription_item(product_to_add)
