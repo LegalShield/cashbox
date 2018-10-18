@@ -52,7 +52,7 @@ describe Cashbox::Subscription do
   context "billing state methods" do
     describe "in_retry?" do
       let(:subscription_retry) { Cashbox::Subscription.new(billing_state: Cashbox::Subscription::IN_RETRY) }
-      let(:subscription_not_retry) { Cashbox::Subscription.new(bililng_state: "Not") }
+      let(:subscription_not_retry) { Cashbox::Subscription.new(billing_state: "Not") }
 
       it "returns true if subscription billing state is 'in retry'" do
         expect(subscription_retry.in_retry?).to be(true)
@@ -65,7 +65,7 @@ describe Cashbox::Subscription do
 
     describe "failed_to_collect?" do
       let(:subscription_failed) { Cashbox::Subscription.new(billing_state: Cashbox::Subscription::FAILED_TO_COLLECT) }
-      let(:subscription_not_failed) { Cashbox::Subscription.new(bililng_state: "Not") }
+      let(:subscription_not_failed) { Cashbox::Subscription.new(billing_state: "Not") }
 
       it "returns true if subscription billing state is 'failed to collect'" do
         expect(subscription_failed.failed_to_collect?).to be(true)
@@ -78,12 +78,12 @@ describe Cashbox::Subscription do
 
     describe "grace_period?" do
       let(:subscription_in_grace) { Cashbox::Subscription.new(billing_state: Cashbox::Subscription::GRACE_PERIOD) }
-      let(:subscription_not_in_grace) { Cashbox::Subscription.new(bililng_state: "Not") }
-    
+      let(:subscription_not_in_grace) { Cashbox::Subscription.new(billing_state: "Not") }
+
       it "returns true if subscription billing state is 'grace period'" do
         expect(subscription_in_grace.grace_period?).to be(true)
       end
-    
+
       it "returns false if subscription billing state is not 'grace period'" do
         expect(subscription_not_in_grace.grace_period?).to be(false)
       end
