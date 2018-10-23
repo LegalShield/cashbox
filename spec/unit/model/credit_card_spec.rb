@@ -21,12 +21,12 @@ describe Cashbox::CreditCard do
 
     it 'returns master card when the master card prefix 2 is sent' do
       credit_card = Cashbox::CreditCard.new({ bin: 234 })
-      expect(credit_card.network).to eql('Master Card')
+      expect(credit_card.network).to eql('MasterCard')
     end
 
     it 'returns master card when the master card prefix 5 is sent' do
       credit_card = Cashbox::CreditCard.new({ bin: 534 })
-      expect(credit_card.network).to eql('Master Card')
+      expect(credit_card.network).to eql('MasterCard')
     end
   end
 end
