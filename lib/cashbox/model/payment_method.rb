@@ -4,6 +4,9 @@ module Cashbox
     include Rest::ReadWrite
     include Rest::Archive
 
+    CREDIT_CARD = 'CreditCard'
+    DIRECT_DEBIT = 'DirectDebit'
+
     property :id
     property :vid
     property :created, coerce: Cashbox::Type.DateTime
@@ -18,11 +21,11 @@ module Cashbox
     property :validation_status
 
     def credit_card?
-      type == "CreditCard"
+      type == CREDIT_CARD
     end
 
     def direct_debit?
-      type == "DirectDebit"
+      type == DIRECT_DEBIT
     end
 
     def last_digits
@@ -30,10 +33,7 @@ module Cashbox
     end
 
     def card_network
-      return unless type == "CreditCard"
-      bin_number = credit_card.bin.to_s
-      return "Visa" if bin_number.start_with?("4")
-      return "Master Card" if bin_number.start_with?("2", "5")
+      credit_card.network unless direct_debit?
     end
   end
 end
