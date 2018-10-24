@@ -12,4 +12,21 @@ describe Cashbox::CreditCard do
   it { is_expected.to have_property(:last_digits) }
 
   its(:object) { is_expected.to eql('CreditCard') }
+
+  describe '#network' do
+    it 'returns visa when the visa prefix is sent' do
+      credit_card = Cashbox::CreditCard.new({ bin: 4321 })
+      expect(credit_card.network).to eql('Visa')
+    end
+
+    it 'returns master card when the master card prefix 2 is sent' do
+      credit_card = Cashbox::CreditCard.new({ bin: 234 })
+      expect(credit_card.network).to eql('MasterCard')
+    end
+
+    it 'returns master card when the master card prefix 5 is sent' do
+      credit_card = Cashbox::CreditCard.new({ bin: 534 })
+      expect(credit_card.network).to eql('MasterCard')
+    end
+  end
 end

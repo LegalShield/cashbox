@@ -61,19 +61,35 @@ describe Cashbox::PaymentMethod do
     end
   end
 
-  describe "card_network" do
-    let(:credit_card_visa) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "4321" }) }
-    let(:credit_card_master_card) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "2345" }) }
-    let(:credit_card_master_card_two) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "5432" }) }
-    let(:credit_card_unknown) { Cashbox::PaymentMethod.new(type: "CreditCard", credit_card: { bin: "9999" }) }
-    let(:direct_debit) { Cashbox::PaymentMethod.new(type: "DirectDebit", direct_debit: {}) }
+  describe "#card_network" do
+    context 'with a credit card' do
+      let(:credit_card) { Cashbox::CreditCard.new({ }) }
 
-    it "returns the correct card networks" do
-      expect(credit_card_visa.card_network).to eq("Visa")
-      expect(credit_card_master_card.card_network).to eq("Master Card")
-      expect(credit_card_master_card_two.card_network).to eq("Master Card")
-      expect(credit_card_unknown.card_network).to eq(nil)
-      expect(direct_debit.card_network).to eq(nil)
+      subject do
+        Cashbox::PaymentMethod.new({
+          type: Cashbox::PaymentMethod::CREDIT_CARD,
+          credit_card: credit_card
+        })
+      end
+
+      it 'delegates to credit card for the network name' do
+        allow(credit_card).to receive(:network).and_return('Visa')
+        subject.card_network
+        expect(credit_card).to have_received(:network)
+      end
+    end
+
+    context 'with a direct debit' do
+      subject do
+        Cashbox::PaymentMethod.new({
+          type: Cashbox::PaymentMethod::DIRECT_DEBIT,
+          direct_debit: Cashbox::DirectDebit.new({ })
+        })
+      end
+
+      it 'does not delegate to direct debit' do
+        expect(subject.card_network).to be_nil
+      end
     end
   end
 end
