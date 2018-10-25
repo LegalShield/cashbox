@@ -140,7 +140,7 @@ describe 'Account' do
     let(:payment_method) { Cashbox::PaymentMethod.new }
 
     let!(:stub) do
-      stub_post('/accounts/1?update_behavior=CatchUp&replace_on_all_subscriptions=0&ignore_avs=0&ignore_cvn=0')
+      stub_post('/accounts/1?update_behavior=CatchUp&replace_on_all_subscriptions=1&ignore_avs=0&ignore_cvn=0')
         .with({
           body: {
             id: '1',
