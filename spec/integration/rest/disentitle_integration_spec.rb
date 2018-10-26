@@ -18,7 +18,7 @@ describe 'Disentitle' do
   describe '#disentitle' do
     subject { self.class::Widget.new({ vid: 'vid', id: 1, name: 'my-widget' }) }
     let(:body) { { 'object' => 'Widget', 'vid' => 1, 'id' => 1, 'name' => 'your-widget' }.to_json }
-    let!(:stub) { stub_post('/widgets/vid/actions/cancel').with({ body: { disentitle: 'Yes' }.to_json }).to_return(api_response(body)) }
+    let!(:stub) { stub_post('/widgets/vid/actions/cancel?disentitle=true').to_return(api_response(body)) }
 
     before { subject.disentitle }
 
