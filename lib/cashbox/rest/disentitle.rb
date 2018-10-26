@@ -8,7 +8,7 @@ module Cashbox::Rest
       include Cashbox::Rest::Helpers
 
       def disentitle
-        request = Cashbox::Request.new(:post, "#{route(self.vid)}/actions/cancel?disentitle=true")
+        request = Cashbox::Request.new(:post, "#{route(self.vid)}/actions/cancel", { query: { disentitle: true } })
         self.class.cast(self, request.response)
       end
     end
