@@ -8,7 +8,13 @@ module Cashbox::Rest
       include Cashbox::Rest::Helpers
 
       def update_payment(payment_method)
-        request = Cashbox::Request.new(:post, "#{route(self.vid)}?update_behavior=CatchUp&replace_on_all_subscriptions=0&ignore_avs=0&ignore_cvn=0", {
+        request = Cashbox::Request.new(:post, route(self.vid), {
+          query: {
+            update_behavior: 'CatchUp',
+            replace_on_all_subscriptions: false,
+            ignore_avs: false,
+            ignore_cvn: false
+          },
           body: {
             id: self.vid,
             payment_methods: {

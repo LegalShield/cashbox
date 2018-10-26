@@ -14,14 +14,14 @@ describe Cashbox::Rest::Disentitle do
       allow(subject.class).to receive(:cast)
 
       allow(Cashbox::Request).to receive(:new)
-        .with(:post, '/test_models/my-vid/actions/cancel?disentitle=true')
+        .with(:post, '/test_models/my-vid/actions/cancel', { query: { disentitle: true } })
         .and_return(request)
 
       subject.disentitle
     end
 
     it 'calls Cashbox::Request correctly' do
-      expect(Cashbox::Request).to have_received(:new).with(:post, '/test_models/my-vid/actions/cancel?disentitle=true')
+      expect(Cashbox::Request).to have_received(:new).with(:post, '/test_models/my-vid/actions/cancel', { query: { disentitle: true } })
     end
 
     it 'passes the response to cast correctly' do

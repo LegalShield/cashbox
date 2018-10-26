@@ -15,7 +15,13 @@ describe Cashbox::Rest::UpdatePayment do
       allow(subject.class).to receive(:cast)
 
       allow(Cashbox::Request).to receive(:new)
-        .with(:post, '/test_models/my-vid?update_behavior=CatchUp&replace_on_all_subscriptions=0&ignore_avs=0&ignore_cvn=0', {
+        .with(:post, '/test_models/my-vid', {
+          query: {
+            update_behavior: 'CatchUp',
+            replace_on_all_subscriptions: false,
+            ignore_avs: false,
+            ignore_cvn: false
+          },
           body: {
             id: 'my-vid',
             payment_methods: {
@@ -31,7 +37,13 @@ describe Cashbox::Rest::UpdatePayment do
 
     it 'calls Cashbox::Request correctly' do
       expect(Cashbox::Request).to have_received(:new)
-        .with(:post, '/test_models/my-vid?update_behavior=CatchUp&replace_on_all_subscriptions=0&ignore_avs=0&ignore_cvn=0', {
+        .with(:post, '/test_models/my-vid', {
+          query: {
+            update_behavior: 'CatchUp',
+            replace_on_all_subscriptions: false,
+            ignore_avs: false,
+            ignore_cvn: false
+          },
           body: {
             id: 'my-vid',
             payment_methods: {
