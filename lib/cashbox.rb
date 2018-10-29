@@ -15,7 +15,18 @@ module Cashbox
         hash.each { |k, v| self.send("#{k}=", v) }
       end
     end
+  end
 
+  def self.before_request(&block)
+    Cashbox::Request.before_request_blocks << block
+  end
+
+  def self.after_request(&block)
+    Cashbox::Request.after_request_blocks << block
+  end
+
+  def self.cache_config(&block)
+    block.call(Cashbox::Cache)
   end
 
   def self.production!
@@ -46,6 +57,7 @@ module Cashbox
     autoload :Type
     autoload :Request
     autoload :Rest
+    autoload :Cache
 
     autoload_under 'model' do
       autoload :Model
@@ -81,4 +93,8 @@ module Cashbox
     autoload :Objectable, 'cashbox/concern/objectable'
     autoload :Persistable, 'cashbox/concern/persistable'
   end
+
+  # this is bad, dunno where to put this atm
+  Cashbox::Request.before_request_blocks = []
+  Cashbox::Request.after_request_blocks = []
 end
