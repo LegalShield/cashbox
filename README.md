@@ -33,32 +33,32 @@ require "cashbox"
 The library needs to be configured with your account's username & password which is available from your account rep. To configure the gem run:
 
 ```ruby
-Cashbox.config({ username: 'me', password: 'sekret' })
-```
-
-or
-
-```ruby
 Cashbox.config do |c|
+  # set your username and password
   c.username = 'me'
   c.password = 'sekret'
+  
+  # run in production 
+  c.production!
 end
 ```
 
 #### Switch Environments
 
 ```ruby
->> Cashbox.production!
-=> "https://api.vindicia.com"
+Cashbox.config do |c|
+  c.production!
+  # sets base uri to "https://api.vindicia.com"
 
->> Cashbox.sandbox!
-=> "https://api.prodtest.vindicia.com"
+  c.sandbox!
+  c.development!
+  # sets base uri to "https://api.prodtest.vindicia.com"
 
->> Cashbox.test!
-=> "http://example.com"
-# also sets
-# Cashbox.username == 'username'
-# Cashbox.password == 'password'
+  c.test!
+  # sets base uri to "http://example.com"
+  # sets username = 'username'
+  # sets password = 'password
+end
 ```
 
 #### Fetching

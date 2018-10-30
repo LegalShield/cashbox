@@ -7,7 +7,7 @@ module Cashbox
     base_uri 'https://api.vindicia.com'
 
     class << self
-      attr_accessor :before_request_blocks, :after_request_blocks
+      attr_accessor :before_request_hooks, :after_request_hooks
     end
 
     def initialize(method, path, options = {})
@@ -17,18 +17,16 @@ module Cashbox
     end
 
     def response
-      self.class.before_request_blocks.each do |block|
-        block.call(@method, @path, @options)
+      self.class.before_request_hooks.each do |hook|
+        hook.call(@method, @path, @options)
       end
 
       response = Cashbox::Cache.get(cache_key) if should_cache?
       response ||= self.class.send(@method, @path, @options.merge(default_options)).parsed_response
       Cashbox::Cache.set(cache_key, response) if should_cache?
 
-      self.class.after_request_blocks.each do |block|
-        response.tap do |res|
-          block.call(@method, @path, @options, res)
-        end
+      self.class.after_request_hooks.each do |hook|
+        hook.call(@method, @path, @options, response)
       end
 
       Hashie::Mash.new(response)

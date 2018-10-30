@@ -10,31 +10,28 @@ module Cashbox::Cache
     end
 
     def get(key)
-      value_cache_key = cache_key_with_namespace(key)
-      expires_at_cache_key = expires_at_cache_key_with_namespace(key)
-
-      value = @cache[value_cache_key]
+      value = read(cache_key_with_namespace(key))
       value = Marshal.load(value) if value
 
-      expires_at = @cache[expires_at_cache_key]
+      expires_at = read(expires_at_cache_key_with_namespace(key))
       expires_at = Time.at(expires_at) if expires_at
 
+      puts 'miss'   if value.nil?
+      puts 'no ttl' if expires_at.nil?
+      puts 'hit'    if expires_at && Time.now < expires_at
+
       if value.nil? || expires_at.nil? || Time.now < expires_at
-        puts 'hit or nil'
         return value
       else
-        puts 'miss or timeout'
+        puts 'delete'
         delete(key) && delete(expires_at_cache_key)
         return nil
       end
     end
 
     def set(key, value)
-      value_cache_key = cache_key_with_namespace(key)
-      expires_at_cache_key = expires_at_cache_key_with_namespace(key)
-
-      @cache[value_cache_key] = Marshal.dump(value)
-      @cache[expires_at_cache_key] = (Time.now.to_i + @expires_in) if @expires_in
+      write(cache_key_with_namespace(key), Marshal.dump(value))
+      write(expires_at_cache_key_with_namespace(key), Time.now.to_i + @expires_in) if @expires_in
     end
 
     def delete(key)
@@ -42,6 +39,14 @@ module Cashbox::Cache
     end
 
     private
+
+    def read(key)
+      @cache[key]
+    end
+
+    def write(key, value)
+
+    end
 
     def cache_key_with_namespace(key)
       [ @namespace, key ].compact.join(':')
