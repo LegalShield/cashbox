@@ -17,7 +17,7 @@ module Cashbox
     property :active
     property :type
     property :account_holder
-    property :billing_address
+    property :billing_address, coerce: Cashbox::Address
     property :validation_status
 
     def credit_card?
