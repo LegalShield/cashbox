@@ -124,7 +124,7 @@ describe 'ReadWrite' do
     context 'when asking for more than the max limit' do
       let(:first_body) { {
         'object' => 'List',
-        'data' => [ { 'object' => 'Widget', 'vid' => 1, 'id' => 1, 'name' => 'my-widget' } ],
+        'data' => 100.times.map { { 'object' => 'Widget', 'vid' => 1, 'id' => 1, 'name' => 'my-widget' } },
         'next' => '/widgets?limit=100&starting_after=1&name=my-widget',
         'previous' => '/widgets?limit=100&ending_before=1&name=my-widget'
       }.to_json }
@@ -135,13 +135,13 @@ describe 'ReadWrite' do
 
       let(:second_body) { {
         'object' => 'List',
-        'data' => [ { 'object' => 'Widget', 'vid' => 2, 'id' => 2, 'name' => 'my-widget' } ],
+        'data' => 20.times.map { { 'object' => 'Widget', 'vid' => 2, 'id' => 2, 'name' => 'my-widget' } },
         'next' => nil,
         'previous' => '/widgets?limit=100&ending_before=2&name=my-widget'
       }.to_json }
 
       let!(:second_stub) do
-        stub_get('/widgets').with({ query: { name: 'my-widget', limit: 100, starting_after: 1 } }).to_return(api_response(second_body))
+        stub_get('/widgets').with({ query: { name: 'my-widget', limit: 20, starting_after: 1 } }).to_return(api_response(second_body))
       end
 
       let!(:results) { subject.where({ name: 'my-widget', limit: 120 }) }
@@ -152,7 +152,7 @@ describe 'ReadWrite' do
       end
 
       it 'merges the results from the multiple requests into a single results array' do
-        expect(results.size).to eql(2)
+        expect(results.size).to eql(120)
       end
     end
   end
@@ -162,7 +162,7 @@ describe 'ReadWrite' do
 
     let(:first_body) { {
       'object' => 'List',
-      'data' => [ { 'object' => 'Widget', 'vid' => 1, 'id' => 1, 'name' => 'my-widget' } ],
+      'data' => 100.times.map { { 'object' => 'Widget', 'vid' => 1, 'id' => 1, 'name' => 'my-widget' } },
       'next' => '/widgets?limit=100&starting_after=1',
       'previous' => '/widgets?limit=100&ending_before=1'
     }.to_json }
@@ -173,7 +173,7 @@ describe 'ReadWrite' do
 
     let(:second_body) { {
       'object' => 'List',
-      'data' => [ { 'object' => 'Widget', 'vid' => 2, 'id' => 2, 'name' => 'my-widget' } ],
+      'data' => 100.times.map { { 'object' => 'Widget', 'vid' => 2, 'id' => 2, 'name' => 'my-widget' } },
       'next' => '/widgets?limit=100&starting_after=2',
       'previous' => '/widgets?limit=100&ending_before=2'
     }.to_json }
@@ -184,7 +184,7 @@ describe 'ReadWrite' do
 
     let(:third_body) { {
       'object' => 'List',
-      'data' => [ { 'object' => 'Widget', 'vid' => 3, 'id' => 3, 'name' => 'my-widget' } ],
+      'data' => 100.times.map { { 'object' => 'Widget', 'vid' => 3, 'id' => 3, 'name' => 'my-widget' } },
       'next' => nil,
       'previous' => '/widgets?limit=100&ending_before=3'
     }.to_json }

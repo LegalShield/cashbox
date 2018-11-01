@@ -3,7 +3,6 @@ require 'active_support/concern'
 module Cashbox::Rest
   module ReadWrite
     extend ActiveSupport::Concern
-
     DEFAULT_LIMIT = 100.freeze
 
     included do
@@ -53,7 +52,7 @@ module Cashbox::Rest
         response = Cashbox::Request.new(:get, route, { query: params }).response
         objects = cast(self.new, response)
 
-        if (response.next && (max.nil? || objects.count < max))
+        if (objects.count == DEFAULT_LIMIT) && (response.next && (max.nil? || objects.count < max))
           max -= objects.count if max
           params = Addressable::URI.parse(response.next).query_values
           objects.concat(query(params, max))
