@@ -2,4 +2,3 @@ cashbox:
   build:
     image: cashbox
     dockerfile: Dockerfile
-  cached: true

@@ -64,7 +64,7 @@ describe Cashbox::Rest::ReadWrite do
     let(:instance) { double('instance') }
 
     before do
-      allow(subject).to receive(:cast).and_return(['first'], ['second'])
+      allow(subject).to receive(:cast).and_return((0..99).to_a)
       allow(subject).to receive(:new).and_return(instance)
     end
 
@@ -94,17 +94,17 @@ describe Cashbox::Rest::ReadWrite do
       end
 
       it 'contacts the response into a single result set' do
-        expect(results).to eql(['first', 'second'])
+        expect(results).to eq((0..99).to_a.concat((0..99).to_a))
       end
     end
 
     context 'when the result set is 1' do
-      let(:response_one) { double('response_one', { next: 'test_models?page=2&field=value' }) }
+      let(:response_one) { double('response_one', { next: 'test_models?page=2&field=value', previous: '/', data: [] }) }
       let(:request_one) { double('request_one', { response: response_one }) }
 
       before do
         allow(Cashbox::Request).to receive(:new).with(:get, '/test_models', { query: { 'field' => 'value', 'limit' => 100 } }).and_return(request_one)
-        allow(subject).to receive(:cast).and_return([])
+        allow(subject).to receive(:cast).and_return([1])
 
         subject.where({ field: 'value' })
       end
@@ -138,7 +138,7 @@ describe Cashbox::Rest::ReadWrite do
       end
 
       it 'contacts the response into a single result set' do
-        expect(results).to eql(['first'])
+        expect(results).to eql((0..99).to_a)
       end
     end
   end
