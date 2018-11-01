@@ -98,6 +98,22 @@ describe Cashbox::Rest::ReadWrite do
       end
     end
 
+    context 'when the result set is 1' do
+      let(:response_one) { double('response_one', { next: 'test_models?page=2&field=value' }) }
+      let(:request_one) { double('request_one', { response: response_one }) }
+
+      before do
+        allow(Cashbox::Request).to receive(:new).with(:get, '/test_models', { query: { 'field' => 'value', 'limit' => 100 } }).and_return(request_one)
+        allow(subject).to receive(:cast).and_return([])
+
+        subject.where({ field: 'value' })
+      end
+
+      it 'calls Cashbox::Request correctly' do
+        expect(Cashbox::Request).to have_received(:new).once
+      end
+    end
+
     context 'limit 10' do
       let(:response) { double('response_one', { next: nil }) }
       let(:request) { double('request', { response: response }) }
