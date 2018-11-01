@@ -46,12 +46,26 @@ describe 'Product' do
   describe 'all' do
     subject { Cashbox::Product.all }
 
+    let(:products_one) do
+      hash = JSON.parse(fixture('products_one'))
+      hash['data'] = 100.times.map { hash['data'][0] }
+      hash['total_count'] = hash['data'].count
+      hash.to_json
+    end
+
+    let(:products_two) do
+      hash = JSON.parse(fixture('products_two'))
+      hash['data'] = 100.times.map { hash['data'][0] }
+      hash['total_count'] = hash['data'].count
+      hash.to_json
+    end
+
     before do
       stub_get('/products')
         .with({ query: { limit: 100 } })
         .to_return({
           :status => 200,
-          :body => fixture('products_one'),
+          :body => products_one,
           :headers => { 'Content-Type': 'application/json' }
         })
 
@@ -59,7 +73,7 @@ describe 'Product' do
         .with({ query: { limit: 100, starting_after: 1 } })
         .to_return({
           :status => 200,
-          :body => fixture('products_two'),
+          :body => products_two,
           :headers => { 'Content-Type': 'application/json' }
         })
 
@@ -80,7 +94,7 @@ describe 'Product' do
     end
 
     it 'fetches 2 records' do
-      expect(subject.count).to eql(2)
+      expect(subject.count).to eql(200)
     end
   end
 
