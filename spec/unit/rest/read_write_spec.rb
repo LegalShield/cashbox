@@ -24,6 +24,10 @@ describe Cashbox::Rest::ReadWrite do
       it 'raises argument error when id is missing' do
         expect { subject.find }.to raise_error(ArgumentError)
       end
+
+      it 'raises argument error when id is nil' do
+        expect { subject.find(nil) }.to raise_error(ArgumentError)
+      end
     end
 
     context 'with args' do
