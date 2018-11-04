@@ -23,7 +23,6 @@ module Cashbox::Rest
 
     class_methods do
       def find(id)
-        raise ArgumentError.new("wrong number of arguments (given 0, expected 1)") if id.nil?
         request = Cashbox::Request.new(:get, route(id))
         self.cast(self.new, request.response)
       end
