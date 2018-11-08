@@ -1,8 +1,10 @@
 FROM paasmule/rbenv
 
+RUN mkdir /app
+ADD .ruby-version /app
+
 RUN rbenv install $(cat .ruby-version)
 
-RUN mkdir /app
 ADD . /app
 WORKDIR /app
 
