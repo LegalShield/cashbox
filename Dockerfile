@@ -8,6 +8,7 @@ RUN rbenv install $(cat .ruby-version)
 
 ADD Gemfile ./
 ADD Gemfile.lock ./
-RUN gem install bundler && bundle install -j20
+RUN gem install bundler
+RUN bundle install -j20
 
 ADD . ./
