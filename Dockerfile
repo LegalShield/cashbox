@@ -5,7 +5,7 @@ WORKDIR /app
 
 ADD Gemfile Gemfile.lock cashbox.gemspec ./
 
-RUN mkdir ./lib/cashbox/
+RUN mkdir -p ./lib/cashbox/
 ADD lib/cashbox/version.rb ./lib/cashbox/
 
 ADD .ruby-version ./
