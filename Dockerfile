@@ -6,12 +6,13 @@ WORKDIR /app
 ADD .ruby-version ./
 RUN rbenv install $(cat .ruby-version)
 
-ADD Gemfile ./
-ADD Gemfile.lock ./
 RUN gem install bundler
-RUN whoami
-RUN cat Gemfile
-Run cat Gemfile.lock
+
+ADD Gemfile Gemfile.lock cashbox.gemspec ./
+
+RUN mkdir ./lib/cashbox/
+ADD lib/cashbox/version.rb ./lib/casbox/
+
 RUN bundle install
 
 ADD . ./
