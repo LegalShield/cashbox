@@ -34,7 +34,7 @@ module Cashbox
     property :policy
     property :starts, coerce: Cashbox::Type.DateTime
     property :status
-
+    
     def in_retry?
       billing_state == IN_RETRY
     end
@@ -67,8 +67,13 @@ module Cashbox
       items.last.replaces = subscription_item_to_remove.product.id if subscription_item_to_remove
     end
 
-    def update_subscription_items
-      Cashbox::Request.new(:post, "#{route(id)}?effective_date=today&bill_prorated_period=true", { body: self.to_json })
+    def update_subscription_items    
+      request = Cashbox::Request.new(:post, "#{route(id)}?effective_date=today&bill_prorated_period=false", { body: self.to_json })
+      self.class.cast(self, request.response)
+    end
+
+    def reset_items_for_update
+        items.clear
     end
   end
 end
