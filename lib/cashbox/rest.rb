@@ -11,5 +11,6 @@ module Cashbox::Rest
     autoload :ReadWrite
     autoload :Refund
     autoload :UpdatePayment
+    autoload :UpdateSubscription
   end
 end
