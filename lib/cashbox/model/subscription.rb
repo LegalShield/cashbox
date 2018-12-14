@@ -4,7 +4,6 @@ module Cashbox
     include Rest::ReadWrite
     include Rest::Cancel
     include Rest::Disentitle
-    include Rest::UpdateSubscription
 
     IN_RETRY = "In Retry".freeze
     FAILED_TO_COLLECT = "Failed To Collect".freeze
@@ -48,11 +47,19 @@ module Cashbox
       billing_state == GRACE_PERIOD
     end
 
-    def replace_subscription_item(product_to_add, product_to_remove)
-      subscription_item_to_remove = remove_subscription_item(product_to_remove)
-
-      add_subscription_item(product_to_add)
-      items.last.replaces = subscription_item_to_remove.product.id if subscription_item_to_remove
+    def add_subscription_items(subscprition_items)
+      request = Cashbox::Request.new(:post, route(vid), 
+          {
+              query: { 
+                  effective_date: 'today',
+                  bill_prorated_period: true
+              },
+              body: {
+                  id: id,
+                  items: subscprition_items
+              }.to_json
+          })
+      self.class.cast(self, request.response)  
     end
   end
 end
