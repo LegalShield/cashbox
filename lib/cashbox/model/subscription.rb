@@ -34,7 +34,7 @@ module Cashbox
     property :policy
     property :starts, coerce: Cashbox::Type.DateTime
     property :status
-    
+
     def in_retry?
       billing_state == IN_RETRY
     end
@@ -47,12 +47,12 @@ module Cashbox
       billing_state == GRACE_PERIOD
     end
 
-    def add_subscription_items(subscprition_items)
+    def add_subscription_items(subscprition_items, bill_prorated)
       request = Cashbox::Request.new(:post, route(vid), 
           {
               query: { 
                   effective_date: 'today',
-                  bill_prorated_period: true
+                  bill_prorated_period: bill_prorated
               },
               body: {
                   id: id,

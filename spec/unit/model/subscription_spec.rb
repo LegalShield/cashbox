@@ -112,7 +112,7 @@ describe Cashbox::Subscription do
          })
          .and_return(request)
       
-         subscription.add_subscription_items(subscprition_items)
+         subscription.add_subscription_items(subscprition_items, true)
     end
 
     it 'makes the correct api call to cashbox' do
