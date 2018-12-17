@@ -47,7 +47,7 @@ module Cashbox
       billing_state == GRACE_PERIOD
     end
 
-    def add_subscription_items(subscprition_items, bill_prorated)
+    def add_subscription_items(subscription_items, bill_prorated)
       request = Cashbox::Request.new(:post, route(vid), 
           {
               query: { 
@@ -56,7 +56,7 @@ module Cashbox
               },
               body: {
                   id: id,
-                  items: subscprition_items
+                  items: subscription_items
               }.to_json
           })
       self.class.cast(self, request.response)  
