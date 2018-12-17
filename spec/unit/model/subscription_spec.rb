@@ -93,6 +93,7 @@ describe Cashbox::Subscription do
   describe '#add_subscription_items' do
     
     subject { Cashbox::Subscription.new(id: 'sub_15', vid: 'sub_1235' ) }
+    
     let!(:subscription_item_1) { Cashbox::SubscriptionItem.new(product: Cashbox::Product.new(id: "123")) }
     let!(:subscription_item_2) { Cashbox::SubscriptionItem.new(product: Cashbox::Product.new(id: "456")) }
     let(:request) { double('request', { response: 'my data' }) }
