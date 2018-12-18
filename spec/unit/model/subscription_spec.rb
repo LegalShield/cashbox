@@ -115,8 +115,9 @@ describe Cashbox::Subscription do
           }.to_json
          })
          .and_return(request)
-      
-         subject.add_subscription_items(subscprition_items, true)
+      subject.add_subscription_items(subscprition_items, true)
+
+    allow(subject).to receive(:add_subscription_items).with(subscprition_items, true).and_return('add called')
     end
 
     it 'makes the correct api call to cashbox' do
@@ -136,6 +137,10 @@ describe Cashbox::Subscription do
 
     it 'passes the response to cast correctly' do
       expect(subject.class).to have_received(:cast).with(subject, 'my data')
+    end
+
+    it 'passes parameters correctly' do      
+      expect(subject.add_subscription_items(subscprition_items, true)).to eql('add called')
     end
   end
 end
