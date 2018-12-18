@@ -117,7 +117,7 @@ describe Cashbox::Subscription do
          .and_return(request)
       subject.add_subscription_items(subscprition_items, true)
 
-    allow(subject).to receive(:add_subscription_items).with(subscprition_items, true).and_return('add called')
+      allow(Cashbox::Subscription).to receive(:cast).and_return('add called')
     end
 
     it 'makes the correct api call to cashbox' do
