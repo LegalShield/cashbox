@@ -35,10 +35,10 @@ describe 'Subscription' do
       Cashbox::Subscription.new(
         id: 'sub_1234',
         metadata: {
-          "vin:MandateFlag": "1",
-          "vin:MandateVersion": "1.0",
-          "vin:MandateBankName": "The Bank NA",
-          "vin:MandateID": "1234123412341234"
+          'vin:MandateFlag': '1',
+          'vin:MandateVersion': '1.0',
+          'vin:MandateBankName': 'The Bank NA',
+          'vin:MandateID': '1234123412341234'
         }
       )
     end
@@ -50,10 +50,10 @@ describe 'Subscription' do
             object: 'Subscription',
             id: 'sub_1234',
             metadata: {
-              "vin:MandateFlag": "1",
-              "vin:MandateVersion": "1.0",
-              "vin:MandateBankName": "The Bank NA",
-              "vin:MandateID": "1234123412341234"
+              'vin:MandateFlag': '1',
+              'vin:MandateVersion': '1.0',
+              'vin:MandateBankName': 'The Bank NA',
+              'vin:MandateID': '1234123412341234'
             }
           }.to_json
         }).to_return({
@@ -69,6 +69,47 @@ describe 'Subscription' do
 
     it 'makes the correct call' do
       expect(stub).to have_been_requested
+    end
+  end
+
+  describe 'update subscription' do
+    let(:subscription) do
+      Cashbox::Subscription.new(
+        id: 'sub_1234',
+        items: [
+          {
+             object: 'SubscriptionItem',
+             replaces: 'sub_1234.1'
+          }
+        ]
+      )
+    end
+
+    let!(:update_stub) do
+      stub_post('/subscriptions')
+        .with({
+          body: {
+            object: 'Subscription',
+            id: 'sub_1234',
+            items: [
+              {
+                 object: 'SubscriptionItem',
+                 replaces: 'sub_1234.1'
+              }
+            ]
+          }.to_json
+        }).to_return({
+          :status => 200,
+          :body => fixture('subscription'),
+          :headers => { 'Content-Type': 'application/json' }
+        })
+    end
+    before do
+      subscription.save
+    end
+
+    it 'makes the correct call' do
+      expect(update_stub).to have_been_requested
     end
   end
 end

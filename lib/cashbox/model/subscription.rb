@@ -61,5 +61,20 @@ module Cashbox
           })
       self.class.cast(self, request.response)  
     end
+
+    def remove_subscription_items(subscription_items, bill_prorated)
+      request = Cashbox::Request.new(:post, route(vid),
+        {
+          query: {
+            effective_date: 'next_billing',
+            bill_prorated_period: bill_prorated
+          },
+          body: {
+            id: id,
+            items: subscription_items
+          }.to_json
+        })
+      self.class.cast(self, request.response)
+    end
   end
 end

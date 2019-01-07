@@ -143,4 +143,57 @@ describe Cashbox::Subscription do
       expect(subject.add_subscription_items(subscprition_items, true)).to eql('add called')
     end
   end
+
+  describe '#remove_subscription_items' do
+    subject { Cashbox::Subscription.new(id: 'sub_15', vid: 'sub_1235' ) }
+
+    let!(:subscription_item_1) { {'replaces': '123'} }
+    let!(:subscription_item_2) { {'replaces': '456'} }
+    let(:request) { double('request', { response: 'my data' }) }
+    let(:subscription_items) { [subscription_item_1, subscription_item_2] }
+
+    before do
+      allow(subject.class).to receive(:cast)
+
+      allow(Cashbox::Request).to receive(:new)
+        .with(:post, '/subscriptions/sub_1235',
+        {
+          query: {
+              effective_date: 'next_billing',
+              bill_prorated_period: false
+          },
+          body: {
+              id: 'sub_15',
+              items: subscription_items
+          }.to_json
+         })
+         .and_return(request)
+      subject.remove_subscription_items(subscription_items, false)
+
+      allow(Cashbox::Subscription).to receive(:cast).and_return('remove called')
+    end
+
+    it 'makes the correct api call to cashbox' do
+      expect(Cashbox::Request).to have_received(:new)
+        .with(:post, '/subscriptions/sub_1235',
+        {
+          query: {
+              effective_date: 'next_billing',
+              bill_prorated_period: false
+          },
+          body: {
+              id: 'sub_15',
+              items: subscription_items
+          }.to_json
+         })
+    end
+
+    it 'passes the response to cast correctly' do
+      expect(subject.class).to have_received(:cast).with(subject, 'my data')
+    end
+
+    it 'passes parameters correctly' do
+      expect(subject.remove_subscription_items(subscription_items, false)).to eql('remove called')
+    end
+  end
 end
