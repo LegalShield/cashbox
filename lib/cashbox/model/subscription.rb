@@ -47,11 +47,11 @@ module Cashbox
       billing_state == GRACE_PERIOD
     end
 
-    def add_subscription_items(subscription_items, bill_prorated)
-      request = Cashbox::Request.new(:post, route(vid), 
+    def modify_subscription_items(subscription_items, bill_prorated, effective_date='today')
+      request = Cashbox::Request.new(:post, route(vid),
           {
-              query: { 
-                  effective_date: 'today',
+              query: {
+                  effective_date: effective_date,
                   bill_prorated_period: bill_prorated
               },
               body: {
@@ -59,21 +59,6 @@ module Cashbox
                   items: subscription_items
               }.to_json
           })
-      self.class.cast(self, request.response)  
-    end
-
-    def remove_subscription_items(subscription_items, bill_prorated)
-      request = Cashbox::Request.new(:post, route(vid),
-        {
-          query: {
-            effective_date: 'next_billing',
-            bill_prorated_period: bill_prorated
-          },
-          body: {
-            id: id,
-            items: subscription_items
-          }.to_json
-        })
       self.class.cast(self, request.response)
     end
   end
