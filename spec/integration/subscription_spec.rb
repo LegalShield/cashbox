@@ -1,65 +1,65 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe 'Subscription' do
+describe "Subscription" do
   before { Cashbox.test!  }
   after { Cashbox.production! }
 
-  describe 'first transaction' do
+  describe "first transaction" do
     subject do
       Cashbox::Subscription.first
     end
 
     before do
-      stub_get('/subscriptions')
+      stub_get("/subscriptions")
         .with({ query: { limit: 1 } })
         .to_return({
           :status => 200,
-          :body => fixture('subscriptions'),
-          :headers => { 'Content-Type': 'application/json' }
+          :body => fixture("subscriptions"),
+          :headers => { "Content-Type": "application/json" }
         })
     end
 
     it { is_expected.to be_a(Cashbox::Subscription) }
 
-    its(:object)         { is_expected.to eql('Subscription') }
-    its(:id)             { is_expected.to eql('8-1486761541') }
-    its(:vid)            { is_expected.to eql('2297d68dbe0e4cc37aaf553c302af4b2bb20abbd') }
-    its(:created)        { is_expected.to eql(DateTime.parse('2017-02-10T13:19:03-08:00')) }
+    its(:object)         { is_expected.to eql("Subscription") }
+    its(:id)             { is_expected.to eql("8-1486761541") }
+    its(:vid)            { is_expected.to eql("2297d68dbe0e4cc37aaf553c302af4b2bb20abbd") }
+    its(:created)        { is_expected.to eql(DateTime.parse("2017-02-10T13:19:03-08:00")) }
     its(:account)        { is_expected.to be_a(Cashbox::Account)  }
     its(:billing_plan)   { is_expected.to be_a(Cashbox::BillingPlan) }
     its(:payment_method) { is_expected.to be_a(Cashbox::PaymentMethod) }
   end
 
-  describe 'create subscription' do
+  describe "create subscription" do
     let(:subscription) do
       Cashbox::Subscription.new(
-        id: 'sub_1234',
+        id: "sub_1234",
         metadata: {
-          'vin:MandateFlag': '1',
-          'vin:MandateVersion': '1.0',
-          'vin:MandateBankName': 'The Bank NA',
-          'vin:MandateID': '1234123412341234'
+          "vin:MandateFlag": "1",
+          "vin:MandateVersion": "1.0",
+          "vin:MandateBankName": "The Bank NA",
+          "vin:MandateID": "1234123412341234"
         }
       )
     end
 
     let!(:stub) do
-      stub_post('/subscriptions')
+      stub_post("/subscriptions")
         .with({
           body: {
-            object: 'Subscription',
-            id: 'sub_1234',
+            object: "Subscription",
+            id: "sub_1234",
             metadata: {
-              'vin:MandateFlag': '1',
-              'vin:MandateVersion': '1.0',
-              'vin:MandateBankName': 'The Bank NA',
-              'vin:MandateID': '1234123412341234'
+              "vin:MandateFlag": "1",
+              "vin:MandateVersion": "1.0",
+              "vin:MandateBankName": "The Bank NA",
+              "vin:MandateID": "1234123412341234"
             }
           }.to_json
         }).to_return({
           :status => 200,
-          :body => fixture('subscription'),
-          :headers => { 'Content-Type': 'application/json' }
+          :body => fixture("subscription"),
+          :headers => { "Content-Type": "application/json" }
         })
     end
 
@@ -67,48 +67,48 @@ describe 'Subscription' do
       subscription.save
     end
 
-    it 'makes the correct call' do
+    it "makes the correct call" do
       expect(stub).to have_been_requested
     end
   end
 
-  describe 'update subscription' do
+  describe "update subscription" do
     let(:subscription) do
       Cashbox::Subscription.new(
-        id: 'sub_1234',
+        id: "sub_1234",
         items: [
           {
-             object: 'SubscriptionItem',
-             replaces: 'sub_1234.1'
+             object: "SubscriptionItem",
+             replaces: "sub_1234.1"
           }
         ]
       )
     end
 
     let!(:update_stub) do
-      stub_post('/subscriptions')
+      stub_post("/subscriptions")
         .with({
           body: {
-            object: 'Subscription',
-            id: 'sub_1234',
+            object: "Subscription",
+            id: "sub_1234",
             items: [
               {
-                 object: 'SubscriptionItem',
-                 replaces: 'sub_1234.1'
+                 object: "SubscriptionItem",
+                 replaces: "sub_1234.1"
               }
             ]
           }.to_json
         }).to_return({
           :status => 200,
-          :body => fixture('subscription'),
-          :headers => { 'Content-Type': 'application/json' }
+          :body => fixture("subscription"),
+          :headers => { "Content-Type": "application/json" }
         })
     end
     before do
       subscription.save
     end
 
-    it 'makes the correct call' do
+    it "makes the correct call" do
       expect(update_stub).to have_been_requested
     end
   end
