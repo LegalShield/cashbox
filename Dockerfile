@@ -14,6 +14,6 @@ COPY lib/cashbox/version.rb ./lib/cashbox/
 
 ENV RAILS_ENV test
 
-RUN gem install bundler && bundle install
+RUN gem install bundler -v 1.17.3 && bundle install -j20
 
 COPY . ./
