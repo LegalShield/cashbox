@@ -3,6 +3,7 @@ FROM paasmule/rbenv
 RUN mkdir /app
 WORKDIR /app
 
+RUN cd /root/.rbenv/plugins/ruby-build && git pull && cd -
 ADD .ruby-version ./
 RUN rbenv install $(cat .ruby-version)
 RUN gem install bundler
