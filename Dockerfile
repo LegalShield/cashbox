@@ -1,19 +1,15 @@
-FROM noonat/rbenv-nodenv
+FROM paasmule/rbenv
 
 RUN mkdir /app
 WORKDIR /app
 
-RUN cd /root/.rbenv/plugins/ruby-build && git pull && cd -
-COPY .ruby-version ./
+ADD .ruby-version ./
 RUN rbenv install $(cat .ruby-version)
-RUN rbenv global $(cat .ruby-version)
+RUN gem install bundler -v 1.17.3
 
-COPY Gemfile Gemfile.lock cashbox.gemspec ./
+ADD Gemfile Gemfile.lock cashbox.gemspec ./
 RUN mkdir -p ./lib/cashbox/
-COPY lib/cashbox/version.rb ./lib/cashbox/
+ADD lib/cashbox/version.rb ./lib/cashbox/
+RUN bundle install -j20
 
-ENV RAILS_ENV test
-
-RUN gem install bundler -v 1.17.3 && bundle install -j20
-
-COPY . ./
+ADD . ./
