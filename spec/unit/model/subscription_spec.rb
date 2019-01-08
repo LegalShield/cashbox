@@ -34,7 +34,6 @@ describe Cashbox::Subscription do
 
   its(:object) { is_expected.to eql('Subscription') }
 
-
   describe "constants" do
     it "IN_RETRY is assigned to the correct value" do
       expect(Cashbox::Subscription::IN_RETRY).to eql("In Retry")
@@ -48,7 +47,7 @@ describe Cashbox::Subscription do
       expect(Cashbox::Subscription::GRACE_PERIOD).to eql("Grace Period")
     end
   end
-  
+
   context "billing state methods" do
     describe "in_retry?" do
       let(:subscription_retry) { Cashbox::Subscription.new(billing_state: Cashbox::Subscription::IN_RETRY) }
@@ -89,58 +88,57 @@ describe Cashbox::Subscription do
       end
     end
   end
- 
-  describe '#add_subscription_items' do
-    
+
+  describe '#modify_subscription_items' do
     subject { Cashbox::Subscription.new(id: 'sub_15', vid: 'sub_1235' ) }
-    
-    let!(:subscription_item_1) { Cashbox::SubscriptionItem.new(product: Cashbox::Product.new(id: "123")) }
-    let!(:subscription_item_2) { Cashbox::SubscriptionItem.new(product: Cashbox::Product.new(id: "456")) }
+
+    let!(:subscription_item_1) { {'replaces': '123'} }
+    let!(:subscription_item_2) { {'replaces': '456'} }
     let(:request) { double('request', { response: 'my data' }) }
-    let(:subscprition_items) { [subscription_item_1, subscription_item_2] }
+    let(:subscription_items) { [subscription_item_1, subscription_item_2] }
 
     before do
       allow(subject.class).to receive(:cast)
 
       allow(Cashbox::Request).to receive(:new)
-        .with(:post, '/subscriptions/sub_1235', 
+        .with(:post, '/subscriptions/sub_1235',
         {
-          query: { 
-              effective_date: 'today',
-              bill_prorated_period: true
+          query: {
+              effective_date: 'next_billing',
+              bill_prorated_period: false
           },
           body: {
               id: 'sub_15',
-              items: subscprition_items
+              items: subscription_items
           }.to_json
-         })
-         .and_return(request)
-      subject.add_subscription_items(subscprition_items, true)
+        })
+        .and_return(request)
+      subject.modify_subscription_items(subscription_items, false, 'next_billing')
 
-      allow(Cashbox::Subscription).to receive(:cast).and_return('add called')
+      allow(Cashbox::Subscription).to receive(:cast).and_return('modify called')
     end
 
     it 'makes the correct api call to cashbox' do
       expect(Cashbox::Request).to have_received(:new)
-        .with(:post, '/subscriptions/sub_1235', 
+        .with(:post, '/subscriptions/sub_1235',
         {
-          query: { 
-              effective_date: 'today',
-              bill_prorated_period: true
+          query: {
+              effective_date: 'next_billing',
+              bill_prorated_period: false
           },
           body: {
               id: 'sub_15',
-              items: subscprition_items
+              items: subscription_items
           }.to_json
-         })
+        })
     end
 
     it 'passes the response to cast correctly' do
       expect(subject.class).to have_received(:cast).with(subject, 'my data')
     end
 
-    it 'passes parameters correctly' do      
-      expect(subject.add_subscription_items(subscprition_items, true)).to eql('add called')
+    it 'passes parameters correctly' do
+      expect(subject.modify_subscription_items(subscription_items, false, 'next_billing')).to eql('modify called')
     end
   end
 end
