@@ -1,4 +1,4 @@
-FROM paasmule/rbenv
+FROM noonat/rbenv-nodenv
 
 RUN mkdir /app
 WORKDIR /app
