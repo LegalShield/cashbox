@@ -8,6 +8,7 @@ describe Cashbox::SubscriptionItem do
   it { is_expected.to have_property(:product).coercing_with(Cashbox::Product) }
   it { is_expected.to have_property(:index_number) }
   it { is_expected.to have_property(:replaces) }
+  it { is_expected.to have_property(:replaced_by) }
 
   its(:object) { is_expected.to eql('SubscriptionItem') }
 end
