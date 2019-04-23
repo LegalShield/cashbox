@@ -53,9 +53,12 @@ describe Cashbox::Request do
 
   context '#response' do
     let(:block) { double("block", call: true) }
+    let(:response) { double("response", headers: { "request-id" => 1234 }, body: "") }
     subject { Cashbox::Request.new(:method, 'path', { option: true }) }
 
     before do
+      allow(Hashie::Mash).to receive(:new).and_return(true)
+
       Cashbox.password = 'sekret'
       Cashbox.username = 'me'
 
@@ -63,21 +66,23 @@ describe Cashbox::Request do
         option: true,
         basic_auth: { username: 'me', password: 'sekret' },
         timeout: 100
-      })
+      }).and_return(response)
     end
 
     context 'is defined' do
       it 'is called' do
         allow(Cashbox::Request).to receive(:after_request_log_block).and_return(block)
+
         subject.response
 
-        expect(block).to have_received(:call)
+        expect(block).to have_received(:call).with(:method, 'path', { option: true }, 1234, { "request-id" => 1234 }, "" )
       end
     end
 
     context 'is not defined' do
       it 'is not called' do
         allow(Cashbox::Request).to receive(:after_request_log_block).and_return(nil)
+
         subject.response
 
         expect(block).not_to have_received(:call)
