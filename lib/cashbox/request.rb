@@ -19,15 +19,13 @@ module Cashbox
     end
 
     def response
-      resp = self.class.send(@method, @path, @options.merge(default_options))
+      res = self.class.send(@method, @path, @options.merge(default_options))
 
       if self.class.after_request_log_block
-        resp.tap do |r|
-          self.class.after_request_log_block.call(@method, @path, @options, r)
-        end
+        self.class.after_request_log_block.call(@method, @path, @options, res.headers["request-id"], res.headers, res.body)
       end
 
-      Hashie::Mash.new(resp)
+      Hashie::Mash.new(res)
     end
 
     private
