@@ -28,5 +28,10 @@ describe Cashbox::CreditCard do
       credit_card = Cashbox::CreditCard.new({ bin: 534 })
       expect(credit_card.network).to eql('MasterCard')
     end
+
+    it 'returns Discover when the Discover prefix 6 is sent' do
+      credit_card = Cashbox::CreditCard.new({ bin: 634 })
+      expect(credit_card.network).to eql('Discover')
+    end
   end
 end

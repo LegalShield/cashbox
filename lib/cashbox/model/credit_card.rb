@@ -2,10 +2,12 @@ module Cashbox
   class CreditCard < Model
     include Concern::Objectable
 
+    DISCOVER = 'Discover'
     MASTER_CARD = 'MasterCard'
     VISA = 'Visa'
 
     BIN_PREFIXES = {
+      '6' => DISCOVER,
       '2' => MASTER_CARD,
       '5' => MASTER_CARD,
       '4' => VISA
