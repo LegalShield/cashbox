@@ -7,6 +7,7 @@ module Cashbox
     VISA = 'Visa'
 
     BIN_PREFIXES = {
+      '3' => DISCOVER,
       '6' => DISCOVER,
       '2' => MASTER_CARD,
       '5' => MASTER_CARD,
