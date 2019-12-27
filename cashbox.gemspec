@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rspec-its', '~> 1.2'
   spec.add_development_dependency 'webmock', '~> 2.0'
-  spec.add_development_dependency 'pry-byebug', '~> 2.0'
+  spec.add_development_dependency 'pry-byebug', '~> 3.4'
 
   spec.add_dependency 'httparty'
   spec.add_dependency 'activesupport'
