@@ -101,6 +101,8 @@ account.save
 
 After checking out the repo, run `bundle install` to install dependencies. Then, run `bundle exec rake` to run the tests. You can also run `bundle console` for an interactive prompt that will allow you to experiment.
 
+To push a new version of the Cashbox ruby gem, you will need to update the version file with the new version, run `bundle install` and be sure to also push the `Gemfile.lock` file up with your code changes to be merged to master. Then, run this command in your terminal to build the gemspec `gem build cashbox.gemspec`. Once the gemspec is built and your code has been merged to master, you can now push the new version to ruby gems by running this command in your terminal: `gem push cashbox-<version number of built gem>.gem` and replace the verbiage within the angle brackets with the new version number.
+
 ### Logging
 
 You can log the request and response of a call to Vindicia by defining a block in your calling application and passing it to this gem.
