@@ -9,7 +9,7 @@ module Cashbox
     property :vid
     property :account, coerce: Cashbox::Account
     property :affiliate
-    property :amount, coerce: Float
+    property :amount, coerce: Vindicia::Type.BigDecimal
     property :billing_attempt, coerce: Integer
     property :billing_descriptor
     property :billing_plan_sequence, coerce: Integer

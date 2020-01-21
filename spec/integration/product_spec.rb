@@ -184,5 +184,13 @@ describe 'Product' do
     it 'parses the response correctly' do
       expect(product.vid).to eq('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
     end
+
+    context 'records in price' do
+      subject { Vindicia::Product.first.prices.first }
+
+      it { is_expected.to be_a(Vindicia::ProductPrice) }
+      its(:amount) { is_expected.to be_a(BigDecimal) }
+      its(:amount) { is_expected.to eq(9.99) }
+    end
   end
 end
