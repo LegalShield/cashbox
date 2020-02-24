@@ -20,20 +20,12 @@ module Cashbox
 
   def self.production!
     Cashbox::Request.base_uri('https://api.vindicia.com')
+    Cashbox::Web.javascript_url = 'https://secure.vindicia.com/pmt/vindicia.js'
   end
 
   def self.sandbox!
     Cashbox::Request.base_uri('https://api.prodtest.vindicia.com')
-  end
-
-  def self.development!
-    Cashbox::Request.base_uri('https://api.prodtest.vindicia.com')
-  end
-
-  def self.test!
-    Cashbox.username = 'username'
-    Cashbox.password = 'password'
-    Cashbox::Request.base_uri('http://example.com')
+    Cashbox::Web.javascript_url = 'https://secure.prodtest.sj.vindicia.com/pmt/vindicia.js'
   end
 
   def self.debug!
@@ -46,6 +38,7 @@ module Cashbox
     autoload :Type
     autoload :Request
     autoload :Rest
+    autoload :Web
 
     autoload_under 'model' do
       autoload :Model

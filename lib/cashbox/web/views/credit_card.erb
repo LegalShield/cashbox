@@ -1,0 +1,14 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <form id="cashbox_credit_card">
+      <% if @address[:line_one] %>
+        <input type="hidden" id="vin_billing_address_line1" name="vin_billing_address_line1" value="<%= @address[:line_one] %>">
+      <% end %>
+      <% if @address[:line_two] %>
+        <input type="hidden" id="vin_billing_address_line2" name="vin_billing_address_line2" value="<%= @address[:line_two] %>">
+      <% end %>
+    </form>
+  </body>
+</html>
