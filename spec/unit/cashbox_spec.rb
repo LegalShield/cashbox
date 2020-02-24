@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Cashbox do
+  before do
+    Cashbox.config do
+    end
+  end
+
   it 'has a version number' do
     expect(Cashbox::VERSION).not_to be nil
   end
@@ -13,30 +18,17 @@ describe Cashbox do
   it { is_expected.to have_attr_accessor(:password) }
 
   context '#configure' do
-    context 'with a block' do
-      subject { Cashbox }
+    subject { Cashbox }
 
-      before do
-        subject.config do |c|
-          c.username = 'who'
-          c.password = 'sekret'
-        end
+    before do
+      subject.config do |c|
+        c.username = 'who'
+        c.password = 'sekret'
       end
-
-      its(:username) { is_expected.to eq('who') }
-      its(:password) { is_expected.to eq('sekret') }
     end
 
-    context 'with a hash' do
-      subject { Cashbox }
-
-      before do
-        subject.config({ username: 'name', password: 'so sekret' })
-      end
-
-      its(:username) { is_expected.to eq('name') }
-      its(:password) { is_expected.to eq('so sekret') }
-    end
+    its(:username) { is_expected.to eq('who') }
+    its(:password) { is_expected.to eq('sekret') }
   end
 
   context '.production!' do
@@ -88,6 +80,30 @@ describe Cashbox do
       expect(Cashbox::Request.default_options[:debug_output]).to be_nil
       subject.debug!
       expect(Cashbox::Request.default_options[:debug_output]).to eq($stdout)
+    end
+  end
+
+  skip ".after_request" do
+    let(:block) { |a,b,c,d| -> {} }
+
+    before do
+      Cashbox.after_request(&block)
+    end
+
+    it "adds a block" do
+      expect(Cashbox::Request.after_request_hooks).to eq([block])
+    end
+  end
+
+  skip ".before_request" do
+    let(:block) { |a,b,c| -> {} }
+
+    before do
+      Cashbox.before_request(&block)
+    end
+
+    it "adds a block" do
+      expect(Cashbox::Request.before_request_hooks).to eq([block])
     end
   end
 end

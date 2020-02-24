@@ -5,47 +5,13 @@ require 'active_support/dependencies/autoload'
 module Cashbox
   extend ActiveSupport::Autoload
 
-  class << self
-    attr_accessor :username, :password
-
-    def config(hash = {})
-      if block_given?
-        yield(self)
-      else
-        hash.each { |k, v| self.send("#{k}=", v) }
-      end
-    end
-
-  end
-
-  def self.production!
-    Cashbox::Request.base_uri('https://api.vindicia.com')
-  end
-
-  def self.sandbox!
-    Cashbox::Request.base_uri('https://api.prodtest.vindicia.com')
-  end
-
-  def self.development!
-    Cashbox::Request.base_uri('https://api.prodtest.vindicia.com')
-  end
-
-  def self.test!
-    Cashbox.username = 'username'
-    Cashbox.password = 'password'
-    Cashbox::Request.base_uri('http://example.com')
-  end
-
-  def self.debug!
-    Cashbox::Request.debug_output $stdout
-  end
-
   eager_autoload do
     autoload :VERSION
     autoload :Error
     autoload :Type
     autoload :Request
     autoload :Rest
+    autoload :Cache
 
     autoload_under 'model' do
       autoload :Model
@@ -80,5 +46,61 @@ module Cashbox
   module Concern
     autoload :Objectable, 'cashbox/concern/objectable'
     autoload :Persistable, 'cashbox/concern/persistable'
+  end
+
+  class << self
+    attr_accessor :username, :password
+
+    delegate :cache_store=, :cache_store, to: Cashbox::Cache
+
+    def config(&block)
+      self::Request.before_request_hooks ||= []
+      self::Request.after_request_hooks  ||= []
+      self::Cache.cache_store            ||= Cashbox::Cache::NullStore.new
+
+      block.call(self)
+    end
+
+    def before_request(&block)
+      self::Request.before_request_hooks << block
+    end
+
+    def after_request(&block)
+      self::Request.after_request_hooks << block
+    end
+
+    def base_uri=(value)
+      self::Request.base_uri(value)
+    end
+
+    def debug!
+      self::Request.debug_output $stdout
+    end
+
+    def production!
+      self.config do |c|
+        c.base_uri = 'https://api.vindicia.com'
+      end
+    end
+
+    def sandbox!
+      self.config do |c|
+        c.base_uri = 'https://api.prodtest.vindicia.com'
+      end
+    end
+
+    def development!
+      self.config do |c|
+        c.base_uri = 'https://api.prodtest.vindicia.com'
+      end
+    end
+
+    def test!
+      self.config do |c|
+        c.username = 'username'
+        c.password = 'password'
+        c.base_uri = 'http://example.com'
+      end
+    end
   end
 end
