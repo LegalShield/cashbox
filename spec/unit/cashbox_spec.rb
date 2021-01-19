@@ -54,7 +54,7 @@ describe Cashbox do
     after { subject.production! }
 
     it 'sets sandbox values' do
-      expect(Cashbox::Request.base_uri).to eql('https://api.prodtest.vindicia.com')
+      expect(Cashbox::Request.base_uri).to eql('https://api.staging.us-west.vindicia.com')
     end
   end
 
@@ -64,7 +64,7 @@ describe Cashbox do
     after { subject.production! }
 
     it 'sets development values' do
-      expect(Cashbox::Request.base_uri).to eql('https://api.prodtest.vindicia.com')
+      expect(Cashbox::Request.base_uri).to eql('https://api.staging.us-west.vindicia.com')
     end
   end
 
