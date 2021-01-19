@@ -23,11 +23,11 @@ module Cashbox
   end
 
   def self.sandbox!
-    Cashbox::Request.base_uri('https://api.prodtest.vindicia.com')
+    Cashbox::Request.base_uri('https://api.staging.us-west.vindicia.com')
   end
 
   def self.development!
-    Cashbox::Request.base_uri('https://api.prodtest.vindicia.com')
+    Cashbox::Request.base_uri('https://api.staging.us-west.vindicia.com')
   end
 
   def self.test!

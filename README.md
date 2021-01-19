@@ -52,7 +52,7 @@ end
 => "https://api.vindicia.com"
 
 >> Cashbox.sandbox!
-=> "https://api.prodtest.vindicia.com"
+=> "https://api.staging.us-west.vindicia.com"
 
 >> Cashbox.test!
 => "http://example.com"
